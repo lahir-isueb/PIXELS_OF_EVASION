@@ -26,7 +26,6 @@ try:
     sticky_texture = pygame.image.load('textures/sticky_enemy.png').convert_alpha()
     #gloomy_texture = pygame.image.load('textures/gloomy_enemy.png').convert_alpha()
     trail_texture = pygame.image.load('textures/trail_enemy.png').convert_alpha()
-    #impostor_texture = pygame.image.load('textures/impostor_enemy.png').convert_alpha()
     splitter_texture = pygame.image.load('textures/splitter_enemy.png').convert_alpha()
     bomb_texture = pygame.image.load('textures/bomb_enemy.png').convert_alpha()
     shooter_texture = pygame.image.load('textures/shooter_enemy.png').convert_alpha()
@@ -5714,7 +5713,7 @@ while running:
 
                 pull_radius = addictive_pull_radius
                 base_pull_strength = addictive_pull_strength
-                if player_alive and not enemy.get("shrinking"):
+                if player_alive and not enemy.get("shrinking") and current_time >= invincible_until:
                     dxp = enemy["x"] - player_x
                     dyp = enemy["y"] - player_y
                     dist = math.hypot(dxp, dyp)
@@ -5722,7 +5721,7 @@ while running:
                         pull_strength = base_pull_strength * (1 - dist / (pull_radius-50+enemy_size/2+player_size/2))
                         player_x += (dxp / dist) * pull_strength
                         player_y += (dyp / dist) * pull_strength
-                if players == 2 and player2_alive and not enemy.get("shrinking"):
+                if players == 2 and player2_alive and not enemy.get("shrinking") and current_time >= player2_invincible_until:
                     dxp = enemy["x"] - player2_x
                     dyp = enemy["y"] - player2_y
                     dist = math.hypot(dxp, dyp)
@@ -6744,7 +6743,7 @@ while running:
 
                 push_radius = blocker_push_radius
                 base_push_strength = blocker_push_strength
-                if player_alive and not enemy.get("shrinking"):
+                if player_alive and not enemy.get("shrinking") and current_time >= invincible_until:
                     dxp = enemy["x"] - player_x
                     dyp = enemy["y"] - player_y
                     dist = math.hypot(dxp, dyp)
@@ -6752,7 +6751,7 @@ while running:
                         push_strength = base_push_strength * (1 - dist / (push_radius-50+enemy_size/2+player_size/2))
                         player_x -= (dxp / dist) * push_strength
                         player_y -= (dyp / dist) * push_strength
-                if players == 2 and player2_alive and not enemy.get("shrinking"):
+                if players == 2 and player2_alive and not enemy.get("shrinking") and current_time >= player2_invincible_until:
                     dxp = enemy["x"] - player2_x
                     dyp = enemy["y"] - player2_y
                     dist = math.hypot(dxp, dyp)
