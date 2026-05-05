@@ -33,7 +33,7 @@ try:
     speedy_texture = pygame.image.load('textures/speedy_enemy.png').convert_alpha()
     shotgun_texture = pygame.image.load('textures/shotgun_enemy.png').convert_alpha()
     #voodoo_texture = pygame.image.load('textures/voodoo_enemy.png').convert_alpha()
-    #blind_texture = pygame.image.load('textures/blind_enemy.png').convert_alpha()
+    blind_texture = pygame.image.load('textures/blind_enemy.png').convert_alpha()
     magma_texture = pygame.image.load('textures/magma_enemy.png').convert_alpha()
     charger_texture = pygame.image.load('textures/charger_enemy.png').convert_alpha()
     rapidshooter_texture = pygame.image.load('textures/rapidshooter_enemy.png').convert_alpha()
@@ -56,7 +56,7 @@ try:
     frostbeam_texture = pygame.image.load('textures/frostbeam_enemy.png').convert_alpha()
     #forecast_texture = pygame.image.load('textures/forecast_enemy.png').convert_alpha()
     #assassin_texture = pygame.image.load('textures/assassin_enemy.png').convert_alpha()
-    #motion_texture = pygame.image.load('textures/motion_enemy.png').convert_alpha()
+    motion_texture = pygame.image.load('textures/motion_enemy.png').convert_alpha()
     #invisibility_texture = pygame.image.load('textures/invisibility_enemy.png').convert_alpha()
     whirly_texture = pygame.image.load('textures/whirly_enemy.png').convert_alpha()
     volcanic_texture = pygame.image.load('textures/volcanic_enemy.png').convert_alpha()
@@ -740,6 +740,9 @@ def enemy_lock_setup(elock, enumber):
     if elock == 0: available_enemy_types.append(enumber + 1)
     elif elock == 1: locked_enemy_types.append(enumber + 1)
     elif elock == 3: ambush_enemy_types.append(enumber + 1)
+
+def CAMPAIGN_SELECT():
+    asd = 0
 
 def SETTINGS():
     global color_list
@@ -4376,21 +4379,29 @@ def TITLE_SCREEN():
     skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
     skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
 
-    start_button = pygame.Rect(WIDTH/2 - 100*SCALED_WIDTH, 300*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
-    button_1p = pygame.Rect(WIDTH/2 - 220*SCALED_WIDTH, 400*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
-    button_2p = pygame.Rect(WIDTH/2 + 20*SCALED_WIDTH, 400*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
-    settings_button = pygame.Rect(WIDTH/2 - 100*SCALED_WIDTH, 500*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
-    quit_button = pygame.Rect(WIDTH/2 - 100*SCALED_WIDTH, 600*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    black_sbox = pygame.Rect(WIDTH/2 - 300*SCALED_WIDTH, 760*SCALED_HEIGHT, 600*SCALED_WIDTH, 400*SCALED_HEIGHT)
+    white_sbox = pygame.Rect(WIDTH/2 - 310*SCALED_WIDTH, 750*SCALED_HEIGHT, 620*SCALED_WIDTH, 400*SCALED_HEIGHT)
+
+    campaign_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 325*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    start_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 400*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    button_1p = pygame.Rect(WIDTH/2 - 220*SCALED_WIDTH, 800*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    button_2p = pygame.Rect(WIDTH/2 + 20*SCALED_WIDTH, 800*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    settings_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 475*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    quit_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 550*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
         
-    p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 200*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
-    p2_skin_button = pygame.Rect(WIDTH/2 + 60*SCALED_WIDTH, HEIGHT - 200*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
-    black_p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 192.5*SCALED_HEIGHT, 85*SCALED_WIDTH, 85*SCALED_HEIGHT)
-    black_p2_skin_button = pygame.Rect(WIDTH/2 + 60*SCALED_WIDTH, HEIGHT - 192.5*SCALED_HEIGHT, 85*SCALED_WIDTH, 85*SCALED_HEIGHT)
+    p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 150*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
+    p2_skin_button = pygame.Rect(WIDTH/2 + 60*SCALED_WIDTH, HEIGHT - 150*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
+    black_p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 142.5*SCALED_HEIGHT, 85*SCALED_WIDTH, 85*SCALED_HEIGHT)
+    black_p2_skin_button = pygame.Rect(WIDTH/2 + 60*SCALED_WIDTH, HEIGHT - 142.5*SCALED_HEIGHT, 85*SCALED_WIDTH, 85*SCALED_HEIGHT)
 
         
     waiting = True
     while waiting:
         screen.fill((0, 0, 0))
+
+        pygame.draw.rect(screen, WHITE, white_sbox, border_radius=0)
+        pygame.draw.rect(screen, BLACK, black_sbox, border_radius=0)
+        
         title_text = big_font.render("Pixels Of Evasion", True, (255, 0, 0))
         screen.blit(title_text, title_text.get_rect(center=(WIDTH/2, 150*SCALED_HEIGHT)))
         
@@ -4410,12 +4421,28 @@ def TITLE_SCREEN():
 
         # --- Start Game button (TOP) ---
         if players in [1, 2]:
-            color = GREEN if start_button.collidepoint(mouse_pos) else FOREST
+            color = BLUE if campaign_button.collidepoint(mouse_pos) else NAVY
         else:
-            color = LIME  # disabled look until a mode is chosen
+            color = GRAY  # disabled look until a mode is chosen
+
+        pygame.draw.rect(screen, color, campaign_button, border_radius=0)
+        campaign_text = font.render("Campaign Levels", True, (255, 255, 255))
+        screen.blit(campaign_text, campaign_text.get_rect(center=campaign_button.center))
+
+        if campaign_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
+            apply_settings()
+            reset_game_state()
+            waiting = False
+
+
+
+        if players in [1, 2]:
+            color = CYAN if start_button.collidepoint(mouse_pos) else TEAL
+        else:
+            color = GRAY  # disabled look until a mode is chosen
 
         pygame.draw.rect(screen, color, start_button, border_radius=0)
-        start_text = font.render("Start Game", True, (255, 255, 255))
+        start_text = font.render("Freeplay", True, (255, 255, 255))
         screen.blit(start_text, start_text.get_rect(center=start_button.center))
 
         if start_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
@@ -4425,9 +4452,9 @@ def TITLE_SCREEN():
 
         # --- Quit button ---
         if players in [1, 2]:
-            color = YELLOW if quit_button.collidepoint(mouse_pos) else SULFUR
+            color = RED if quit_button.collidepoint(mouse_pos) else MAROON
         else:
-            color = CREAM  # disabled look until a mode is chosen
+            color = GRAY  # disabled look until a mode is chosen
 
         pygame.draw.rect(screen, color, quit_button, border_radius=0)
         quit_text = font.render("Quit", True, (255, 255, 255))
@@ -4538,9 +4565,9 @@ def TITLE_SCREEN():
 
         # --- Settings button ---
         if players in [1, 2]:
-            color = BLUE if settings_button.collidepoint(mouse_pos) else NAVY
+            color = YELLOW if settings_button.collidepoint(mouse_pos) else SULFUR
         else:
-            color = SKY  # disabled look until a mode is chosen
+            color = GRAY  # disabled look until a mode is chosen
 
         pygame.draw.rect(screen, color, settings_button, border_radius=0)
         settings_text = font.render("Settings", True, (255, 255, 255))
@@ -4554,11 +4581,11 @@ def TITLE_SCREEN():
         # --- Player buttons (BELOW Start button) ---
         for rect, label, value in [(button_1p, "1 Player", 1), (button_2p, "2 Players", 2)]:
             if players == value:
-                color = RED
+                color = LIME
             elif rect.collidepoint(mouse_pos):
-                color = MAROON
+                color = GREEN
             else:
-                color = CRISP
+                color = FOREST
 
             pygame.draw.rect(screen, color, rect, border_radius=0)
             text = font.render(label, True, text_color)
