@@ -5157,6 +5157,8 @@ while running:
                 if enemy["stopped"]:
                     if enemy["stop_start_time"] > stickiness or (closest_dist < 350 + enemy_size / 2 + player_size / 2 and sticky_sensitive == 1):
                         enemy["stopped"] = False
+                    enemy["x"] = min(max(enemy_size/2, enemy["x"]), 1920 - enemy_size/2)
+                    enemy["y"] = min(max(enemy_size/2, enemy["y"]), 1080 - enemy_size/2)
                 else:
                     enemy["x"] += enemy["dx"] * game_speed
                     enemy["y"] += enemy["dy"] * game_speed
@@ -5591,6 +5593,8 @@ while running:
                 if enemy["stopped"]:
                     if enemy["stop_start_time"] >= stickiness*4 or (closest_dist < 350 + enemy_size / 2 + player_size / 2 and charger_sensitive == 1):
                         enemy["stopped"] = False
+                    enemy["x"] = min(max(enemy_size/2, enemy["x"]), 1920 - enemy_size/2)
+                    enemy["y"] = min(max(enemy_size/2, enemy["y"]), 1080 - enemy_size/2)
                 else:
                     enemy["x"] += enemy["dx"] * game_speed
                     enemy["y"] += enemy["dy"] * game_speed
@@ -6159,6 +6163,8 @@ while running:
                             "ability": None
                         })
                         enemy["trail/shot_charge"] = 0
+                    enemy["x"] = min(max(enemy_size/2, enemy["x"]), 1920 - enemy_size/2)
+                    enemy["y"] = min(max(enemy_size/2, enemy["y"]), 1080 - enemy_size/2)
                 else:
                     enemy["x"] += enemy["dx"] * game_speed
                     enemy["y"] += enemy["dy"] * game_speed
