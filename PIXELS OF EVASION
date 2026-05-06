@@ -24,7 +24,7 @@ try:
     fatal_texture = pygame.image.load('textures/fatal_enemy.png').convert_alpha()
     flow_texture = pygame.image.load('textures/flow_enemy.png').convert_alpha()
     sticky_texture = pygame.image.load('textures/sticky_enemy.png').convert_alpha()
-    #gloomy_texture = pygame.image.load('textures/gloomy_enemy.png').convert_alpha()
+    gloomy_texture = pygame.image.load('textures/gloomy_enemy.png').convert_alpha()
     trail_texture = pygame.image.load('textures/trail_enemy.png').convert_alpha()
     splitter_texture = pygame.image.load('textures/splitter_enemy.png').convert_alpha()
     bomb_texture = pygame.image.load('textures/bomb_enemy.png').convert_alpha()
@@ -32,23 +32,23 @@ try:
     sniper_texture = pygame.image.load('textures/sniper_enemy.png').convert_alpha()
     speedy_texture = pygame.image.load('textures/speedy_enemy.png').convert_alpha()
     shotgun_texture = pygame.image.load('textures/shotgun_enemy.png').convert_alpha()
-    #voodoo_texture = pygame.image.load('textures/voodoo_enemy.png').convert_alpha()
+    voodoo_texture = pygame.image.load('textures/voodoo_enemy.png').convert_alpha()
     blind_texture = pygame.image.load('textures/blind_enemy.png').convert_alpha()
     magma_texture = pygame.image.load('textures/magma_enemy.png').convert_alpha()
     charger_texture = pygame.image.load('textures/charger_enemy.png').convert_alpha()
     rapidshooter_texture = pygame.image.load('textures/rapidshooter_enemy.png').convert_alpha()
     frostbite_texture = pygame.image.load('textures/frostbite_enemy.png').convert_alpha()
-    #addictive_texture = pygame.image.load('textures/addictive_enemy.png').convert_alpha()
+    addictive_texture = pygame.image.load('textures/addictive_enemy.png').convert_alpha()
     laser_texture = pygame.image.load('textures/laser_enemy.png').convert_alpha()
-    #hardened_texture = pygame.image.load('textures/hardened_enemy.png').convert_alpha()
-    #accelerator_texture = pygame.image.load('textures/accelerator_enemy.png').convert_alpha()
+    hardened_texture = pygame.image.load('textures/hardened_enemy.png').convert_alpha()
+    accelerator_texture = pygame.image.load('textures/accelerator_enemy.png').convert_alpha()
     cold_texture = pygame.image.load('textures/cold_enemy.png').convert_alpha()
     tracer_texture = pygame.image.load('textures/tracer_enemy.png').convert_alpha()
     savage_texture = pygame.image.load('textures/savage_enemy.png').convert_alpha()
     teleporter_texture = pygame.image.load('textures/teleporter_enemy.png').convert_alpha()
     phantom_texture = pygame.image.load('textures/phantom_enemy.png').convert_alpha()
     stream_texture = pygame.image.load('textures/stream_enemy.png').convert_alpha()
-    #sensitive_texture = pygame.image.load('textures/sensitive_enemy.png').convert_alpha()
+    sensitive_texture = pygame.image.load('textures/sensitive_enemy.png').convert_alpha()
     burstshooter_texture = pygame.image.load('textures/burstshooter_enemy.png').convert_alpha()
     stickyshooter_texture = pygame.image.load('textures/stickyshooter_enemy.png').convert_alpha()
     sparker_texture = pygame.image.load('textures/sparker_enemy.png').convert_alpha()
@@ -65,7 +65,7 @@ try:
     error_texture = pygame.image.load('textures/error_enemy.png').convert_alpha()
     glitchy_texture = pygame.image.load('textures/glitchy_enemy.png').convert_alpha()
     #blocker_texture = pygame.image.load('textures/blocker_enemy.png').convert_alpha()
-    #gloomyshooter_texture = pygame.image.load('textures/gloomyshooter_enemy.png').convert_alpha()
+    gloomyshooter_texture = pygame.image.load('textures/gloomyshooter_enemy.png').convert_alpha()
     pulse_texture = pygame.image.load('textures/pulse_enemy.png').convert_alpha()
     grower_texture = pygame.image.load('textures/grower_enemy.png').convert_alpha()
     can_use_textures = True
@@ -742,7 +742,852 @@ def enemy_lock_setup(elock, enumber):
     elif elock == 3: ambush_enemy_types.append(enumber + 1)
 
 def CAMPAIGN_SELECT():
-    asd = 0
+    global WIDTH, HEIGHT, SCALED_WIDTH, SCALED_HEIGHT, SCALED_TEXT
+    
+    level_for_campaign_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    level_names = ["Nothing lol", "Starting With Basics", "Picking Up Speed", "Clingy Claustrophobia 1", "Run Away", "Horde Alert", "Aqua Arena 1", "Teleportation Trappers 1", "Bullet Barrage 1 ", "Rocky Rage 1", "Great Gauntlet 1",
+                   "Back To Basics", "Stormy Surge 1", "Frostbite Frenzy 1", "Blazing Burnout 1", "Just Juke 1", "Teleportation Trappers 2", "Bullet Barrage 2", "Clingy Claustrophobia 2", "Laggy Lab 1", "Great Gauntlet 2",
+                   "So Gloomy I Forgot", "Stormy Surge 2", "Whirling Winds 1", "Two Souls One Life", "Back To Deadly Basics", "Bullet Barrage 3", "Rocky Rage 2", "Teleportation Trappers 3", "Laggy Lab 2", "Great Gauntlet 3",
+                   "Whirling Winds 2", "Scary Shadows 1", "Podium Projectiles 1", "Clingy Claustrophobia 3", "Just Juke 2", "Scary Shadows 2", "Frostbite Frenzy 2", "Blazing Burnout 2", "Scary Shadows 3", "Great Gauntlet 4",
+                   "Frostbite Frenzy 3", "Blazing Burnout 3", "Whirling Winds 3", "Laggy Lab 3", "Stormy Surge 3", "Rocky Rage 3", "Laser Lunge 1", "Aqua Arena 2", "Lightning Legacy 1", "Great Gauntlet 5",
+                   "Aqua Arena 3", "Scary Shadows 4", "Frostbite Frenzy 4", "Blazing Burnout 4", "Lightning Legacy 2", "Scary Shadows 5", "Laggy Lab 4", "Laser Lunge 2", "Scary Shadows 6", "Great Gauntlet 6",
+                   "Aqua Arena 4", "Clingy Claustrophobia 4", "Frostbite Frenzy 5", "Blazing Burnout 5", "Laser Lunge 3", "Podium Projectiles 2", "Lightning Legacy 3", "Laggy Lab 5", "Aqua Arena 5", "Great Gauntlet 7",
+                   "Splitter Splatter 1", "Scary Shadows 7", "Disaster Defusion 1", "Rocky Rage 4", "Clingy Claustrophobia 5", "Scary Shadows 8", "Lucky Seven", "Frostbite Frenzy 6", "Blazing Burnout 6", "Great Gauntlet 8",
+                   "Teleportation Trappers 4", "Laggy Lab 6", "Splitter Splatter 2", "Whirling Winds 4", "Just Juke 3", "Aqua Arena 6", "Laser Lunge 4", "Rocky Rage 5", "Clingy Claustrophobia 6", "Great Gauntlet 9",
+                   "Teleportation Trappers 5", "Stormy Surge 4", "Scary Shadows 9", "Bullet Barrage 4", "Lightning Legacy 4", "Frostbite Frenzy 7", "Blazing Burnout 7", "Disaster Defusion 2", "Podium Projectiles 3", "Gigantic Gauntlet X"]
+    level_selected = 0
+    
+    running = True
+    button_offset = 10
+    enemy_locking_labels = ["Starter", "Locked", "Banned", "Ambush"]
+    player_size_plus_button = pygame.Rect(WIDTH/2 + 120, HEIGHT/2 - 20, 60, 60)
+    player_size_minus_button = pygame.Rect(WIDTH/2 - 180, HEIGHT/2 - 20, 60, 60)
+    black_cbox = pygame.Rect(0,0,WIDTH,180)
+    white_cbox = pygame.Rect(0,0,WIDTH,190)
+    white_ccbox = pygame.Rect(1100,185,10,HEIGHT)
+    while running:
+        screen.fill(BLACK)
+        text = big_font.render("Level Select", True, WHITE)
+        pygame.draw.rect(screen, WHITE, white_cbox, border_radius=0)
+        pygame.draw.rect(screen, BLACK, black_cbox, border_radius=0)
+        pygame.draw.rect(screen, WHITE, white_ccbox, border_radius=0)
+        screen.blit(text, (50*SCALED_WIDTH, 50*SCALED_HEIGHT))
+        info = font.render("Press Escape to return", True, SILVER)
+        level_text = biggish_font.render("Level " + str(level_selected) + ": " + level_names[level_selected], True, WHITE)
+        screen.blit(info, (810*SCALED_WIDTH, 100*SCALED_HEIGHT))
+        screen.blit(level_text, (1125*SCALED_WIDTH, 230*SCALED_HEIGHT))
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_click = pygame.mouse.get_pressed()[0]
+        
+        level_one_text = font.render("1", True, WHITE)
+        level_one_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_one_button, border_radius=0)
+        screen.blit(level_one_text, level_one_text.get_rect(center=level_one_button.center))
+        if level_one_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 1
+            pygame.time.delay(200)
+
+        level_two_text = font.render("2", True, WHITE)
+        level_two_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_two_button, border_radius=0)
+        screen.blit(level_two_text, level_two_text.get_rect(center=level_two_button.center))
+        if level_two_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 2
+            pygame.time.delay(200)
+
+        level_thre_text = font.render("3", True, YELLOW)
+        level_thre_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, level_thre_button, border_radius=0)
+        screen.blit(level_thre_text, level_thre_text.get_rect(center=level_thre_button.center))
+        if level_thre_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 3
+            pygame.time.delay(200)
+
+        level_four_text = font.render("4", True, WHITE)
+        level_four_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_four_button, border_radius=0)
+        screen.blit(level_four_text, level_four_text.get_rect(center=level_four_button.center))
+        if level_four_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 4
+            pygame.time.delay(200)
+
+        level_five_text = font.render("5", True, WHITE)
+        level_five_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_five_button, border_radius=0)
+        screen.blit(level_five_text, level_five_text.get_rect(center=level_five_button.center))
+        if level_five_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 5
+            pygame.time.delay(200)
+
+        level_six_text = font.render("6", True, BLUE)
+        level_six_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, AQUA, level_six_button, border_radius=0)
+        screen.blit(level_six_text, level_six_text.get_rect(center=level_six_button.center))
+        if level_six_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 6
+            pygame.time.delay(200)
+
+        level_seven_text = font.render("7", True, CYAN)
+        level_seven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, PURPLE, level_seven_button, border_radius=0)
+        screen.blit(level_seven_text, level_seven_text.get_rect(center=level_seven_button.center))
+        if level_seven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 7
+            pygame.time.delay(200)
+
+        level_eight_text = font.render("8", True, RED)
+        level_eight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, MAROON, level_eight_button, border_radius=0)
+        screen.blit(level_eight_text, level_eight_text.get_rect(center=level_eight_button.center))
+        if level_eight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 8
+            pygame.time.delay(200)
+
+        level_nine_text = font.render("9", True, TAN)
+        level_nine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, BROWN, level_nine_button, border_radius=0)
+        screen.blit(level_nine_text, level_nine_text.get_rect(center=level_nine_button.center))
+        if level_nine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 9
+            pygame.time.delay(200)
+
+        level_ten_text = font.render("10", True, BLACK)
+        level_ten_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_ten_button, border_radius=0)
+        screen.blit(level_ten_text, level_ten_text.get_rect(center=level_ten_button.center))
+        if level_ten_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 10
+            pygame.time.delay(200)
+
+        level_eleven_text = font.render("11", True, WHITE)
+        level_eleven_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_eleven_button, border_radius=0)
+        screen.blit(level_eleven_text, level_eleven_text.get_rect(center=level_eleven_button.center))
+        if level_eleven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 11
+            pygame.time.delay(200)
+
+        level_twelve_text = font.render("12", True, CLOUD)
+        level_twelve_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SULFUR, level_twelve_button, border_radius=0)
+        screen.blit(level_twelve_text, level_twelve_text.get_rect(center=level_twelve_button.center))
+        if level_twelve_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 12
+            pygame.time.delay(200)
+
+        level_thirteen_text = font.render("13", True, TEAL)
+        level_thirteen_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_thirteen_button, border_radius=0)
+        screen.blit(level_thirteen_text, level_thirteen_text.get_rect(center=level_thirteen_button.center))
+        if level_thirteen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 13
+            pygame.time.delay(200)
+
+        level_fourteen_text = font.render("14", True, GOLD)
+        level_fourteen_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_fourteen_button, border_radius=0)
+        screen.blit(level_fourteen_text, level_fourteen_text.get_rect(center=level_fourteen_button.center))
+        if level_fourteen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 14
+            pygame.time.delay(200)
+
+        level_fifteen_text = font.render("15", True, RED)
+        level_fifteen_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LIME, level_fifteen_button, border_radius=0)
+        screen.blit(level_fifteen_text, level_fifteen_text.get_rect(center=level_fifteen_button.center))
+        if level_fifteen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 15
+            pygame.time.delay(200)
+
+        level_sixteen_text = font.render("16", True, CYAN)
+        level_sixteen_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, PURPLE, level_sixteen_button, border_radius=0)
+        screen.blit(level_sixteen_text, level_sixteen_text.get_rect(center=level_sixteen_button.center))
+        if level_sixteen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 16
+            pygame.time.delay(200)
+
+        level_seventeen_text = font.render("17", True, RED)
+        level_seventeen_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, MAROON, level_seventeen_button, border_radius=0)
+        screen.blit(level_seventeen_text, level_seventeen_text.get_rect(center=level_seventeen_button.center))
+        if level_seventeen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 17
+            pygame.time.delay(200)
+
+        level_eighteen_text = font.render("18", True, YELLOW)
+        level_eighteen_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, level_eighteen_button, border_radius=0)
+        screen.blit(level_eighteen_text, level_eighteen_text.get_rect(center=level_eighteen_button.center))
+        if level_eighteen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 18
+            pygame.time.delay(200)
+
+        level_nineteen_text = font.render("19", True, COBALT)
+        level_nineteen_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LILAC, level_nineteen_button, border_radius=0)
+        screen.blit(level_nineteen_text, level_nineteen_text.get_rect(center=level_nineteen_button.center))
+        if level_nineteen_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 19
+            pygame.time.delay(200)
+
+        level_twenty_text = font.render("20", True, BLACK)
+        level_twenty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_twenty_button, border_radius=0)
+        screen.blit(level_twenty_text, level_twenty_text.get_rect(center=level_twenty_button.center))
+        if level_twenty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 20
+            pygame.time.delay(200)
+
+        level_twentyone_text = font.render("21", True, VIOLET)
+        level_twentyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_twentyone_button, border_radius=0)
+        screen.blit(level_twentyone_text, level_twentyone_text.get_rect(center=level_twentyone_button.center))
+        if level_twentyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 21
+            pygame.time.delay(200)
+
+        level_twentytwo_text = font.render("22", True, CLOUD)
+        level_twentytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SULFUR, level_twentytwo_button, border_radius=0)
+        screen.blit(level_twentytwo_text, level_twentytwo_text.get_rect(center=level_twentytwo_button.center))
+        if level_twentytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 22
+            pygame.time.delay(200)
+
+        level_twentythree_text = font.render("23", True, CREAM)
+        level_twentythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, CLOUD, level_twentythree_button, border_radius=0)
+        screen.blit(level_twentythree_text, level_twentythree_text.get_rect(center=level_twentythree_button.center))
+        if level_twentythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 23
+            pygame.time.delay(200)
+
+        level_twentyfour_text = font.render("24", True, WHITE)
+        level_twentyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_twentyfour_button, border_radius=0)
+        screen.blit(level_twentyfour_text, level_twentyfour_text.get_rect(center=level_twentyfour_button.center))
+        if level_twentyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 24
+            pygame.time.delay(200)
+
+        level_twentyfive_text = font.render("25", True, WHITE)
+        level_twentyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GRAY, level_twentyfive_button, border_radius=0)
+        screen.blit(level_twentyfive_text, level_twentyfive_text.get_rect(center=level_twentyfive_button.center))
+        if level_twentyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 25
+            pygame.time.delay(200)
+
+        level_twentysix_text = font.render("26", True, RED)
+        level_twentysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, MAROON, level_twentysix_button, border_radius=0)
+        screen.blit(level_twentysix_text, level_twentysix_text.get_rect(center=level_twentysix_button.center))
+        if level_twentysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 26
+            pygame.time.delay(200)
+
+        level_twentyseven_text = font.render("27", True, TAN)
+        level_twentyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, BROWN, level_twentyseven_button, border_radius=0)
+        screen.blit(level_twentyseven_text, level_twentyseven_text.get_rect(center=level_twentyseven_button.center))
+        if level_twentyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 27
+            pygame.time.delay(200)
+
+        level_twentyeight_text = font.render("28", True, CYAN)
+        level_twentyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, PURPLE, level_twentyeight_button, border_radius=0)
+        screen.blit(level_twentyeight_text, level_twentyeight_text.get_rect(center=level_twentyeight_button.center))
+        if level_twentyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 28
+            pygame.time.delay(200)
+
+        level_twentynine_text = font.render("29", True, COBALT)
+        level_twentynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LILAC, level_twentynine_button, border_radius=0)
+        screen.blit(level_twentynine_text, level_twentynine_text.get_rect(center=level_twentynine_button.center))
+        if level_twentynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 29
+            pygame.time.delay(200)
+
+        level_thirty_text = font.render("30", True, BLACK)
+        level_thirty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_thirty_button, border_radius=0)
+        screen.blit(level_thirty_text, level_thirty_text.get_rect(center=level_thirty_button.center))
+        if level_thirty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 30
+            pygame.time.delay(200)
+
+        level_thirtyone_text = font.render("31", True, CREAM)
+        level_thirtyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, CLOUD, level_thirtyone_button, border_radius=0)
+        screen.blit(level_thirtyone_text, level_thirtyone_text.get_rect(center=level_thirtyone_button.center))
+        if level_thirtyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 31
+            pygame.time.delay(200)
+
+        level_thirtytwo_text = font.render("32", True, VIOLET)
+        level_thirtytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_thirtytwo_button, border_radius=0)
+        screen.blit(level_thirtytwo_text, level_thirtytwo_text.get_rect(center=level_thirtytwo_button.center))
+        if level_thirtytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 32
+            pygame.time.delay(200)
+
+        level_thirtythree_text = font.render("33", True, BRONZE)
+        level_thirtythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GOLD, level_thirtythree_button, border_radius=0)
+        screen.blit(level_thirtythree_text, level_thirtythree_text.get_rect(center=level_thirtythree_button.center))
+        if level_thirtythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 33
+            pygame.time.delay(200)
+
+        level_thirtyfour_text = font.render("34", True, YELLOW)
+        level_thirtyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, level_thirtyfour_button, border_radius=0)
+        screen.blit(level_thirtyfour_text, level_thirtyfour_text.get_rect(center=level_thirtyfour_button.center))
+        if level_thirtyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 34
+            pygame.time.delay(200)
+
+        level_thirtyfive_text = font.render("35", True, RED)
+        level_thirtyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LIME, level_thirtyfive_button, border_radius=0)
+        screen.blit(level_thirtyfive_text, level_thirtyfive_text.get_rect(center=level_thirtyfive_button.center))
+        if level_thirtyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 35
+            pygame.time.delay(200)
+
+        level_thirtysix_text = font.render("36", True, VIOLET)
+        level_thirtysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_thirtysix_button, border_radius=0)
+        screen.blit(level_thirtysix_text, level_thirtysix_text.get_rect(center=level_thirtysix_button.center))
+        if level_thirtysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 36
+            pygame.time.delay(200)
+
+        level_thirtyseven_text = font.render("37", True, TEAL)
+        level_thirtyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_thirtyseven_button, border_radius=0)
+        screen.blit(level_thirtyseven_text, level_thirtyseven_text.get_rect(center=level_thirtyseven_button.center))
+        if level_thirtyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 37
+            pygame.time.delay(200)
+
+        level_thirtyeight_text = font.render("38", True, GOLD)
+        level_thirtyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_thirtyeight_button, border_radius=0)
+        screen.blit(level_thirtyeight_text, level_thirtyeight_text.get_rect(center=level_thirtyeight_button.center))
+        if level_thirtyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 38
+            pygame.time.delay(200)
+
+        level_thirtynine_text = font.render("39", True, VIOLET)
+        level_thirtynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_thirtynine_button, border_radius=0)
+        screen.blit(level_thirtynine_text, level_thirtynine_text.get_rect(center=level_thirtynine_button.center))
+        if level_thirtynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 39
+            pygame.time.delay(200)
+
+        level_fourty_text = font.render("40", True, BLACK)
+        level_fourty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_fourty_button, border_radius=0)
+        screen.blit(level_fourty_text, level_fourty_text.get_rect(center=level_fourty_button.center))
+        if level_fourty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 40
+            pygame.time.delay(200)
+
+        level_fourtyone_text = font.render("41", True, TEAL)
+        level_fourtyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_fourtyone_button, border_radius=0)
+        screen.blit(level_fourtyone_text, level_fourtyone_text.get_rect(center=level_fourtyone_button.center))
+        if level_fourtyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 41
+            pygame.time.delay(200)
+
+        level_fortytwo_text = font.render("42", True, GOLD)
+        level_fortytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_fortytwo_button, border_radius=0)
+        screen.blit(level_fortytwo_text, level_fortytwo_text.get_rect(center=level_fortytwo_button.center))
+        if level_fortytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 42
+            pygame.time.delay(200)
+
+        level_fortythree_text = font.render("43", True, CREAM)
+        level_fortythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, CLOUD, level_fortythree_button, border_radius=0)
+        screen.blit(level_fortythree_text, level_fortythree_text.get_rect(center=level_fortythree_button.center))
+        if level_fortythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 43
+            pygame.time.delay(200)
+
+        level_fortyfour_text = font.render("44", True, COBALT)
+        level_fortyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LILAC, level_fortyfour_button, border_radius=0)
+        screen.blit(level_fortyfour_text, level_fortyfour_text.get_rect(center=level_fortyfour_button.center))
+        if level_fortyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 44
+            pygame.time.delay(200)
+
+        level_fortyfive_text = font.render("45", True, CLOUD)
+        level_fortyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SULFUR, level_fortyfive_button, border_radius=0)
+        screen.blit(level_fortyfive_text, level_fortyfive_text.get_rect(center=level_fortyfive_button.center))
+        if level_fortyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 45
+            pygame.time.delay(200)
+
+        level_fortysix_text = font.render("46", True, TAN)
+        level_fortysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, BROWN, level_fortysix_button, border_radius=0)
+        screen.blit(level_fortysix_text, level_fortysix_text.get_rect(center=level_fortysix_button.center))
+        if level_fortysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 46
+            pygame.time.delay(200)
+
+        level_fortyseven_text = font.render("47", True, HOT_PINK)
+        level_fortyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TURQUOISE, level_fortyseven_button, border_radius=0)
+        screen.blit(level_fortyseven_text, level_fortyseven_text.get_rect(center=level_fortyseven_button.center))
+        if level_fortyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 47
+            pygame.time.delay(200)
+
+        level_fortyeight_text = font.render("48", True, BLUE)
+        level_fortyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, AQUA, level_fortyeight_button, border_radius=0)
+        screen.blit(level_fortyeight_text, level_fortyeight_text.get_rect(center=level_fortyeight_button.center))
+        if level_fortyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 48
+            pygame.time.delay(200)
+
+        level_fortynine_text = font.render("49", True, AZURE)
+        level_fortynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, YELLOW, level_fortynine_button, border_radius=0)
+        screen.blit(level_fortynine_text, level_fortynine_text.get_rect(center=level_fortynine_button.center))
+        if level_fortynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 49
+            pygame.time.delay(200)
+
+        level_fifty_text = font.render("50", True, BLACK)
+        level_fifty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_fifty_button, border_radius=0)
+        screen.blit(level_fifty_text, level_fifty_text.get_rect(center=level_fifty_button.center))
+        if level_fifty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 50
+            pygame.time.delay(200)
+
+        level_fiftyone_text = font.render("51", True, BLUE)
+        level_fiftyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, AQUA, level_fiftyone_button, border_radius=0)
+        screen.blit(level_fiftyone_text, level_fiftyone_text.get_rect(center=level_fiftyone_button.center))
+        if level_fiftyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 51
+            pygame.time.delay(200)
+
+        level_fiftytwo_text = font.render("52", True, VIOLET)
+        level_fiftytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_fiftytwo_button, border_radius=0)
+        screen.blit(level_fiftytwo_text, level_fiftytwo_text.get_rect(center=level_fiftytwo_button.center))
+        if level_fiftytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 52
+            pygame.time.delay(200)
+
+        level_fiftythree_text = font.render("53", True, TEAL)
+        level_fiftythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_fiftythree_button, border_radius=0)
+        screen.blit(level_fiftythree_text, level_fiftythree_text.get_rect(center=level_fiftythree_button.center))
+        if level_fiftythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 53
+            pygame.time.delay(200)
+
+        level_fiftyfour_text = font.render("54", True, GOLD)
+        level_fiftyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_fiftyfour_button, border_radius=0)
+        screen.blit(level_fiftyfour_text, level_fiftyfour_text.get_rect(center=level_fiftyfour_button.center))
+        if level_fiftyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 54
+            pygame.time.delay(200)
+
+        level_fiftyfive_text = font.render("55", True, AZURE)
+        level_fiftyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, YELLOW, level_fiftyfive_button, border_radius=0)
+        screen.blit(level_fiftyfive_text, level_fiftyfive_text.get_rect(center=level_fiftyfive_button.center))
+        if level_fiftyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 55
+            pygame.time.delay(200)
+
+        level_fiftysix_text = font.render("56", True, VIOLET)
+        level_fiftysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_fiftysix_button, border_radius=0)
+        screen.blit(level_fiftysix_text, level_fiftysix_text.get_rect(center=level_fiftysix_button.center))
+        if level_fiftysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 56
+            pygame.time.delay(200)
+
+        level_fiftyseven_text = font.render("57", True, COBALT)
+        level_fiftyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LILAC, level_fiftyseven_button, border_radius=0)
+        screen.blit(level_fiftyseven_text, level_fiftyseven_text.get_rect(center=level_fiftyseven_button.center))
+        if level_fiftyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 57
+            pygame.time.delay(200)
+
+        level_fiftyeight_text = font.render("58", True, HOT_PINK)
+        level_fiftyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TURQUOISE, level_fiftyeight_button, border_radius=0)
+        screen.blit(level_fiftyeight_text, level_fiftyeight_text.get_rect(center=level_fiftyeight_button.center))
+        if level_fiftyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 58
+            pygame.time.delay(200)
+
+        level_fiftynine_text = font.render("59", True, VIOLET)
+        level_fiftynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_fiftynine_button, border_radius=0)
+        screen.blit(level_fiftynine_text, level_fiftynine_text.get_rect(center=level_fiftynine_button.center))
+        if level_fiftynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 59
+            pygame.time.delay(200)
+
+        level_sixty_text = font.render("60", True, BLACK)
+        level_sixty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_sixty_button, border_radius=0)
+        screen.blit(level_sixty_text, level_sixty_text.get_rect(center=level_sixty_button.center))
+        if level_sixty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 60
+            pygame.time.delay(200)
+
+        level_sixtyone_text = font.render("61", True, BLUE)
+        level_sixtyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, AQUA, level_sixtyone_button, border_radius=0)
+        screen.blit(level_sixtyone_text, level_sixtyone_text.get_rect(center=level_sixtyone_button.center))
+        if level_sixtyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 61
+            pygame.time.delay(200)
+
+        level_sixtytwo_text = font.render("62", True, YELLOW)
+        level_sixtytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, level_sixtytwo_button, border_radius=0)
+        screen.blit(level_sixtytwo_text, level_sixtytwo_text.get_rect(center=level_sixtytwo_button.center))
+        if level_sixtytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 62
+            pygame.time.delay(200)
+
+        level_sixtythree_text = font.render("63", True, TEAL)
+        level_sixtythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_sixtythree_button, border_radius=0)
+        screen.blit(level_sixtythree_text, level_sixtythree_text.get_rect(center=level_sixtythree_button.center))
+        if level_sixtythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 63
+            pygame.time.delay(200)
+
+        level_sixtyfour_text = font.render("64", True, GOLD)
+        level_sixtyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_sixtyfour_button, border_radius=0)
+        screen.blit(level_sixtyfour_text, level_sixtyfour_text.get_rect(center=level_sixtyfour_button.center))
+        if level_sixtyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 64
+            pygame.time.delay(200)
+
+        level_sixtyfive_text = font.render("65", True, HOT_PINK)
+        level_sixtyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TURQUOISE, level_sixtyfive_button, border_radius=0)
+        screen.blit(level_sixtyfive_text, level_sixtyfive_text.get_rect(center=level_sixtyfive_button.center))
+        if level_sixtyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 65
+            pygame.time.delay(200)
+
+        level_sixtysix_text = font.render("66", True, BRONZE)
+        level_sixtysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GOLD, level_sixtysix_button, border_radius=0)
+        screen.blit(level_sixtysix_text, level_sixtysix_text.get_rect(center=level_sixtysix_button.center))
+        if level_sixtysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 66
+            pygame.time.delay(200)
+
+        level_sixseven_text = font.render("67", True, AZURE)
+        level_sixseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, YELLOW, level_sixseven_button, border_radius=0)
+        screen.blit(level_sixseven_text, level_sixseven_text.get_rect(center=level_sixseven_button.center))
+        if level_sixseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 67
+            pygame.time.delay(200)
+
+        level_sixtyeight_text = font.render("68", True, COBALT)
+        level_sixtyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LILAC, level_sixtyeight_button, border_radius=0)
+        screen.blit(level_sixtyeight_text, level_sixtyeight_text.get_rect(center=level_sixtyeight_button.center))
+        if level_sixtyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 68
+            pygame.time.delay(200)
+
+        level_sixtynine_text = font.render("69", True, BLUE)
+        level_sixtynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, AQUA, level_sixtynine_button, border_radius=0)
+        screen.blit(level_sixtynine_text, level_sixtynine_text.get_rect(center=level_sixtynine_button.center))
+        if level_sixtynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 69
+            pygame.time.delay(200)
+
+        level_seventy_text = font.render("70", True, BLACK)
+        level_seventy_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_seventy_button, border_radius=0)
+        screen.blit(level_seventy_text, level_seventy_text.get_rect(center=level_seventy_button.center))
+        if level_seventy_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 70
+            pygame.time.delay(200)
+
+        level_seventyone_text = font.render("71", True, GREEN)
+        level_seventyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, CHARTREUSE, level_seventyone_button, border_radius=0)
+        screen.blit(level_seventyone_text, level_seventyone_text.get_rect(center=level_seventyone_button.center))
+        if level_seventyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 71
+            pygame.time.delay(200)
+
+        level_seventytwo_text = font.render("72", True, VIOLET)
+        level_seventytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_seventytwo_button, border_radius=0)
+        screen.blit(level_seventytwo_text, level_seventytwo_text.get_rect(center=level_seventytwo_button.center))
+        if level_seventytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 72
+            pygame.time.delay(200)
+
+        level_seventythree_text = font.render("73", True, CLOUD)
+        level_seventythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TAN, level_seventythree_button, border_radius=0)
+        screen.blit(level_seventythree_text, level_seventythree_text.get_rect(center=level_seventythree_button.center))
+        if level_seventythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 73
+            pygame.time.delay(200)
+
+        level_seventyfour_text = font.render("74", True, TAN)
+        level_seventyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, BROWN, level_seventyfour_button, border_radius=0)
+        screen.blit(level_seventyfour_text, level_seventyfour_text.get_rect(center=level_seventyfour_button.center))
+        if level_seventyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 74
+            pygame.time.delay(200)
+
+        level_seventyfive_text = font.render("75", True, YELLOW)
+        level_seventyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, level_seventyfive_button, border_radius=0)
+        screen.blit(level_seventyfive_text, level_seventyfive_text.get_rect(center=level_seventyfive_button.center))
+        if level_seventyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 75
+            pygame.time.delay(200)
+
+        level_seventysix_text = font.render("76", True, VIOLET)
+        level_seventysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_seventysix_button, border_radius=0)
+        screen.blit(level_seventysix_text, level_seventysix_text.get_rect(center=level_seventysix_button.center))
+        if level_seventysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 76
+            pygame.time.delay(200)
+
+        level_seventyseven_text = font.render("77", True, WHITE)
+        level_seventyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GOLD, level_seventyseven_button, border_radius=0)
+        screen.blit(level_seventyseven_text, level_seventyseven_text.get_rect(center=level_seventyseven_button.center))
+        if level_seventyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 77
+            pygame.time.delay(200)
+
+        level_seventyeight_text = font.render("78", True, TEAL)
+        level_seventyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_seventyeight_button, border_radius=0)
+        screen.blit(level_seventyeight_text, level_seventyeight_text.get_rect(center=level_seventyeight_button.center))
+        if level_seventyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 78
+            pygame.time.delay(200)
+
+        level_seventynine_text = font.render("79", True, GOLD)
+        level_seventynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_seventynine_button, border_radius=0)
+        screen.blit(level_seventynine_text, level_seventynine_text.get_rect(center=level_seventynine_button.center))
+        if level_seventynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 79
+            pygame.time.delay(200)
+
+        level_eighty_text = font.render("80", True, BLACK)
+        level_eighty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_eighty_button, border_radius=0)
+        screen.blit(level_eighty_text, level_eighty_text.get_rect(center=level_eighty_button.center))
+        if level_eighty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 80
+            pygame.time.delay(200)
+
+        level_eightyone_text = font.render("81", True, CYAN)
+        level_eightyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, PURPLE, level_eightyone_button, border_radius=0)
+        screen.blit(level_eightyone_text, level_eightyone_text.get_rect(center=level_eightyone_button.center))
+        if level_eightyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 81
+            pygame.time.delay(200)
+
+        level_eightytwo_text = font.render("82", True, COBALT)
+        level_eightytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LILAC, level_eightytwo_button, border_radius=0)
+        screen.blit(level_eightytwo_text, level_eightytwo_text.get_rect(center=level_eightytwo_button.center))
+        if level_eightytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 82
+            pygame.time.delay(200)
+
+        level_eightythree_text = font.render("83", True, GREEN)
+        level_eightythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, CHARTREUSE, level_eightythree_button, border_radius=0)
+        screen.blit(level_eightythree_text, level_eightythree_text.get_rect(center=level_eightythree_button.center))
+        if level_eightythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 83
+            pygame.time.delay(200)
+
+        level_eightyfour_text = font.render("84", True, CREAM)
+        level_eightyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, CLOUD, level_eightyfour_button, border_radius=0)
+        screen.blit(level_eightyfour_text, level_eightyfour_text.get_rect(center=level_eightyfour_button.center))
+        if level_eightyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 84
+            pygame.time.delay(200)
+
+        level_eightyfive_text = font.render("85", True, RED)
+        level_eightyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LIME, level_eightyfive_button, border_radius=0)
+        screen.blit(level_eightyfive_text, level_eightyfive_text.get_rect(center=level_eightyfive_button.center))
+        if level_eightyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 85
+            pygame.time.delay(200)
+
+        level_eightysix_text = font.render("86", True, BLUE)
+        level_eightysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, AQUA, level_eightysix_button, border_radius=0)
+        screen.blit(level_eightysix_text, level_eightysix_text.get_rect(center=level_eightysix_button.center))
+        if level_eightysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 86
+            pygame.time.delay(200)
+
+        level_eightyseven_text = font.render("87", True, HOT_PINK)
+        level_eightyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TURQUOISE, level_eightyseven_button, border_radius=0)
+        screen.blit(level_eightyseven_text, level_eightyseven_text.get_rect(center=level_eightyseven_button.center))
+        if level_eightyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 87
+            pygame.time.delay(200)
+
+        level_eightyeight_text = font.render("88", True, TAN)
+        level_eightyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, BROWN, level_eightyeight_button, border_radius=0)
+        screen.blit(level_eightyeight_text, level_eightyeight_text.get_rect(center=level_eightyeight_button.center))
+        if level_eightyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 88
+            pygame.time.delay(200)
+
+        level_eightynine_text = font.render("89", True, YELLOW)
+        level_eightynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, level_eightynine_button, border_radius=0)
+        screen.blit(level_eightynine_text, level_eightynine_text.get_rect(center=level_eightynine_button.center))
+        if level_eightynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 89
+            pygame.time.delay(200)
+
+        level_ninty_text = font.render("90", True, BLACK)
+        level_ninty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_ninty_button, border_radius=0)
+        screen.blit(level_ninty_text, level_ninty_text.get_rect(center=level_ninty_button.center))
+        if level_ninty_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 90
+            pygame.time.delay(200)
+
+        level_nintyone_text = font.render("91", True, CYAN)
+        level_nintyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, PURPLE, level_nintyone_button, border_radius=0)
+        screen.blit(level_nintyone_text, level_nintyone_text.get_rect(center=level_nintyone_button.center))
+        if level_nintyone_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 91
+            pygame.time.delay(200)
+
+        level_nintytwo_text = font.render("92", True, CLOUD)
+        level_nintytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SULFUR, level_nintytwo_button, border_radius=0)
+        screen.blit(level_nintytwo_text, level_nintytwo_text.get_rect(center=level_nintytwo_button.center))
+        if level_nintytwo_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 92
+            pygame.time.delay(200)
+
+        level_nintythree_text = font.render("93", True, VIOLET)
+        level_nintythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SHADOW, level_nintythree_button, border_radius=0)
+        screen.blit(level_nintythree_text, level_nintythree_text.get_rect(center=level_nintythree_button.center))
+        if level_nintythree_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 93
+            pygame.time.delay(200)
+
+        level_nintyfour_text = font.render("94", True, RED)
+        level_nintyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, MAROON, level_nintyfour_button, border_radius=0)
+        screen.blit(level_nintyfour_text, level_nintyfour_text.get_rect(center=level_nintyfour_button.center))
+        if level_nintyfour_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 94
+            pygame.time.delay(200)
+
+        level_nintyfive_text = font.render("95", True, AZURE)
+        level_nintyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, YELLOW, level_nintyfive_button, border_radius=0)
+        screen.blit(level_nintyfive_text, level_nintyfive_text.get_rect(center=level_nintyfive_button.center))
+        if level_nintyfive_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 95
+            pygame.time.delay(200)
+
+        level_nintysix_text = font.render("96", True, TEAL)
+        level_nintysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TUNDRA, level_nintysix_button, border_radius=0)
+        screen.blit(level_nintysix_text, level_nintysix_text.get_rect(center=level_nintysix_button.center))
+        if level_nintysix_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 96
+            pygame.time.delay(200)
+
+        level_nintyseven_text = font.render("97", True, GOLD)
+        level_nintyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, LAVA, level_nintyseven_button, border_radius=0)
+        screen.blit(level_nintyseven_text, level_nintyseven_text.get_rect(center=level_nintyseven_button.center))
+        if level_nintyseven_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 97
+            pygame.time.delay(200)
+
+        level_nintyeight_text = font.render("98", True, CLOUD)
+        level_nintyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, TAN, level_nintyeight_button, border_radius=0)
+        screen.blit(level_nintyeight_text, level_nintyeight_text.get_rect(center=level_nintyeight_button.center))
+        if level_nintyeight_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 98
+            pygame.time.delay(200)
+
+        level_nintynine_text = font.render("99", True, BRONZE)
+        level_nintynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GOLD, level_nintynine_button, border_radius=0)
+        screen.blit(level_nintynine_text, level_nintynine_text.get_rect(center=level_nintynine_button.center))
+        if level_nintynine_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 99
+            pygame.time.delay(200)
+
+        level_onehundred_text = font.render("100", True, RED)
+        level_onehundred_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, RED, level_onehundred_button, border_radius=0)
+        level_onehundred_button_again = pygame.Rect(980*SCALED_WIDTH, 235*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 80*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        pygame.draw.rect(screen, BLACK, level_onehundred_button_again, border_radius=0)
+        screen.blit(level_onehundred_text, level_onehundred_text.get_rect(center=level_onehundred_button.center))
+        if level_onehundred_button.collidepoint(mouse_pos) and mouse_click:
+            level_selected = 100
+            pygame.time.delay(200)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit(); exit()
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE):
+                running = False
+        pygame.display.flip()
+        clock.tick(60)
 
 def SETTINGS():
     global color_list
@@ -4430,9 +5275,9 @@ def TITLE_SCREEN():
         screen.blit(campaign_text, campaign_text.get_rect(center=campaign_button.center))
 
         if campaign_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
-            apply_settings()
-            reset_game_state()
-            waiting = False
+            CAMPAIGN_SELECT()
+            pygame.time.delay(200)   # <-- prevents instant selection
+            continue
 
 
 
@@ -7604,11 +8449,11 @@ while running:
          
 # --- Placing on Textures ---
         if use_textures and modifiers[0] == 0:
-            textures = [basic_texture, homing_texture, fatal_texture, flow_texture, sticky_texture, "None", trail_texture, "None", splitter_texture, bomb_texture,
-                        shooter_texture, sniper_texture, speedy_texture, shotgun_texture, "None", "None", magma_texture, charger_texture, rapidshooter_texture, frostbite_texture,
-                        "None", laser_texture, "None", "None", cold_texture, tracer_texture, savage_texture, teleporter_texture, phantom_texture, stream_texture,
-                        "None", burstshooter_texture, stickyshooter_texture, sparker_texture, annihilator_texture, frostbeam_texture, "None", "None", "None", "None",
-                        whirly_texture, volcanic_texture, pyrobeam_texture, laggy_texture, error_texture, glitchy_texture, "None", "None", pulse_texture, grower_texture]
+            textures = [basic_texture, homing_texture, fatal_texture, flow_texture, sticky_texture, gloomy_texture, trail_texture, "None", splitter_texture, bomb_texture,
+                        shooter_texture, sniper_texture, speedy_texture, shotgun_texture, voodoo_texture, blind_texture, magma_texture, charger_texture, rapidshooter_texture, frostbite_texture,
+                        addictive_texture, laser_texture, hardened_texture, accelerator_texture, cold_texture, tracer_texture, savage_texture, teleporter_texture, phantom_texture, stream_texture,
+                        sensitive_texture, burstshooter_texture, stickyshooter_texture, sparker_texture, annihilator_texture, frostbeam_texture, "None", "None", motion_texture, "None",
+                        whirly_texture, volcanic_texture, pyrobeam_texture, laggy_texture, error_texture, glitchy_texture, "None", gloomyshooter_texture, pulse_texture, grower_texture]
         else:
             textures = ["None", "None", "None", "None", "None", "None", "None", "None", "None", "None",
                         "None", "None", "None", "None", "None", "None", "None", "None", "None", "None",
