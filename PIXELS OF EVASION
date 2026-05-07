@@ -232,6 +232,9 @@ spawner_height = spawner_size*SCALED_HEIGHT
 spawner_color = RED # RED IS DEFAULT
 spawner_timer = 0
 
+# --- Campaign Variables ---
+campaign_start = False
+
 # --- Control Point ---
 control_point_spawned = False
 
@@ -392,6 +395,7 @@ walleffect = 0
 # --- Font Size ---
 slightly_small_font = pygame.font.SysFont("ocraextended", int(22 * SCALED_TEXT))
 font = pygame.font.SysFont("ocraextended", int(24 * SCALED_TEXT))
+slightly_big_font = pygame.font.SysFont("ocraextended", int(32 * SCALED_TEXT))
 biggish_font = pygame.font.SysFont("ocraextended", int(40 * SCALED_TEXT))
 big_font = pygame.font.SysFont("ocraextended", int(90 * SCALED_TEXT))
 enemy_font = pygame.font.SysFont(None, int(0.96 * enemy_size * SCALED_TEXT))
@@ -741,7 +745,386 @@ def enemy_lock_setup(elock, enumber):
     elif elock == 3: ambush_enemy_types.append(enumber + 1)
 
 def CAMPAIGN_SELECT():
+    global campaign_start
     global WIDTH, HEIGHT, SCALED_WIDTH, SCALED_HEIGHT, SCALED_TEXT
+
+    global player_size_setting
+    global enemy_size_setting
+    global projectile_size_setting
+    global min_spawn_delay_setting
+    global max_spawn_delay_setting
+    global spawn_delay_change_setting
+    global player_speed_setting
+    global enemy_speed_setting
+    global projectile_speed_setting
+    global regen_delay_setting
+    global player_health_setting
+    global trail_duration_setting
+    global trail_distance_setting
+    global freeze_duration_setting
+    global burn_duration_setting
+    global invincibility_duration_setting
+    global chaser_turn_amount_setting
+    global enemy_stick_setting
+    global projectile_fire_rate_setting
+    global enemy_damage_setting
+    global burst_setting
+    global enemy_unlock_setting
+    global target_setting
+    global projectile_damage_setting
+    global unharden_death_setting
+    global insta_spawn_setting
+    global ambush_per_score_setting
+    global teleport_angle_change_setting
+    global burn_particle_lifetime_setting
+    global freezeslip_max_setting
+    global blocker_push_radius_setting
+    global blocker_push_strength_setting
+    global addictive_interaction_setting
+    global blocker_interaction_setting
+    global target_closest_setting
+    global growing_speed_setting
+    global ambush_start_setting
+    global annihilator_interaction_setting
+    global hardened_speed_percent_setting
+    global fatal_speed_percent_setting
+    global annihilator_speed_percent_setting
+    global enemy_locks
+    
+    global basic_hp_setting
+    global homing_hp_setting
+    global fatal_hp_setting
+    global flow_hp_setting
+    global sticky_hp_setting, sticky_sensitive_setting
+    global gloomy_hp_setting
+    global trail_hp_setting
+    global impostor_hp_setting
+    global splitter_hp_setting
+    global split_amount_setting
+    global bomb_hp_setting
+    global bomb_projectile_amount_setting
+    global shooter_hp_setting
+    global sniper_hp_setting
+    global extra_sniper_damage_setting
+    global speedy_hp_setting
+    global shotgun_hp_setting
+    global shotgun_bullets_setting
+    global voodoo_hp_setting
+    global blind_hp_setting
+    global magma_hp_setting
+    global charger_hp_setting, charger_sensitive_setting
+    global rapidshooter_hp_setting
+    global frostbite_hp_setting
+    global frostbite_projectile_amount_setting
+    global addictive_hp_setting
+    global addictive_pull_strength_setting
+    global addictive_pull_radius_setting
+    global laser_hp_setting
+    global laser_damage_setting
+    global laser_duration_setting
+    global hardened_hp_setting
+    global harden_break_setting
+    global accelerator_hp_setting
+    global cold_hp_setting
+    global tracer_hp_setting
+    global savage_hp_setting
+    global teleporter_hp_setting
+    global phantom_hp_setting
+    global stream_hp_setting
+    global sensitive_hp_setting
+    global burstshooter_hp_setting
+    global stickyshooter_hp_setting
+    global sparker_hp_setting
+    global annihilator_hp_setting
+    global annihilator_projectile_amount_setting
+    global frostbeam_hp_setting
+    global forecast_hp_setting
+    global assassin_hp_setting
+    global motion_hp_setting
+    global invisibility_hp_setting
+    global whirly_hp_setting
+    global volcanic_hp_setting
+    global pyrobeam_hp_setting
+    global laggy_hp_setting
+    global error_hp_setting
+    global glitchy_hp_setting
+    global blocker_hp_setting
+    global gloomyshooter_hp_setting
+    global pulse_hp_setting
+    global grower_hp_setting
+    global modifiers
+
+    def give_seed(pasted):
+        global player_size_setting, enemy_size_setting, projectile_size_setting, min_spawn_delay_setting, max_spawn_delay_setting, spawn_delay_change_setting
+        global player_speed_setting, enemy_speed_setting, projectile_speed_setting
+        global regen_delay_setting, player_health_setting
+        global trail_duration_setting
+        global trail_distance_setting
+        global freeze_duration_setting
+        global burn_duration_setting
+        global invincibility_duration_setting
+        global chaser_turn_amount_setting
+        global enemy_stick_setting
+        global projectile_fire_rate_setting
+        global enemy_damage_setting
+        global burst_setting
+        global enemy_unlock_setting
+        global target_setting
+        global projectile_damage_setting
+        global unharden_death_setting
+        global insta_spawn_setting
+        global ambush_per_score_setting
+        global teleport_angle_change_setting
+        global burn_particle_lifetime_setting
+        global blocker_push_radius_setting
+        global blocker_push_strength_setting
+        global addictive_interaction_setting
+        global blocker_interaction_setting
+        global target_closest_setting
+        global growing_speed_setting
+        global ambush_start_setting
+        global annihilator_interaction_setting
+        global hardened_speed_percent_setting
+        global fatal_speed_percent_setting
+        global annihilator_speed_percent_setting
+        global freezeslip_max_setting
+        global enemy_locks
+        
+        global basic_hp_setting
+        global homing_hp_setting
+        global fatal_hp_setting
+        global flow_hp_setting
+        global sticky_hp_setting, sticky_sensitive_setting
+        global gloomy_hp_setting
+        global trail_hp_setting
+        global impostor_hp_setting
+        global splitter_hp_setting
+        global split_amount_setting
+        global bomb_hp_setting
+        global bomb_projectile_amount_setting
+        global shooter_hp_setting
+        global sniper_hp_setting
+        global extra_sniper_damage_setting
+        global speedy_hp_setting
+        global shotgun_hp_setting
+        global shotgun_bullets_setting
+        global voodoo_hp_setting
+        global blind_hp_setting
+        global magma_hp_setting
+        global charger_hp_setting, charger_sensitive_setting
+        global rapidshooter_hp_setting
+        global frostbite_hp_setting
+        global frostbite_projectile_amount_setting
+        global addictive_hp_setting
+        global addictive_pull_strength_setting
+        global addictive_pull_radius_setting
+        global laser_hp_setting
+        global laser_damage_setting
+        global laser_duration_setting
+        global hardened_hp_setting
+        global harden_break_setting
+        global accelerator_hp_setting
+        global cold_hp_setting
+        global tracer_hp_setting
+        global savage_hp_setting
+        global teleporter_hp_setting
+        global phantom_hp_setting
+        global stream_hp_setting
+        global sensitive_hp_setting
+        global burstshooter_hp_setting
+        global stickyshooter_hp_setting
+        global sparker_hp_setting
+        global annihilator_hp_setting
+        global annihilator_projectile_amount_setting
+        global frostbeam_hp_setting
+        global forecast_hp_setting
+        global assassin_hp_setting
+        global motion_hp_setting
+        global invisibility_hp_setting
+        global whirly_hp_setting
+        global volcanic_hp_setting
+        global pyrobeam_hp_setting
+        global laggy_hp_setting
+        global error_hp_setting
+        global glitchy_hp_setting
+        global blocker_hp_setting
+        global gloomyshooter_hp_setting
+        global pulse_hp_setting
+        global grower_hp_setting
+        global modifiers
+        scount = 0
+        chara = ""
+        try:
+            for c in pasted:
+                if c == "_":
+                    match scount:
+                        case 0: player_size_setting = int(chara)
+                        case 1: enemy_size_setting = int(chara)
+                        case 2: projectile_size_setting = int(chara)
+                        case 3: min_spawn_delay_setting = int(chara)
+                        case 4: max_spawn_delay_setting = int(chara)
+                        case 5: spawn_delay_change_setting = int(chara)
+                        case 6: player_speed_setting = int(chara)
+                        case 7: enemy_speed_setting = int(chara)
+                        case 8: projectile_speed_setting = int(chara)
+                        case 9: regen_delay_setting = int(chara)
+                        case 10: trail_duration_setting = int(chara)
+                        case 11: trail_distance_setting = int(chara)
+                        case 12: freeze_duration_setting = int(chara)
+                        case 13: invincibility_duration_setting = int(chara)
+                        case 14: chaser_turn_amount_setting = int(chara)
+                        case 15: enemy_stick_setting = int(chara)
+                        case 16: projectile_fire_rate_setting = int(chara)
+                        case 17: enemy_damage_setting = int(chara)
+                        case 18: burst_setting = int(chara)
+                        case 19: enemy_unlock_setting = int(chara)
+                        case 20: projectile_damage_setting = int(chara)
+                        case 21: enemy_locks[0] = int(chara)
+                        case 22: enemy_locks[1] = int(chara)
+                        case 23: enemy_locks[2] = int(chara)
+                        case 24: enemy_locks[3] = int(chara)
+                        case 25: enemy_locks[4] = int(chara)
+                        case 26: enemy_locks[5] = int(chara)
+                        case 27: enemy_locks[6] = int(chara)
+                        case 28: enemy_locks[7] = int(chara)
+                        case 29: enemy_locks[8] = int(chara)
+                        case 30: enemy_locks[9] = int(chara)
+                        case 31: enemy_locks[10] = int(chara)
+                        case 32: enemy_locks[11] = int(chara)
+                        case 33: enemy_locks[12] = int(chara)
+                        case 34: enemy_locks[13] = int(chara)
+                        case 35: enemy_locks[14] = int(chara)
+                        case 36: enemy_locks[15] = int(chara)
+                        case 37: enemy_locks[16] = int(chara)
+                        case 38: enemy_locks[17] = int(chara)
+                        case 39: enemy_locks[18] = int(chara)
+                        case 40: enemy_locks[19] = int(chara)
+                        case 41: enemy_locks[20] = int(chara)
+                        case 42: enemy_locks[21] = int(chara)
+                        case 43: enemy_locks[22] = int(chara)
+                        case 44: enemy_locks[23] = int(chara)
+                        case 45: enemy_locks[24] = int(chara)
+                        case 46: enemy_locks[25] = int(chara)
+                        case 47: enemy_locks[26] = int(chara)
+                        case 48: enemy_locks[27] = int(chara)
+                        case 49: enemy_locks[28] = int(chara)
+                        case 50: enemy_locks[29] = int(chara)
+                        case 51: enemy_locks[30] = int(chara)
+                        case 52: enemy_locks[31] = int(chara)
+                        case 53: enemy_locks[32] = int(chara)
+                        case 54: enemy_locks[33] = int(chara)
+                        case 55: enemy_locks[34] = int(chara)
+                        case 56: enemy_locks[35] = int(chara)
+                        case 57: basic_hp_setting = int(chara)
+                        case 58: homing_hp_setting = int(chara)
+                        case 59: fatal_hp_setting = int(chara)
+                        case 60: flow_hp_setting = int(chara)
+                        case 61: sticky_hp_setting = int(chara)
+                        case 62: gloomy_hp_setting = int(chara)
+                        case 63: trail_hp_setting = int(chara)
+                        case 64: impostor_hp_setting = int(chara)
+                        case 65: splitter_hp_setting = int(chara)
+                        case 66: split_amount_setting = int(chara)
+                        case 67: bomb_hp_setting = int(chara)
+                        case 68: bomb_projectile_amount_setting = int(chara)
+                        case 69: shooter_hp_setting = int(chara)
+                        case 70: sniper_hp_setting = int(chara)
+                        case 71: extra_sniper_damage_setting = int(chara)
+                        case 72: speedy_hp_setting = int(chara)
+                        case 73: shotgun_hp_setting = int(chara)
+                        case 74: shotgun_bullets_setting = int(chara)
+                        case 75: voodoo_hp_setting = int(chara)
+                        case 76: blind_hp_setting = int(chara)
+                        case 77: magma_hp_setting = int(chara)
+                        case 78: charger_hp_setting = int(chara)
+                        case 79: rapidshooter_hp_setting = int(chara)
+                        case 80: frostbite_hp_setting = int(chara)
+                        case 81: frostbite_projectile_amount_setting = int(chara)
+                        case 82: addictive_hp_setting = int(chara)
+                        case 83: addictive_pull_strength_setting = int(chara)
+                        case 84: addictive_pull_radius_setting = int(chara)
+                        case 85: laser_hp_setting = int(chara)
+                        case 86: laser_damage_setting = int(chara)
+                        case 87: laser_duration_setting = int(chara)
+                        case 88: hardened_hp_setting = int(chara)
+                        case 89: harden_break_setting = int(chara)
+                        case 90: accelerator_hp_setting = int(chara)
+                        case 91: cold_hp_setting = int(chara)
+                        case 92: tracer_hp_setting = int(chara)
+                        case 93: savage_hp_setting = int(chara)
+                        case 94: teleporter_hp_setting = int(chara)
+                        case 95: phantom_hp_setting = int(chara)
+                        case 96: stream_hp_setting = int(chara)
+                        case 97: sensitive_hp_setting = int(chara)
+                        case 98: burstshooter_hp_setting = int(chara)
+                        case 99: stickyshooter_hp_setting = int(chara)
+                        case 100: sparker_hp_setting = int(chara)
+                        case 101: annihilator_hp_setting = int(chara)
+                        case 102: annihilator_projectile_amount_setting = int(chara)
+                        case 103: frostbeam_hp_setting = int(chara)
+                        case 104: modifiers[0] = int(chara)
+                        case 105: player_health_setting = int(chara)
+                        case 106: unharden_death_setting = int(chara)
+                        case 107: target_setting = int(chara)
+                        case 108: modifiers[1] = int(chara)
+                        case 109: sticky_sensitive_setting = int(chara)
+                        case 110: charger_sensitive_setting = int(chara)
+                        case 111: forecast_hp_setting = int(chara)
+                        case 112: enemy_locks[36] = int(chara)
+                        case 113: assassin_hp_setting = int(chara)
+                        case 114: enemy_locks[37] = int(chara)
+                        case 115: motion_hp_setting = int(chara)
+                        case 116: enemy_locks[38] = int(chara)
+                        case 117: modifiers[2] = int(chara)
+                        case 118: invisibility_hp_setting = int(chara)
+                        case 119: enemy_locks[39] = int(chara)
+                        case 120: insta_spawn_setting = int(chara)
+                        case 121: ambush_per_score_setting = int(chara)
+                        case 122: modifiers[3] = int(chara)
+                        case 123: whirly_hp_setting = int(chara)
+                        case 124: enemy_locks[40] = int(chara)
+                        case 125: teleport_angle_change_setting = int(chara)
+                        case 126: burn_duration_setting = int(chara)
+                        case 127: burn_particle_lifetime_setting = int(chara)
+                        case 128: volcanic_hp_setting = int(chara)
+                        case 129: pyrobeam_hp_setting = int(chara)
+                        case 130: enemy_locks[41] = int(chara)
+                        case 131: enemy_locks[42] = int(chara)
+                        case 132: modifiers[4] = int(chara)
+                        case 133: modifiers[5] = int(chara)
+                        case 134: freezeslip_max_setting = int(chara)
+                        case 135: modifiers[6] = int(chara)
+                        case 136: laggy_hp_setting = int(chara)
+                        case 137: enemy_locks[43] = int(chara)
+                        case 138: error_hp_setting = int(chara)
+                        case 139: enemy_locks[44] = int(chara)
+                        case 140: glitchy_hp_setting = int(chara)
+                        case 141: enemy_locks[45] = int(chara)
+                        case 142: blocker_hp_setting = int(chara)
+                        case 143: enemy_locks[46] = int(chara)
+                        case 144: blocker_push_radius_setting = int(chara)
+                        case 145: blocker_push_strength_setting = int(chara)
+                        case 146: addictive_interaction_setting = int(chara)
+                        case 147: blocker_interaction_setting = int(chara)
+                        case 148: gloomyshooter_hp_setting = int(chara)
+                        case 149: enemy_locks[47] = int(chara)
+                        case 150: target_closest_setting = int(chara)
+                        case 151: pulse_hp_setting = int(chara)
+                        case 152: grower_hp_setting = int(chara)
+                        case 153: enemy_locks[48] = int(chara)
+                        case 154: enemy_locks[49] = int(chara)
+                        case 155: growing_speed_setting = int(chara)
+                        case 156: modifiers[7] = int(chara)
+                        case 157: ambush_start_setting = int(chara)
+                        case 158: annihilator_interaction_setting = int(chara)
+                        case 159: hardened_speed_percent_setting = int(chara)
+                        case 160: fatal_speed_percent_setting = int(chara)
+                        case 161: annihilator_speed_percent_setting = int(chara)
+                    scount += 1
+                    chara = ""
+                else: chara += c
+        except:
+            scount = 0
     
     level_for_campaign_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     level_names = ["Nothing lol", "Starting With Basics", "Picking Up Speed", "Clingy Claustrophobia 1", "Run Away", "Horde Alert", "Aqua Arena 1", "Teleportation Trappers 1", "Bullet Barrage 1 ", "Rocky Rage 1", "Great Gauntlet 1",
@@ -754,9 +1137,112 @@ def CAMPAIGN_SELECT():
                    "Splitter Splatter 1", "Scary Shadows 7", "Disaster Defusion 1", "Rocky Rage 4", "Clingy Claustrophobia 5", "Scary Shadows 8", "Lucky Seven", "Frostbite Frenzy 6", "Blazing Burnout 6", "Great Gauntlet 8",
                    "Teleportation Trappers 4", "Laggy Lab 6", "Splitter Splatter 2", "Whirling Winds 4", "Just Juke 3", "Aqua Arena 6", "Laser Lunge 4", "Rocky Rage 5", "Clingy Claustrophobia 6", "Great Gauntlet 9",
                    "Teleportation Trappers 5", "Stormy Surge 4", "Scary Shadows 9", "Bullet Barrage 4", "Lightning Legacy 4", "Frostbite Frenzy 7", "Blazing Burnout 7", "Disaster Defusion 2", "Podium Projectiles 3", "Gigantic Gauntlet X"]
+    level_seeds = ["50_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_1_15_1_0_4_1_0_100_0_5_1_1_500_100_2_1_1_1_0_9_20_0_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_11_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_16_8_5_5_50_200_25_500_1000_5_100_10_1_10_50_1_0_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_34_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_100_10_100_1500_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_5_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_5_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_25_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_1500_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_17_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_500_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_10_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_6_100_0_5_2_1_500_100_2_1_2_2_0_18_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_50_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_10_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_12_100_0_5_2_1_500_100_2_1_2_2_0_29_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_1_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_10_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_50_0_5_2_1_500_100_2_1_2_2_0_37_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_5_1_10_100_1_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_6_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_5_50_0_5_2_1_500_100_2_1_2_2_0_7_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_3_0_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_0_0_1_3_2_3_2_15_2_0_4_2_15_100_0_5_2_1_500_100_2_1_2_2_0_13_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_75_75_35_",
+                    "50_50_10_100_1500_10_8_5_5_50_200_25_500_1000_5_100_5_1_10_20_1_0_2_2_1_1_2_2_2_2_2_1_2_1_2_2_2_2_1_2_2_2_2_1_1_2_2_2_1_2_1_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_0_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_14_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_0_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_3_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_1_0_0_3_2_3_2_15_2_0_4_2_8_100_0_5_2_1_500_100_2_1_2_2_0_35_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_70_0_5_2_1_500_100_2_1_2_2_0_32_20_1_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_14_20_1_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_1000_10_8_5_5_30_200_25_500_1000_5_100_10_1_10_300_1_3_0_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_99_2_99_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_15_6969_0_5_2_1_500_100_2_1_2_2_0_7_20_2_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_1000_1000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_20_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_1_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_99_2_99_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_20_6969_0_99_1_1_500_100_2_1_2_2_0_39_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_2_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_1_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_3_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_5_100_0_5_2_1_500_100_2_1_2_2_0_8_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_150_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_8_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_75_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_24_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_100_75_35_",
+                    "100_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_1_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_43_20_0_5_0_6_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_0_0_2_0_0_2_0_2_2_2_0_2_0_2_2_2_0_0_2_2_2_2_0_0_0_2_2_0_2_0_2_0_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_10_1_1_1_0_1_3_2_3_2_15_2_1_4_2_10_200_0_5_0_1_500_100_2_1_2_2_0_4_20_0_5_0_6_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_40_10_100_3000_10_8_5_5_150_200_25_500_1000_5_100_15_1_10_100_1_2_2_2_2_2_3_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_1_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_1_0_1_3_2_3_2_15_2_0_4_2_40_100_0_5_2_1_500_100_2_1_2_2_0_47_20_1_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_50_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_0_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_2_0_0_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_36_20_0_5_3_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_5_1_30_100_1_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_5_2_3_3_7_12_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_6_0_1_3_2_3_2_15_2_0_4_2_8_100_0_1_3_1_500_100_2_1_2_2_0_2_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_150_10_100_2000_6_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_18_4_3_1_4_32_7_10_300_3_1_100_40_20_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_1_1_1_0_0_1_3_2_3_2_30_0_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_12_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_14_8_5_5_6969_200_25_500_0_5_100_10_1_10_200_1_0_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_5_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_10_1_1_0_0_1_3_2_3_2_15_2_0_4_2_8_100_0_5_2_1_500_100_2_1_2_2_0_48_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_2_75_100_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_0_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_3_0_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_20_1_1_0_0_1_3_2_3_2_15_2_0_4_2_4_100_0_5_2_1_500_100_2_1_2_2_0_45_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_70_10_100_2000_6_10_8_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_0_3_2_1_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_7_3_1_4_32_7_10_300_3_1_100_99_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_150_100_2_1_2_2_0_5_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_25_75_35_",
+                    "50_50_10_1000_1000_10_8_8_5_50_200_25_500_1000_5_100_10_1_10_20_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_1_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_99_2_99_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_20_6969_0_99_3_1_500_100_2_1_2_2_0_41_20_0_5_2_99_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "100_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_3_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_31_20_3_5_0_6_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_3_0_0_0_0_2_2_0_0_2_0_0_2_0_0_0_2_2_2_2_0_0_0_0_2_0_2_0_2_0_2_2_2_2_5_2_1_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_4_1_1_6_0_1_3_2_3_2_15_0_3_4_2_20_100_0_5_0_1_500_100_2_1_2_2_0_3_20_4_5_0_6_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_50_2_50_50_35_",
+                    "50_50_10_10000_10000_10_6_10_5_6969_200_25_500_0_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_6_0_1_3_2_3_2_15_2_1_4_2_20_50_0_1_0_1_500_100_2_1_2_2_0_20_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_50_2_50_75_35_",
+                    "50_50_10_100_1500_16_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_0_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_2_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_47_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_75_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_7_1_7_100_1_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_5_1_0_5_4_5_5_9_4_3_3_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_5_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_1_100_0_5_2_1_500_100_2_1_2_2_0_6_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_150_2_50_75_35_",
+                    "50_100_10_100_2000_6_8_5_5_50_200_25_500_1000_5_1000_10_1_10_100_1_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_14_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_1_1_3_2_3_2_15_2_0_4_2_6_100_0_5_2_1_500_100_2_1_2_2_0_22_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_8_2_0_20_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_2_3_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_99_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_50_0_5_2_1_500_100_2_1_2_2_0_25_20_2_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_100_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_0_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_39_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_500_2000_10_8_8_5_50_200_25_150_1000_5_100_10_1_10_100_1_2_2_2_0_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_3_2_2_2_2_2_2_2_2_2_2_2_5_2_3_4_7_10_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_6_2_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_4_0_1_3_2_3_2_15_2_0_4_2_25_100_0_5_2_1_500_100_2_1_2_2_0_28_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_8_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_1_2_2_2_0_2_2_2_2_2_2_3_2_2_0_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_5_2_5_3_7_9_3_5_3_2_8_8_4_1_0_5_4_21_5_9_5_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_0_0_4_2_3_100_0_5_2_1_500_100_2_1_2_2_0_49_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_100_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_1_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_15_100_0_5_2_1_500_100_2_1_2_2_0_43_20_0_2_3_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_2000_8_10_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_0_0_0_0_0_2_2_0_0_0_0_0_0_0_0_0_3_2_2_2_0_0_0_0_2_0_2_0_0_0_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_2_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_10_1_1_4_0_1_3_2_3_2_15_0_2_4_2_4_100_0_5_0_1_500_100_2_1_2_2_0_35_20_0_5_0_6_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_0_45_0_0_2_50_75_35_",
+                    "50_150_10_100_2000_10_8_5_5_50_200_25_50_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_5_0_1_3_2_3_2_15_2_1_4_2_3_100_0_5_2_1_500_100_2_1_2_2_0_30_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_20_20_100_1500_10_8_7_5_50_200_6_500_1000_5_100_10_1_10_300_1_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_1_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_2_1_1_0_0_1_3_2_3_2_15_2_0_4_2_35_100_0_5_2_1_500_100_2_1_2_2_0_10_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_4_8_5_5_50_200_25_500_1000_5_100_10_1_20_300_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_20_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_7_0_1_3_2_3_2_15_2_1_4_2_35_100_0_1_3_1_500_100_2_1_2_2_0_13_20_0_5_2_6_2_1_2_5_2_300_20_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_30_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_9_0_1_3_2_3_2_15_2_3_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_40_20_3_5_2_5_0_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_4000_14_8_5_5_50_200_25_500_1000_5_100_40_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_0_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_1_1_2_6_2_4_15_3_2_1_3_32_1_0_4_1_1_3_0_1_3_2_3_2_15_2_0_4_2_35_300_0_5_2_1_500_100_2_1_2_2_0_19_50_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_3_4_0_2_45_0_300_2_50_75_35_",
+                    "70_70_10_100_2000_10_8_10_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_0_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_15_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_0_1_0_0_1_3_2_3_2_15_3_0_4_2_5_100_0_5_2_1_500_100_2_1_2_2_0_11_20_0_5_2_6_2_1_2_5_1_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_10_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_5_50_0_5_2_1_500_100_2_1_2_2_0_31_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_0_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_20_100_0_5_2_1_500_100_2_1_2_2_0_29_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_1_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_4000_10_8_5_5_50_200_25_500_1000_5_100_40_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_1_2_2_3_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_1_9_4_5_2_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_2_3_32_1_0_3_1_1_0_0_0_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_33_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_50_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_5_200_25_500_0_5_100_10_20_10_100_10_0_0_0_0_0_0_0_2_2_0_0_0_0_0_0_0_0_0_0_2_0_0_0_0_0_0_2_0_2_0_0_0_2_0_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_80_1_1_3_0_1_3_2_3_2_15_0_3_4_2_0_100_0_5_0_1_500_100_2_1_2_2_0_23_20_4_5_0_6_0_1_2_5_0_300_10_2_1_4_2_0_2_4_0_0_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_1_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_1_9_50_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_0_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_0_20_100_0_5_2_1_500_100_2_1_2_2_0_27_50_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_7_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_0_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_6_50_0_5_2_1_500_100_2_1_2_2_0_37_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "35_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_5_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_8_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_2_48_20_1_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_75_75_35_",
+                    "50_50_10_100_2000_8_8_12_4_50_500_6_500_1000_3_100_10_3_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_0_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_3_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_2_4_2_7_100_0_5_2_1_500_100_2_1_2_2_0_17_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_75_75_35_",
+                    "45_45_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_20_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_0_0_4_0_10_50_0_5_2_1_500_100_2_1_2_2_0_38_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_75_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_40_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_9_0_1_3_2_3_2_15_2_0_4_2_1_100_0_5_2_1_500_100_2_1_2_2_0_23_20_0_5_0_6_0_1_3_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_3_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_1_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_45_20_4_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_100_",
+                    "50_50_10_100_2000_8_8_8_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_2_2_2_2_0_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_99_12_4_1_0_5_4_5_3_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_8_100_1_5_2_1_500_100_2_1_2_2_0_46_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_8_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_0_0_0_0_0_2_0_0_0_0_0_0_0_0_0_0_0_0_0_3_0_0_0_0_0_0_0_0_0_0_2_0_0_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_1_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_8_0_1_3_2_3_2_15_0_0_4_0_12_200_0_5_0_1_500_100_2_1_2_2_0_31_20_4_5_0_6_0_1_0_5_0_300_10_2_1_4_2_0_2_4_0_0_45_0_0_2_50_75_35_",
+                    "50_50_10_100_2000_6_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_2_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_28_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_1_100_2_50_75_35_",
+                    "50_100_30_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_0_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_60_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_18_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_9_5_50_200_25_500_1000_5_300_10_1_10_300_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_1_2_2_3_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_100_0_5_2_1_500_100_2_1_2_2_0_32_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_65_10_100_2000_8_8_9_5_50_250_15_500_1000_5_100_10_2_10_100_1_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_5_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_4_1_1_0_0_1_3_2_3_2_15_2_1_4_2_8_100_0_5_2_1_500_100_3_1_1_3_0_12_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_20_20_5_30_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_150_40_10_5_5_1_2_6_2_4_15_3_2_1_1_128_1_0_3_1_1_0_0_1_3_2_3_2_15_2_3_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_49_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_3_50_75_100_",
+                    "30_100_50_100_2000_10_10_3_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_1_20_4_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_1200_6_12_20_5_50_200_25_500_1000_5_100_40_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_3_100_0_5_2_1_500_100_2_1_2_2_0_22_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_1200_6_12_20_5_50_200_25_500_1000_5_100_40_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_3_100_0_5_2_1_500_100_2_1_2_2_0_23_20_0_5_2_6_2_1_0_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_2_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_38_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_0_2_45_0_100_2_50_75_35_",
+                    "50_70_10_100_2400_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_0_0_0_0_0_2_2_0_0_0_0_0_3_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_1_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_9_0_1_3_2_3_2_15_0_3_4_0_1_100_0_5_0_1_500_100_2_1_0_0_0_44_20_4_5_0_6_0_1_0_5_0_300_10_2_1_4_2_0_2_4_0_0_45_1_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_1_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_22_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_1_45_1_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_0_2_0_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_0_15_2_0_4_2_4_50_0_5_2_1_500_100_2_1_2_2_0_41_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_0_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_99_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_6_0_1_3_0_3_2_15_2_2_4_2_1_100_0_5_2_1_500_100_2_1_2_2_0_34_20_3_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_1_100_2_50_25_35_",
+                    "50_75_10_500_3500_10_8_8_5_40_200_25_500_1000_5_100_10_1_10_300_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_0_2_2_2_2_2_2_2_1_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_5_4_3_1_4_32_7_10_300_3_1_100_99_40_5_5_1_2_6_2_4_99_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_5_3_0_4_2_25_100_0_5_2_1_500_100_2_1_2_2_0_14_20_3_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_100_75_35_",
+                    "50_150_50_100_2000_10_8_5_5_50_200_25_500_1000_5_100_40_1_10_100_1_2_2_2_2_0_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_2_1_200_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_8_6969_0_5_2_1_500_100_2_1_2_2_0_28_20_0_5_2_6_2_1_2_5_2_300_10_2_1_2_1_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_10000_10_8_6_5_6969_200_10_500_1000_5_1000_10_1_10_100_1_2_2_2_2_2_2_0_0_0_0_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_0_0_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_40_10_1_1_0_0_1_3_2_3_0_15_2_0_4_2_13_100_0_5_0_1_500_100_2_1_2_2_0_39_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_0_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "35_35_10_100_3500_2_8_7_1_3_200_25_500_1000_5_100_10_6_10_100_6_0_2_2_0_2_2_0_2_0_2_2_2_0_3_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_2_7_8_8_4_1_0_5_3_7_5_9_4_3_1_4_32_7_10_300_1_6_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_17_7_1_1_2_0_1_3_2_3_2_15_2_3_4_2_7_100_0_5_2_1_500_100_2_1_2_2_0_16_20_3_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_70_2_50_75_35_",
+                    "50_50_10_100_3000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_30_10_5_5_1_2_6_2_4_10_3_2_1_3_32_1_31_5_0_1_0_0_1_3_2_3_2_15_2_2_4_2_10_200_0_5_0_1_500_100_2_1_2_2_1_35_50_0_5_2_6_2_1_2_10_2_300_10_1_1_4_2_0_2_4_2_2_45_0_0_3_50_75_100_",
+                    "50_50_10_100_3000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_30_10_5_5_1_2_6_2_4_10_3_2_1_3_32_1_0_5_0_1_0_0_1_3_2_3_2_15_2_2_4_2_0_100_0_5_2_1_500_100_2_1_2_2_2_11_20_0_5_2_6_2_1_2_10_0_300_10_2_1_4_2_0_2_4_2_2_45_1_200_3_50_75_100_",
+                    "50_50_10_100_3000_10_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_10_1_1_7_0_1_99_3_3_0_15_0_0_4_0_10_100_1_5_0_1_500_100_2_1_0_0_0_15_20_1_5_0_6_0_1_0_5_0_300_10_2_1_4_0_0_2_4_0_0_45_0_100_2_50_75_35_",
+                    "50_150_10_4000_4000_10_12_10_5_100_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_99_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_1_100_0_99_3_1_500_100_2_1_2_2_0_40_20_4_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_10_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_30_10_5_5_1_2_6_2_4_10_3_2_1_3_32_1_0_3_0_1_9_0_1_3_2_3_2_15_2_0_4_2_1_100_1_5_2_1_500_100_2_1_2_2_0_43_20_0_5_0_6_0_3_3_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_3_50_75_100_",
+                    "50_50_10_10000_10000_2_8_5_5_6969_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_20_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_30_10_5_5_1_2_6_2_4_10_3_2_1_3_32_1_0_5_0_1_0_0_1_3_2_3_2_15_2_3_4_2_1_6969_0_5_2_1_500_120_2_1_2_2_0_21_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_75_75_35_",
+                    "50_50_10_100_1000_4_10_12_5_10_200_40_500_1000_3_100_1_3_25_100_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_3_2_2_3_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_99_2_6_99_4_15_99_2_1_3_32_1_0_7_1_1_6_0_1_3_2_3_2_15_2_2_99_3_1_100_0_1_0_1_500_100_2_1_2_2_0_2_20_4_5_2_6_2_1_2_99_3_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_6969_1000_25_500_1000_5_100_10_1_10_100_1_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_5_2_99_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_2_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_0_0_1_3_2_3_2_15_2_0_4_2_10_50_0_5_2_1_500_100_2_1_2_2_0_33_20_2_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_100_35_",
+                    "50_40_10_100_3500_10_8_8_5_10_200_25_500_0_5_100_40_3_10_300_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_5_4_3_1_4_32_7_10_300_3_1_100_40_40_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_9_1_1_2_0_1_3_2_3_2_15_2_0_4_2_50_200_0_5_2_1_500_100_2_1_2_2_0_29_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_3_4_1_2_45_1_100_2_50_75_35_",
+                    "50_20_10_100_2000_10_8_5_5_60_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_2_2_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_4_3_1_4_32_7_10_300_1_1_100_30_10_5_5_1_2_6_2_4_10_3_2_1_3_32_1_0_5_0_1_0_0_1_3_2_3_2_15_2_3_4_2_34_50_0_5_2_1_500_100_2_1_2_0_0_31_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_150_10_100_3000_10_8_10_8_25_200_25_500_0_5_100_10_1_10_100_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_3_0_2_2_2_2_2_2_2_2_1_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_60_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_5_1_1_7_0_1_3_2_3_2_15_2_0_4_2_1_100_0_5_2_1_500_100_2_1_1_2_0_5_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "10_150_50_100_2000_6_8_3_5_100_200_25_500_1500_5_500_10_1_10_100_1_2_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_1_2_2_2_2_2_2_2_2_2_3_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_7_3_1_4_32_7_10_300_3_1_100_90_20_5_6_1_2_6_2_4_10_3_3_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_4_150_0_5_2_1_500_100_2_1_2_2_0_26_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_1_2_4_2_2_45_0_300_2_100_75_35_",
+                    "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_50_10_1_1_0_0_1_3_0_3_0_15_0_0_4_0_0_100_0_5_0_1_500_100_2_1_0_0_0_49_20_4_5_0_6_0_1_0_5_0_300_10_2_1_4_0_0_2_4_0_0_45_0_100_2_50_75_35_",
+                    "50_50_10_100_1200_2_8_8_5_15_300_50_10000_300_10_500_30_1_10_60_1_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_1_2_0_1_1_2_2_2_1_2_2_5_2_1_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_6_7_3_1_4_32_7_10_300_3_1_2000_30_10_5_6_1_2_99_3_12_10_3_2_1_3_32_1_0_5_0_1_0_0_1_3_2_3_2_15_2_3_4_2_10_200_0_12_1_1_500_100_2_1_2_2_0_40_20_0_5_2_18_1_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_3_50_25_100_",
+                    "50_50_10_100_3000_20_10_7_10_25_1000_10_1000_1000_5_300_10_1_15_50_1_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_0_1_1_2_0_2_2_2_1_2_2_2_2_2_0_2_0_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_10_4_5_5_6_7_6_2_7_8_7_10_300_3_1_500_30_10_5_6_1_2_6_3_4_10_5_2_2_3_32_1_0_5_0_1_3_0_1_3_2_5_2_15_2_0_4_2_0_100_1_10_0_1_500_100_2_1_2_2_0_17_20_4_5_2_6_2_2_1_5_1_300_10_2_1_4_2_0_2_4_2_2_45_1_100_2_75_75_35_",
+                    "50_50_10_100_2000_10_8_7_5_50_200_25_500_1000_5_100_10_1_10_100_1_2_2_2_0_2_2_2_2_2_2_2_2_2_2_3_2_2_2_2_2_2_2_2_2_2_2_0_2_0_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_2_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_5_3_1_1_0_0_1_3_2_3_0_15_2_0_4_0_3_100_0_5_2_1_500_100_2_1_2_2_0_4_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_0_2_50_75_35_",
+                    "50_50_10_100_6000_22_8_5_5_5_200_6_500_0_5_1000_25_10_10_30_1_2_2_2_2_2_2_2_2_2_1_0_1_2_1_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_1_1_1_1_2_5_2_3_3_7_9_3_5_3_2_8_64_8_2_4_5_7_21_5_9_7_3_2_4_32_7_10_300_3_2_100_30_10_5_6_1_2_6_2_4_10_5_3_2_1_128_1_0_99_0_0_0_0_1_5_2_3_2_15_2_0_4_2_4_150_0_5_2_1_500_100_2_1_2_2_0_7_20_0_5_2_6_2_2_1_5_2_300_10_2_1_7_1_0_4_4_1_2_45_0_0_3_75_100_35_",
+                    "50_50_10_100_2000_10_10_14_5_25_200_5_500_0_3_100_10_2_10_100_1_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_3_2_2_5_2_3_3_7_9_3_5_3_3_8_8_4_1_0_5_4_5_5_9_4_2_1_4_32_7_10_300_3_1_100_40_10_5_5_2_2_6_2_4_15_3_2_6_3_32_1_0_5_1_1_0_0_0_3_2_3_2_15_2_0_4_2_2_100_0_5_2_1_500_100_2_1_2_2_0_19_20_0_5_2_6_2_2_1_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
+                    "50_50_50_100_3000_10_8_5_1_50_200_25_0_1000_3_100_10_1_10_100_1_2_2_2_1_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_3_2_2_2_0_2_2_2_2_1_2_2_2_2_2_2_1_5_2_3_6_7_9_3_5_3_2_8_8_4_1_1_10_4_5_5_9_7_3_1_5_128_7_10_300_3_1_500_30_10_12_6_1_2_6_5_4_10_3_2_1_3_32_1_0_3_0_1_4_0_1_3_2_3_2_15_2_1_4_2_5_100_0_5_2_1_500_100_2_1_2_2_0_30_20_0_5_2_9_1_1_2_5_2_300_10_2_1_4_2_1_2_4_2_2_45_0_50_3_75_100_35_",
+                    "50_50_20_100_3000_10_8_10_5_50_200_25_2000_1000_3_800_20_1_10_150_1_2_2_0_2_2_2_0_2_2_2_2_2_2_1_2_2_0_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_1_2_5_2_6_3_7_9_5_5_3_2_8_8_4_1_1_5_4_21_5_6_12_3_1_4_32_7_10_300_3_1_250_40_40_5_6_1_3_6_3_4_10_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_5_3_1_4_2_30_90_0_5_2_1_500_100_3_1_1_1_0_10_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_1_2_4_2_2_45_0_50_3_75_100_35_",
+                    "30_50_30_100_2000_8_10_10_5_30_500_30_1000_1000_5_600_5_1_10_200_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_1_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_7_6_7_3_1_4_32_7_10_300_3_1_250_50_20_5_6_1_2_6_3_4_20_3_2_1_3_32_1_0_3_1_1_1_0_1_99_3_5_2_15_2_0_4_2_1_50_0_5_2_1_500_100_2_1_2_2_0_2_20_4_5_2_6_2_1_1_5_2_300_10_2_2_4_2_0_2_4_2_2_45_0_50_2_25_75_35_",
+                    "50_50_10_100_3500_10_20_5_25_50_200_25_500_1000_5_100_10_1_20_100_1_2_2_2_2_2_2_2_2_2_3_0_2_2_3_3_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_3_2_5_2_3_3_7_9_3_5_3_2_99_64_6_1_0_5_4_21_1_9_4_3_2_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_4_2_1_1_128_1_0_5_1_1_0_0_1_3_2_3_2_15_2_3_4_2_1_100_0_5_2_1_500_100_2_1_2_2_0_16_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_3_50_75_100_",
+                    "50_50_10_10000_10000_2_8_5_5_6969_200_25_500_0_5_100_10_1_10_100_1_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_99_1_1_0_0_1_3_0_3_0_15_0_0_4_0_50_250_0_5_0_1_500_100_2_1_0_0_0_9_20_2_5_0_6_0_1_0_5_0_300_10_2_1_4_0_0_2_4_0_0_45_0_0_2_50_75_35_"
+                    ]
     level_selected = 0
+    ready_to_select = False
     
-    running = True
+    waiting = True
     button_offset = 10
     enemy_locking_labels = ["Starter", "Locked", "Banned", "Ambush"]
     player_size_plus_button = pygame.Rect(WIDTH/2 + 120, HEIGHT/2 - 20, 60, 60)
@@ -764,7 +1250,10 @@ def CAMPAIGN_SELECT():
     black_cbox = pygame.Rect(0,0,WIDTH,180)
     white_cbox = pygame.Rect(0,0,WIDTH,190)
     white_ccbox = pygame.Rect(1100,185,10,HEIGHT)
-    while running:
+
+    start_button = pygame.Rect(1150*SCALED_WIDTH, 950*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    
+    while waiting:
         screen.fill(BLACK)
         text = big_font.render("Level Select", True, WHITE)
         pygame.draw.rect(screen, WHITE, white_cbox, border_radius=0)
@@ -772,17 +1261,36 @@ def CAMPAIGN_SELECT():
         pygame.draw.rect(screen, WHITE, white_ccbox, border_radius=0)
         screen.blit(text, (50*SCALED_WIDTH, 50*SCALED_HEIGHT))
         info = font.render("Press Escape to return", True, SILVER)
-        level_text = biggish_font.render("Level " + str(level_selected) + ": " + level_names[level_selected], True, WHITE)
         screen.blit(info, (810*SCALED_WIDTH, 100*SCALED_HEIGHT))
-        screen.blit(level_text, (1125*SCALED_WIDTH, 230*SCALED_HEIGHT))
+        level_text = slightly_big_font.render("Level " + str(level_selected) + ": " + level_names[level_selected], True, WHITE)
+        lzero_text = slightly_big_font.render("Click a level to select it.", True, WHITE)
+        if level_selected != 0: screen.blit(level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
+        else: screen.blit(lzero_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
+
+        if not mouse_click: ready_to_select = True
+
+        if level_selected != 0:
+            if players in [1, 2]:
+                color = LIME if start_button.collidepoint(mouse_pos) else GREEN
+            else:
+                color = GRAY  # disabled look until a mode is chosen
+
+            pygame.draw.rect(screen, color, start_button, border_radius=0)
+            start_text = font.render("Play", True, (255, 255, 255))
+            screen.blit(start_text, start_text.get_rect(center=start_button.center))
+
+            if start_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
+                give_seed(level_seeds[level_selected])
+                campaign_start = True
+                waiting = False
         
         level_one_text = font.render("1", True, WHITE)
         level_one_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_one_button, border_radius=0)
         screen.blit(level_one_text, level_one_text.get_rect(center=level_one_button.center))
-        if level_one_button.collidepoint(mouse_pos) and mouse_click:
+        if level_one_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 1
             pygame.time.delay(200)
 
@@ -790,7 +1298,7 @@ def CAMPAIGN_SELECT():
         level_two_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_two_button, border_radius=0)
         screen.blit(level_two_text, level_two_text.get_rect(center=level_two_button.center))
-        if level_two_button.collidepoint(mouse_pos) and mouse_click:
+        if level_two_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 2
             pygame.time.delay(200)
 
@@ -798,7 +1306,7 @@ def CAMPAIGN_SELECT():
         level_thre_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GREEN, level_thre_button, border_radius=0)
         screen.blit(level_thre_text, level_thre_text.get_rect(center=level_thre_button.center))
-        if level_thre_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thre_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 3
             pygame.time.delay(200)
 
@@ -806,7 +1314,7 @@ def CAMPAIGN_SELECT():
         level_four_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_four_button, border_radius=0)
         screen.blit(level_four_text, level_four_text.get_rect(center=level_four_button.center))
-        if level_four_button.collidepoint(mouse_pos) and mouse_click:
+        if level_four_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 4
             pygame.time.delay(200)
 
@@ -814,7 +1322,7 @@ def CAMPAIGN_SELECT():
         level_five_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_five_button, border_radius=0)
         screen.blit(level_five_text, level_five_text.get_rect(center=level_five_button.center))
-        if level_five_button.collidepoint(mouse_pos) and mouse_click:
+        if level_five_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 5
             pygame.time.delay(200)
 
@@ -822,7 +1330,7 @@ def CAMPAIGN_SELECT():
         level_six_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, AQUA, level_six_button, border_radius=0)
         screen.blit(level_six_text, level_six_text.get_rect(center=level_six_button.center))
-        if level_six_button.collidepoint(mouse_pos) and mouse_click:
+        if level_six_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 6
             pygame.time.delay(200)
 
@@ -830,7 +1338,7 @@ def CAMPAIGN_SELECT():
         level_seven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, PURPLE, level_seven_button, border_radius=0)
         screen.blit(level_seven_text, level_seven_text.get_rect(center=level_seven_button.center))
-        if level_seven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 7
             pygame.time.delay(200)
 
@@ -838,7 +1346,7 @@ def CAMPAIGN_SELECT():
         level_eight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, MAROON, level_eight_button, border_radius=0)
         screen.blit(level_eight_text, level_eight_text.get_rect(center=level_eight_button.center))
-        if level_eight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 8
             pygame.time.delay(200)
 
@@ -846,7 +1354,7 @@ def CAMPAIGN_SELECT():
         level_nine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, BROWN, level_nine_button, border_radius=0)
         screen.blit(level_nine_text, level_nine_text.get_rect(center=level_nine_button.center))
-        if level_nine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 9
             pygame.time.delay(200)
 
@@ -854,7 +1362,7 @@ def CAMPAIGN_SELECT():
         level_ten_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_ten_button, border_radius=0)
         screen.blit(level_ten_text, level_ten_text.get_rect(center=level_ten_button.center))
-        if level_ten_button.collidepoint(mouse_pos) and mouse_click:
+        if level_ten_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 10
             pygame.time.delay(200)
 
@@ -862,7 +1370,7 @@ def CAMPAIGN_SELECT():
         level_eleven_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_eleven_button, border_radius=0)
         screen.blit(level_eleven_text, level_eleven_text.get_rect(center=level_eleven_button.center))
-        if level_eleven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eleven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 11
             pygame.time.delay(200)
 
@@ -870,7 +1378,7 @@ def CAMPAIGN_SELECT():
         level_twelve_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SULFUR, level_twelve_button, border_radius=0)
         screen.blit(level_twelve_text, level_twelve_text.get_rect(center=level_twelve_button.center))
-        if level_twelve_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twelve_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 12
             pygame.time.delay(200)
 
@@ -878,7 +1386,7 @@ def CAMPAIGN_SELECT():
         level_thirteen_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_thirteen_button, border_radius=0)
         screen.blit(level_thirteen_text, level_thirteen_text.get_rect(center=level_thirteen_button.center))
-        if level_thirteen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirteen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 13
             pygame.time.delay(200)
 
@@ -886,7 +1394,7 @@ def CAMPAIGN_SELECT():
         level_fourteen_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_fourteen_button, border_radius=0)
         screen.blit(level_fourteen_text, level_fourteen_text.get_rect(center=level_fourteen_button.center))
-        if level_fourteen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fourteen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 14
             pygame.time.delay(200)
 
@@ -894,7 +1402,7 @@ def CAMPAIGN_SELECT():
         level_fifteen_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LIME, level_fifteen_button, border_radius=0)
         screen.blit(level_fifteen_text, level_fifteen_text.get_rect(center=level_fifteen_button.center))
-        if level_fifteen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fifteen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 15
             pygame.time.delay(200)
 
@@ -902,7 +1410,7 @@ def CAMPAIGN_SELECT():
         level_sixteen_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, PURPLE, level_sixteen_button, border_radius=0)
         screen.blit(level_sixteen_text, level_sixteen_text.get_rect(center=level_sixteen_button.center))
-        if level_sixteen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixteen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 16
             pygame.time.delay(200)
 
@@ -910,7 +1418,7 @@ def CAMPAIGN_SELECT():
         level_seventeen_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, MAROON, level_seventeen_button, border_radius=0)
         screen.blit(level_seventeen_text, level_seventeen_text.get_rect(center=level_seventeen_button.center))
-        if level_seventeen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventeen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 17
             pygame.time.delay(200)
 
@@ -918,7 +1426,7 @@ def CAMPAIGN_SELECT():
         level_eighteen_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GREEN, level_eighteen_button, border_radius=0)
         screen.blit(level_eighteen_text, level_eighteen_text.get_rect(center=level_eighteen_button.center))
-        if level_eighteen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eighteen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 18
             pygame.time.delay(200)
 
@@ -926,7 +1434,7 @@ def CAMPAIGN_SELECT():
         level_nineteen_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LILAC, level_nineteen_button, border_radius=0)
         screen.blit(level_nineteen_text, level_nineteen_text.get_rect(center=level_nineteen_button.center))
-        if level_nineteen_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nineteen_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 19
             pygame.time.delay(200)
 
@@ -934,7 +1442,7 @@ def CAMPAIGN_SELECT():
         level_twenty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(2)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_twenty_button, border_radius=0)
         screen.blit(level_twenty_text, level_twenty_text.get_rect(center=level_twenty_button.center))
-        if level_twenty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twenty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 20
             pygame.time.delay(200)
 
@@ -942,7 +1450,7 @@ def CAMPAIGN_SELECT():
         level_twentyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_twentyone_button, border_radius=0)
         screen.blit(level_twentyone_text, level_twentyone_text.get_rect(center=level_twentyone_button.center))
-        if level_twentyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 21
             pygame.time.delay(200)
 
@@ -950,7 +1458,7 @@ def CAMPAIGN_SELECT():
         level_twentytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SULFUR, level_twentytwo_button, border_radius=0)
         screen.blit(level_twentytwo_text, level_twentytwo_text.get_rect(center=level_twentytwo_button.center))
-        if level_twentytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 22
             pygame.time.delay(200)
 
@@ -958,7 +1466,7 @@ def CAMPAIGN_SELECT():
         level_twentythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, CLOUD, level_twentythree_button, border_radius=0)
         screen.blit(level_twentythree_text, level_twentythree_text.get_rect(center=level_twentythree_button.center))
-        if level_twentythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 23
             pygame.time.delay(200)
 
@@ -966,7 +1474,7 @@ def CAMPAIGN_SELECT():
         level_twentyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_twentyfour_button, border_radius=0)
         screen.blit(level_twentyfour_text, level_twentyfour_text.get_rect(center=level_twentyfour_button.center))
-        if level_twentyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 24
             pygame.time.delay(200)
 
@@ -974,7 +1482,7 @@ def CAMPAIGN_SELECT():
         level_twentyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_twentyfive_button, border_radius=0)
         screen.blit(level_twentyfive_text, level_twentyfive_text.get_rect(center=level_twentyfive_button.center))
-        if level_twentyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 25
             pygame.time.delay(200)
 
@@ -982,7 +1490,7 @@ def CAMPAIGN_SELECT():
         level_twentysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, MAROON, level_twentysix_button, border_radius=0)
         screen.blit(level_twentysix_text, level_twentysix_text.get_rect(center=level_twentysix_button.center))
-        if level_twentysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 26
             pygame.time.delay(200)
 
@@ -990,7 +1498,7 @@ def CAMPAIGN_SELECT():
         level_twentyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, BROWN, level_twentyseven_button, border_radius=0)
         screen.blit(level_twentyseven_text, level_twentyseven_text.get_rect(center=level_twentyseven_button.center))
-        if level_twentyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 27
             pygame.time.delay(200)
 
@@ -998,7 +1506,7 @@ def CAMPAIGN_SELECT():
         level_twentyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, PURPLE, level_twentyeight_button, border_radius=0)
         screen.blit(level_twentyeight_text, level_twentyeight_text.get_rect(center=level_twentyeight_button.center))
-        if level_twentyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 28
             pygame.time.delay(200)
 
@@ -1006,7 +1514,7 @@ def CAMPAIGN_SELECT():
         level_twentynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LILAC, level_twentynine_button, border_radius=0)
         screen.blit(level_twentynine_text, level_twentynine_text.get_rect(center=level_twentynine_button.center))
-        if level_twentynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_twentynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 29
             pygame.time.delay(200)
 
@@ -1014,7 +1522,7 @@ def CAMPAIGN_SELECT():
         level_thirty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_thirty_button, border_radius=0)
         screen.blit(level_thirty_text, level_thirty_text.get_rect(center=level_thirty_button.center))
-        if level_thirty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 30
             pygame.time.delay(200)
 
@@ -1022,7 +1530,7 @@ def CAMPAIGN_SELECT():
         level_thirtyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, CLOUD, level_thirtyone_button, border_radius=0)
         screen.blit(level_thirtyone_text, level_thirtyone_text.get_rect(center=level_thirtyone_button.center))
-        if level_thirtyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 31
             pygame.time.delay(200)
 
@@ -1030,7 +1538,7 @@ def CAMPAIGN_SELECT():
         level_thirtytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_thirtytwo_button, border_radius=0)
         screen.blit(level_thirtytwo_text, level_thirtytwo_text.get_rect(center=level_thirtytwo_button.center))
-        if level_thirtytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 32
             pygame.time.delay(200)
 
@@ -1038,7 +1546,7 @@ def CAMPAIGN_SELECT():
         level_thirtythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GOLD, level_thirtythree_button, border_radius=0)
         screen.blit(level_thirtythree_text, level_thirtythree_text.get_rect(center=level_thirtythree_button.center))
-        if level_thirtythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 33
             pygame.time.delay(200)
 
@@ -1046,7 +1554,7 @@ def CAMPAIGN_SELECT():
         level_thirtyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GREEN, level_thirtyfour_button, border_radius=0)
         screen.blit(level_thirtyfour_text, level_thirtyfour_text.get_rect(center=level_thirtyfour_button.center))
-        if level_thirtyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 34
             pygame.time.delay(200)
 
@@ -1054,7 +1562,7 @@ def CAMPAIGN_SELECT():
         level_thirtyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LIME, level_thirtyfive_button, border_radius=0)
         screen.blit(level_thirtyfive_text, level_thirtyfive_text.get_rect(center=level_thirtyfive_button.center))
-        if level_thirtyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 35
             pygame.time.delay(200)
 
@@ -1062,7 +1570,7 @@ def CAMPAIGN_SELECT():
         level_thirtysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_thirtysix_button, border_radius=0)
         screen.blit(level_thirtysix_text, level_thirtysix_text.get_rect(center=level_thirtysix_button.center))
-        if level_thirtysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 36
             pygame.time.delay(200)
 
@@ -1070,7 +1578,7 @@ def CAMPAIGN_SELECT():
         level_thirtyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_thirtyseven_button, border_radius=0)
         screen.blit(level_thirtyseven_text, level_thirtyseven_text.get_rect(center=level_thirtyseven_button.center))
-        if level_thirtyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 37
             pygame.time.delay(200)
 
@@ -1078,7 +1586,7 @@ def CAMPAIGN_SELECT():
         level_thirtyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_thirtyeight_button, border_radius=0)
         screen.blit(level_thirtyeight_text, level_thirtyeight_text.get_rect(center=level_thirtyeight_button.center))
-        if level_thirtyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 38
             pygame.time.delay(200)
 
@@ -1086,7 +1594,7 @@ def CAMPAIGN_SELECT():
         level_thirtynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_thirtynine_button, border_radius=0)
         screen.blit(level_thirtynine_text, level_thirtynine_text.get_rect(center=level_thirtynine_button.center))
-        if level_thirtynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_thirtynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 39
             pygame.time.delay(200)
 
@@ -1094,7 +1602,7 @@ def CAMPAIGN_SELECT():
         level_fourty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(4)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_fourty_button, border_radius=0)
         screen.blit(level_fourty_text, level_fourty_text.get_rect(center=level_fourty_button.center))
-        if level_fourty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fourty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 40
             pygame.time.delay(200)
 
@@ -1102,7 +1610,7 @@ def CAMPAIGN_SELECT():
         level_fourtyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_fourtyone_button, border_radius=0)
         screen.blit(level_fourtyone_text, level_fourtyone_text.get_rect(center=level_fourtyone_button.center))
-        if level_fourtyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fourtyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 41
             pygame.time.delay(200)
 
@@ -1110,7 +1618,7 @@ def CAMPAIGN_SELECT():
         level_fortytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_fortytwo_button, border_radius=0)
         screen.blit(level_fortytwo_text, level_fortytwo_text.get_rect(center=level_fortytwo_button.center))
-        if level_fortytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 42
             pygame.time.delay(200)
 
@@ -1118,7 +1626,7 @@ def CAMPAIGN_SELECT():
         level_fortythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, CLOUD, level_fortythree_button, border_radius=0)
         screen.blit(level_fortythree_text, level_fortythree_text.get_rect(center=level_fortythree_button.center))
-        if level_fortythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 43
             pygame.time.delay(200)
 
@@ -1126,7 +1634,7 @@ def CAMPAIGN_SELECT():
         level_fortyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LILAC, level_fortyfour_button, border_radius=0)
         screen.blit(level_fortyfour_text, level_fortyfour_text.get_rect(center=level_fortyfour_button.center))
-        if level_fortyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 44
             pygame.time.delay(200)
 
@@ -1134,7 +1642,7 @@ def CAMPAIGN_SELECT():
         level_fortyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SULFUR, level_fortyfive_button, border_radius=0)
         screen.blit(level_fortyfive_text, level_fortyfive_text.get_rect(center=level_fortyfive_button.center))
-        if level_fortyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 45
             pygame.time.delay(200)
 
@@ -1142,7 +1650,7 @@ def CAMPAIGN_SELECT():
         level_fortysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, BROWN, level_fortysix_button, border_radius=0)
         screen.blit(level_fortysix_text, level_fortysix_text.get_rect(center=level_fortysix_button.center))
-        if level_fortysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 46
             pygame.time.delay(200)
 
@@ -1150,7 +1658,7 @@ def CAMPAIGN_SELECT():
         level_fortyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TURQUOISE, level_fortyseven_button, border_radius=0)
         screen.blit(level_fortyseven_text, level_fortyseven_text.get_rect(center=level_fortyseven_button.center))
-        if level_fortyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 47
             pygame.time.delay(200)
 
@@ -1158,7 +1666,7 @@ def CAMPAIGN_SELECT():
         level_fortyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, AQUA, level_fortyeight_button, border_radius=0)
         screen.blit(level_fortyeight_text, level_fortyeight_text.get_rect(center=level_fortyeight_button.center))
-        if level_fortyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 48
             pygame.time.delay(200)
 
@@ -1166,7 +1674,7 @@ def CAMPAIGN_SELECT():
         level_fortynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, YELLOW, level_fortynine_button, border_radius=0)
         screen.blit(level_fortynine_text, level_fortynine_text.get_rect(center=level_fortynine_button.center))
-        if level_fortynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fortynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 49
             pygame.time.delay(200)
 
@@ -1174,7 +1682,7 @@ def CAMPAIGN_SELECT():
         level_fifty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(5)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_fifty_button, border_radius=0)
         screen.blit(level_fifty_text, level_fifty_text.get_rect(center=level_fifty_button.center))
-        if level_fifty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fifty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 50
             pygame.time.delay(200)
 
@@ -1182,7 +1690,7 @@ def CAMPAIGN_SELECT():
         level_fiftyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, AQUA, level_fiftyone_button, border_radius=0)
         screen.blit(level_fiftyone_text, level_fiftyone_text.get_rect(center=level_fiftyone_button.center))
-        if level_fiftyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 51
             pygame.time.delay(200)
 
@@ -1190,7 +1698,7 @@ def CAMPAIGN_SELECT():
         level_fiftytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_fiftytwo_button, border_radius=0)
         screen.blit(level_fiftytwo_text, level_fiftytwo_text.get_rect(center=level_fiftytwo_button.center))
-        if level_fiftytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 52
             pygame.time.delay(200)
 
@@ -1198,7 +1706,7 @@ def CAMPAIGN_SELECT():
         level_fiftythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_fiftythree_button, border_radius=0)
         screen.blit(level_fiftythree_text, level_fiftythree_text.get_rect(center=level_fiftythree_button.center))
-        if level_fiftythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 53
             pygame.time.delay(200)
 
@@ -1206,7 +1714,7 @@ def CAMPAIGN_SELECT():
         level_fiftyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_fiftyfour_button, border_radius=0)
         screen.blit(level_fiftyfour_text, level_fiftyfour_text.get_rect(center=level_fiftyfour_button.center))
-        if level_fiftyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 54
             pygame.time.delay(200)
 
@@ -1214,7 +1722,7 @@ def CAMPAIGN_SELECT():
         level_fiftyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, YELLOW, level_fiftyfive_button, border_radius=0)
         screen.blit(level_fiftyfive_text, level_fiftyfive_text.get_rect(center=level_fiftyfive_button.center))
-        if level_fiftyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 55
             pygame.time.delay(200)
 
@@ -1222,7 +1730,7 @@ def CAMPAIGN_SELECT():
         level_fiftysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_fiftysix_button, border_radius=0)
         screen.blit(level_fiftysix_text, level_fiftysix_text.get_rect(center=level_fiftysix_button.center))
-        if level_fiftysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 56
             pygame.time.delay(200)
 
@@ -1230,7 +1738,7 @@ def CAMPAIGN_SELECT():
         level_fiftyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LILAC, level_fiftyseven_button, border_radius=0)
         screen.blit(level_fiftyseven_text, level_fiftyseven_text.get_rect(center=level_fiftyseven_button.center))
-        if level_fiftyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 57
             pygame.time.delay(200)
 
@@ -1238,7 +1746,7 @@ def CAMPAIGN_SELECT():
         level_fiftyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TURQUOISE, level_fiftyeight_button, border_radius=0)
         screen.blit(level_fiftyeight_text, level_fiftyeight_text.get_rect(center=level_fiftyeight_button.center))
-        if level_fiftyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 58
             pygame.time.delay(200)
 
@@ -1246,7 +1754,7 @@ def CAMPAIGN_SELECT():
         level_fiftynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_fiftynine_button, border_radius=0)
         screen.blit(level_fiftynine_text, level_fiftynine_text.get_rect(center=level_fiftynine_button.center))
-        if level_fiftynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_fiftynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 59
             pygame.time.delay(200)
 
@@ -1254,7 +1762,7 @@ def CAMPAIGN_SELECT():
         level_sixty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(6)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_sixty_button, border_radius=0)
         screen.blit(level_sixty_text, level_sixty_text.get_rect(center=level_sixty_button.center))
-        if level_sixty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 60
             pygame.time.delay(200)
 
@@ -1262,7 +1770,7 @@ def CAMPAIGN_SELECT():
         level_sixtyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, AQUA, level_sixtyone_button, border_radius=0)
         screen.blit(level_sixtyone_text, level_sixtyone_text.get_rect(center=level_sixtyone_button.center))
-        if level_sixtyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 61
             pygame.time.delay(200)
 
@@ -1270,7 +1778,7 @@ def CAMPAIGN_SELECT():
         level_sixtytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GREEN, level_sixtytwo_button, border_radius=0)
         screen.blit(level_sixtytwo_text, level_sixtytwo_text.get_rect(center=level_sixtytwo_button.center))
-        if level_sixtytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 62
             pygame.time.delay(200)
 
@@ -1278,7 +1786,7 @@ def CAMPAIGN_SELECT():
         level_sixtythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_sixtythree_button, border_radius=0)
         screen.blit(level_sixtythree_text, level_sixtythree_text.get_rect(center=level_sixtythree_button.center))
-        if level_sixtythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 63
             pygame.time.delay(200)
 
@@ -1286,7 +1794,7 @@ def CAMPAIGN_SELECT():
         level_sixtyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_sixtyfour_button, border_radius=0)
         screen.blit(level_sixtyfour_text, level_sixtyfour_text.get_rect(center=level_sixtyfour_button.center))
-        if level_sixtyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 64
             pygame.time.delay(200)
 
@@ -1294,7 +1802,7 @@ def CAMPAIGN_SELECT():
         level_sixtyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TURQUOISE, level_sixtyfive_button, border_radius=0)
         screen.blit(level_sixtyfive_text, level_sixtyfive_text.get_rect(center=level_sixtyfive_button.center))
-        if level_sixtyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 65
             pygame.time.delay(200)
 
@@ -1302,7 +1810,7 @@ def CAMPAIGN_SELECT():
         level_sixtysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GOLD, level_sixtysix_button, border_radius=0)
         screen.blit(level_sixtysix_text, level_sixtysix_text.get_rect(center=level_sixtysix_button.center))
-        if level_sixtysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 66
             pygame.time.delay(200)
 
@@ -1310,7 +1818,7 @@ def CAMPAIGN_SELECT():
         level_sixseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, YELLOW, level_sixseven_button, border_radius=0)
         screen.blit(level_sixseven_text, level_sixseven_text.get_rect(center=level_sixseven_button.center))
-        if level_sixseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 67
             pygame.time.delay(200)
 
@@ -1318,7 +1826,7 @@ def CAMPAIGN_SELECT():
         level_sixtyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LILAC, level_sixtyeight_button, border_radius=0)
         screen.blit(level_sixtyeight_text, level_sixtyeight_text.get_rect(center=level_sixtyeight_button.center))
-        if level_sixtyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 68
             pygame.time.delay(200)
 
@@ -1326,7 +1834,7 @@ def CAMPAIGN_SELECT():
         level_sixtynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, AQUA, level_sixtynine_button, border_radius=0)
         screen.blit(level_sixtynine_text, level_sixtynine_text.get_rect(center=level_sixtynine_button.center))
-        if level_sixtynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_sixtynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 69
             pygame.time.delay(200)
 
@@ -1334,7 +1842,7 @@ def CAMPAIGN_SELECT():
         level_seventy_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(7)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_seventy_button, border_radius=0)
         screen.blit(level_seventy_text, level_seventy_text.get_rect(center=level_seventy_button.center))
-        if level_seventy_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventy_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 70
             pygame.time.delay(200)
 
@@ -1342,7 +1850,7 @@ def CAMPAIGN_SELECT():
         level_seventyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, CHARTREUSE, level_seventyone_button, border_radius=0)
         screen.blit(level_seventyone_text, level_seventyone_text.get_rect(center=level_seventyone_button.center))
-        if level_seventyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 71
             pygame.time.delay(200)
 
@@ -1350,7 +1858,7 @@ def CAMPAIGN_SELECT():
         level_seventytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_seventytwo_button, border_radius=0)
         screen.blit(level_seventytwo_text, level_seventytwo_text.get_rect(center=level_seventytwo_button.center))
-        if level_seventytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 72
             pygame.time.delay(200)
 
@@ -1358,7 +1866,7 @@ def CAMPAIGN_SELECT():
         level_seventythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TAN, level_seventythree_button, border_radius=0)
         screen.blit(level_seventythree_text, level_seventythree_text.get_rect(center=level_seventythree_button.center))
-        if level_seventythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 73
             pygame.time.delay(200)
 
@@ -1366,7 +1874,7 @@ def CAMPAIGN_SELECT():
         level_seventyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, BROWN, level_seventyfour_button, border_radius=0)
         screen.blit(level_seventyfour_text, level_seventyfour_text.get_rect(center=level_seventyfour_button.center))
-        if level_seventyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 74
             pygame.time.delay(200)
 
@@ -1374,7 +1882,7 @@ def CAMPAIGN_SELECT():
         level_seventyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GREEN, level_seventyfive_button, border_radius=0)
         screen.blit(level_seventyfive_text, level_seventyfive_text.get_rect(center=level_seventyfive_button.center))
-        if level_seventyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 75
             pygame.time.delay(200)
 
@@ -1382,7 +1890,7 @@ def CAMPAIGN_SELECT():
         level_seventysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_seventysix_button, border_radius=0)
         screen.blit(level_seventysix_text, level_seventysix_text.get_rect(center=level_seventysix_button.center))
-        if level_seventysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 76
             pygame.time.delay(200)
 
@@ -1390,7 +1898,7 @@ def CAMPAIGN_SELECT():
         level_seventyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GOLD, level_seventyseven_button, border_radius=0)
         screen.blit(level_seventyseven_text, level_seventyseven_text.get_rect(center=level_seventyseven_button.center))
-        if level_seventyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 77
             pygame.time.delay(200)
 
@@ -1398,7 +1906,7 @@ def CAMPAIGN_SELECT():
         level_seventyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_seventyeight_button, border_radius=0)
         screen.blit(level_seventyeight_text, level_seventyeight_text.get_rect(center=level_seventyeight_button.center))
-        if level_seventyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 78
             pygame.time.delay(200)
 
@@ -1406,7 +1914,7 @@ def CAMPAIGN_SELECT():
         level_seventynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_seventynine_button, border_radius=0)
         screen.blit(level_seventynine_text, level_seventynine_text.get_rect(center=level_seventynine_button.center))
-        if level_seventynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_seventynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 79
             pygame.time.delay(200)
 
@@ -1414,7 +1922,7 @@ def CAMPAIGN_SELECT():
         level_eighty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(8)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_eighty_button, border_radius=0)
         screen.blit(level_eighty_text, level_eighty_text.get_rect(center=level_eighty_button.center))
-        if level_eighty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eighty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 80
             pygame.time.delay(200)
 
@@ -1422,7 +1930,7 @@ def CAMPAIGN_SELECT():
         level_eightyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, PURPLE, level_eightyone_button, border_radius=0)
         screen.blit(level_eightyone_text, level_eightyone_text.get_rect(center=level_eightyone_button.center))
-        if level_eightyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 81
             pygame.time.delay(200)
 
@@ -1430,7 +1938,7 @@ def CAMPAIGN_SELECT():
         level_eightytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LILAC, level_eightytwo_button, border_radius=0)
         screen.blit(level_eightytwo_text, level_eightytwo_text.get_rect(center=level_eightytwo_button.center))
-        if level_eightytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 82
             pygame.time.delay(200)
 
@@ -1438,7 +1946,7 @@ def CAMPAIGN_SELECT():
         level_eightythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, CHARTREUSE, level_eightythree_button, border_radius=0)
         screen.blit(level_eightythree_text, level_eightythree_text.get_rect(center=level_eightythree_button.center))
-        if level_eightythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 83
             pygame.time.delay(200)
 
@@ -1446,7 +1954,7 @@ def CAMPAIGN_SELECT():
         level_eightyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, CLOUD, level_eightyfour_button, border_radius=0)
         screen.blit(level_eightyfour_text, level_eightyfour_text.get_rect(center=level_eightyfour_button.center))
-        if level_eightyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 84
             pygame.time.delay(200)
 
@@ -1454,7 +1962,7 @@ def CAMPAIGN_SELECT():
         level_eightyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LIME, level_eightyfive_button, border_radius=0)
         screen.blit(level_eightyfive_text, level_eightyfive_text.get_rect(center=level_eightyfive_button.center))
-        if level_eightyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 85
             pygame.time.delay(200)
 
@@ -1462,7 +1970,7 @@ def CAMPAIGN_SELECT():
         level_eightysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, AQUA, level_eightysix_button, border_radius=0)
         screen.blit(level_eightysix_text, level_eightysix_text.get_rect(center=level_eightysix_button.center))
-        if level_eightysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 86
             pygame.time.delay(200)
 
@@ -1470,7 +1978,7 @@ def CAMPAIGN_SELECT():
         level_eightyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TURQUOISE, level_eightyseven_button, border_radius=0)
         screen.blit(level_eightyseven_text, level_eightyseven_text.get_rect(center=level_eightyseven_button.center))
-        if level_eightyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 87
             pygame.time.delay(200)
 
@@ -1478,7 +1986,7 @@ def CAMPAIGN_SELECT():
         level_eightyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, BROWN, level_eightyeight_button, border_radius=0)
         screen.blit(level_eightyeight_text, level_eightyeight_text.get_rect(center=level_eightyeight_button.center))
-        if level_eightyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 88
             pygame.time.delay(200)
 
@@ -1486,7 +1994,7 @@ def CAMPAIGN_SELECT():
         level_eightynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GREEN, level_eightynine_button, border_radius=0)
         screen.blit(level_eightynine_text, level_eightynine_text.get_rect(center=level_eightynine_button.center))
-        if level_eightynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_eightynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 89
             pygame.time.delay(200)
 
@@ -1494,7 +2002,7 @@ def CAMPAIGN_SELECT():
         level_ninty_button = pygame.Rect(975*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(9)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, RED, level_ninty_button, border_radius=0)
         screen.blit(level_ninty_text, level_ninty_text.get_rect(center=level_ninty_button.center))
-        if level_ninty_button.collidepoint(mouse_pos) and mouse_click:
+        if level_ninty_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 90
             pygame.time.delay(200)
 
@@ -1502,7 +2010,7 @@ def CAMPAIGN_SELECT():
         level_nintyone_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, PURPLE, level_nintyone_button, border_radius=0)
         screen.blit(level_nintyone_text, level_nintyone_text.get_rect(center=level_nintyone_button.center))
-        if level_nintyone_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintyone_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 91
             pygame.time.delay(200)
 
@@ -1510,7 +2018,7 @@ def CAMPAIGN_SELECT():
         level_nintytwo_button = pygame.Rect(135*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SULFUR, level_nintytwo_button, border_radius=0)
         screen.blit(level_nintytwo_text, level_nintytwo_text.get_rect(center=level_nintytwo_button.center))
-        if level_nintytwo_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintytwo_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 92
             pygame.time.delay(200)
 
@@ -1518,7 +2026,7 @@ def CAMPAIGN_SELECT():
         level_nintythree_button = pygame.Rect(240*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, SHADOW, level_nintythree_button, border_radius=0)
         screen.blit(level_nintythree_text, level_nintythree_text.get_rect(center=level_nintythree_button.center))
-        if level_nintythree_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintythree_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 93
             pygame.time.delay(200)
 
@@ -1526,7 +2034,7 @@ def CAMPAIGN_SELECT():
         level_nintyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, MAROON, level_nintyfour_button, border_radius=0)
         screen.blit(level_nintyfour_text, level_nintyfour_text.get_rect(center=level_nintyfour_button.center))
-        if level_nintyfour_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 94
             pygame.time.delay(200)
 
@@ -1534,7 +2042,7 @@ def CAMPAIGN_SELECT():
         level_nintyfive_button = pygame.Rect(450*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, YELLOW, level_nintyfive_button, border_radius=0)
         screen.blit(level_nintyfive_text, level_nintyfive_text.get_rect(center=level_nintyfive_button.center))
-        if level_nintyfive_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintyfive_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 95
             pygame.time.delay(200)
 
@@ -1542,7 +2050,7 @@ def CAMPAIGN_SELECT():
         level_nintysix_button = pygame.Rect(555*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TUNDRA, level_nintysix_button, border_radius=0)
         screen.blit(level_nintysix_text, level_nintysix_text.get_rect(center=level_nintysix_button.center))
-        if level_nintysix_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintysix_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 96
             pygame.time.delay(200)
 
@@ -1550,7 +2058,7 @@ def CAMPAIGN_SELECT():
         level_nintyseven_button = pygame.Rect(660*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, LAVA, level_nintyseven_button, border_radius=0)
         screen.blit(level_nintyseven_text, level_nintyseven_text.get_rect(center=level_nintyseven_button.center))
-        if level_nintyseven_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintyseven_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 97
             pygame.time.delay(200)
 
@@ -1558,7 +2066,7 @@ def CAMPAIGN_SELECT():
         level_nintyeight_button = pygame.Rect(765*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, TAN, level_nintyeight_button, border_radius=0)
         screen.blit(level_nintyeight_text, level_nintyeight_text.get_rect(center=level_nintyeight_button.center))
-        if level_nintyeight_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintyeight_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 98
             pygame.time.delay(200)
 
@@ -1566,7 +2074,7 @@ def CAMPAIGN_SELECT():
         level_nintynine_button = pygame.Rect(870*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GOLD, level_nintynine_button, border_radius=0)
         screen.blit(level_nintynine_text, level_nintynine_text.get_rect(center=level_nintynine_button.center))
-        if level_nintynine_button.collidepoint(mouse_pos) and mouse_click:
+        if level_nintynine_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 99
             pygame.time.delay(200)
 
@@ -1576,7 +2084,7 @@ def CAMPAIGN_SELECT():
         level_onehundred_button_again = pygame.Rect(980*SCALED_WIDTH, 235*SCALED_HEIGHT+level_for_campaign_list.index(10)*85*SCALED_HEIGHT - button_offset, 80*SCALED_WIDTH, 60*SCALED_HEIGHT)
         pygame.draw.rect(screen, BLACK, level_onehundred_button_again, border_radius=0)
         screen.blit(level_onehundred_text, level_onehundred_text.get_rect(center=level_onehundred_button.center))
-        if level_onehundred_button.collidepoint(mouse_pos) and mouse_click:
+        if level_onehundred_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 100
             pygame.time.delay(200)
 
@@ -1584,7 +2092,7 @@ def CAMPAIGN_SELECT():
             if event.type == pygame.QUIT:
                 pygame.quit(); exit()
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE):
-                running = False
+                waiting = False
         pygame.display.flip()
         clock.tick(60)
 
@@ -1697,8 +2205,6 @@ def SETTINGS():
     global pulse_hp_setting
     global grower_hp_setting
     global modifiers
-    global colorword_list
-    global color_list
 
     global screen_size_setting, screen_full, screen, WIDTH, HEIGHT, SCALED_WIDTH, SCALED_HEIGHT, SCALED_TEXT
     global use_textures, use_joke_textures
@@ -2008,7 +2514,7 @@ def SETTINGS():
              "all one color", "invisenemies", "drippingenemies"
              ]
     true_or_false = ["False", "True"]
-    running = True
+    waiting = True
     button_offset = 10
     scroll_y = 0
     scroll_speed = 75*SCALED_HEIGHT
@@ -2028,7 +2534,7 @@ def SETTINGS():
     player_size_plus_button = pygame.Rect(WIDTH/2 + 120, HEIGHT/2 - 20, 60, 60)
     player_size_minus_button = pygame.Rect(WIDTH/2 - 180, HEIGHT/2 - 20, 60, 60)
     
-    while running:
+    while waiting:
         screen.fill(BLACK)
         text = big_font.render("Settings", True, WHITE)
         screen.blit(text, (50*SCALED_WIDTH, 50*SCALED_HEIGHT + scroll_y))
@@ -4953,7 +5459,7 @@ def SETTINGS():
             if event.type == pygame.QUIT:
                 pygame.quit(); exit()
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE):
-                if 0 in enemy_locks: running = False
+                if 0 in enemy_locks: waiting = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if scrollbar_handle.collidepoint(event.pos):
                     dragging_scrollbar = True
@@ -5219,6 +5725,7 @@ def TITLE_SCREEN():
     global player_skins
     global p1_skin_color, p2_skin_color, skin_match
     global custom_color, custom_text, custom_p2text, custom_font
+    global campaign_start
     
     skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
     skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
@@ -5242,206 +5749,211 @@ def TITLE_SCREEN():
     waiting = True
     while waiting:
         screen.fill((0, 0, 0))
-
-        pygame.draw.rect(screen, WHITE, white_sbox, border_radius=0)
-        pygame.draw.rect(screen, BLACK, black_sbox, border_radius=0)
-        
-        title_text = big_font.render("Pixels Of Evasion", True, (255, 0, 0))
-        screen.blit(title_text, title_text.get_rect(center=(WIDTH/2, 150*SCALED_HEIGHT)))
-        
-        if players == 2:
-            p1_skin_button.centerx = WIDTH / 2 - 100*SCALED_WIDTH
-            p2_skin_button.centerx = WIDTH / 2 + 100*SCALED_WIDTH
-            black_p1_skin_button.centerx = WIDTH / 2 - 100*SCALED_WIDTH
-            black_p2_skin_button.centerx = WIDTH / 2 + 100*SCALED_WIDTH
-        else:
-            p1_skin_button.centerx = WIDTH / 2
-            p2_skin_button.centerx = WIDTH + 69696969
-            black_p1_skin_button.centerx = WIDTH / 2
-            black_p2_skin_button.centerx = WIDTH + 69696969
+        if campaign_start == False:
+            pygame.draw.rect(screen, WHITE, white_sbox, border_radius=0)
+            pygame.draw.rect(screen, BLACK, black_sbox, border_radius=0)
             
-        mouse_pos = pygame.mouse.get_pos()
-        mouse_click = pygame.mouse.get_pressed()[0]
+            title_text = big_font.render("Pixels Of Evasion", True, (255, 0, 0))
+            screen.blit(title_text, title_text.get_rect(center=(WIDTH/2, 150*SCALED_HEIGHT)))
+            
+            if players == 2:
+                p1_skin_button.centerx = WIDTH / 2 - 100*SCALED_WIDTH
+                p2_skin_button.centerx = WIDTH / 2 + 100*SCALED_WIDTH
+                black_p1_skin_button.centerx = WIDTH / 2 - 100*SCALED_WIDTH
+                black_p2_skin_button.centerx = WIDTH / 2 + 100*SCALED_WIDTH
+            else:
+                p1_skin_button.centerx = WIDTH / 2
+                p2_skin_button.centerx = WIDTH + 69696969
+                black_p1_skin_button.centerx = WIDTH / 2
+                black_p2_skin_button.centerx = WIDTH + 69696969
+                
+            mouse_pos = pygame.mouse.get_pos()
+            mouse_click = pygame.mouse.get_pressed()[0]
 
-        # --- Start Game button (TOP) ---
-        if players in [1, 2]:
-            color = BLUE if campaign_button.collidepoint(mouse_pos) else NAVY
-        else:
-            color = GRAY  # disabled look until a mode is chosen
+            # --- Start Game button (TOP) ---
+            if players in [1, 2]:
+                color = BLUE if campaign_button.collidepoint(mouse_pos) else NAVY
+            else:
+                color = GRAY  # disabled look until a mode is chosen
 
-        pygame.draw.rect(screen, color, campaign_button, border_radius=0)
-        campaign_text = font.render("Campaign Levels", True, (255, 255, 255))
-        screen.blit(campaign_text, campaign_text.get_rect(center=campaign_button.center))
+            pygame.draw.rect(screen, color, campaign_button, border_radius=0)
+            campaign_text = font.render("Campaign Levels", True, (255, 255, 255))
+            screen.blit(campaign_text, campaign_text.get_rect(center=campaign_button.center))
 
-        if campaign_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
-            CAMPAIGN_SELECT()
-            pygame.time.delay(200)   # <-- prevents instant selection
-            continue
-
-
-
-        if players in [1, 2]:
-            color = CYAN if start_button.collidepoint(mouse_pos) else TEAL
-        else:
-            color = GRAY  # disabled look until a mode is chosen
-
-        pygame.draw.rect(screen, color, start_button, border_radius=0)
-        start_text = font.render("Freeplay", True, (255, 255, 255))
-        screen.blit(start_text, start_text.get_rect(center=start_button.center))
-
-        if start_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
-            apply_settings()
-            reset_game_state()
-            waiting = False
-
-        # --- Quit button ---
-        if players in [1, 2]:
-            color = RED if quit_button.collidepoint(mouse_pos) else MAROON
-        else:
-            color = GRAY  # disabled look until a mode is chosen
-
-        pygame.draw.rect(screen, color, quit_button, border_radius=0)
-        quit_text = font.render("Quit", True, (255, 255, 255))
-        screen.blit(quit_text, quit_text.get_rect(center=quit_button.center))
-
-        if quit_button.collidepoint(mouse_pos) and mouse_click:
-            pygame.quit()
-            quit()
-
-        # --- P1 Skin --
-
-        pygame.draw.rect(screen, player_skins[p1_skin_color][0], p1_skin_button, border_radius=0)
-        pygame.draw.rect(screen, BLACK, black_p1_skin_button, border_radius=0)
-        p1_skin_text = skin_font.render("P1", True, player_skins[p1_skin_color][1])
-        screen.blit(p1_skin_text, p1_skin_text.get_rect(center=p1_skin_button.center))
-
-        if p1_skin_button.collidepoint(mouse_pos) and mouse_click:
-            if p1_skin_color+1 == len(player_skins): p1_skin_color = 0
-            else: p1_skin_color += 1
-            skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-            pygame.time.delay(200)
+            if campaign_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
+                CAMPAIGN_SELECT()
+                pygame.time.delay(200)
+                continue
 
 
-        # --- P2 Skin --
 
-        skin_match = 1
-        pygame.draw.rect(screen, player_skins[p2_skin_color][0], p2_skin_button, border_radius=0)
-        pygame.draw.rect(screen, BLACK, black_p2_skin_button, border_radius=0)
-        if p1_skin_color == p2_skin_color or p2_skin_color == 0: skin_match = 2
-        else: skin_match = 1
-        p2_skin_text = skin_2font.render("P2", True, player_skins[p2_skin_color][skin_match])
-        screen.blit(p2_skin_text, p2_skin_text.get_rect(center=p2_skin_button.center))
+            if players in [1, 2]:
+                color = CYAN if start_button.collidepoint(mouse_pos) else TEAL
+            else:
+                color = GRAY  # disabled look until a mode is chosen
 
-        if p2_skin_button.collidepoint(mouse_pos) and mouse_click:
-            if p2_skin_color+1 == len(player_skins): p2_skin_color = 0
-            else: p2_skin_color += 1
-            skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-            pygame.time.delay(200)
+            pygame.draw.rect(screen, color, start_button, border_radius=0)
+            start_text = font.render("Freeplay", True, (255, 255, 255))
+            screen.blit(start_text, start_text.get_rect(center=start_button.center))
 
-
-        # --- Keyboard Controls for title --
-        custom_skin_number = len(player_skins) - 1
-        for event in pygame.event.get():
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_LEFT)) and players == 1:
-                if p1_skin_color-1 < 0: p1_skin_color = len(player_skins)-1
-                else: p1_skin_color -= 1
-                skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_a)):
-                if p1_skin_color-1 < 0: p1_skin_color = len(player_skins)-1
-                else: p1_skin_color -= 1
-                skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_RIGHT) and players == 1):
-                if p1_skin_color+1 == len(player_skins): p1_skin_color = 0
-                else: p1_skin_color += 1
-                skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_d)):
-                if p1_skin_color+1 == len(player_skins): p1_skin_color = 0
-                else: p1_skin_color += 1
-                skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_j) and players == 2):
-                if p2_skin_color-1 < 0: p2_skin_color = len(player_skins)-1
-                else: p2_skin_color -= 1
-                skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_l) and players == 2):
-                if p2_skin_color+1 == len(player_skins): p2_skin_color = 0
-                else: p2_skin_color += 1
-                skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE)):
+            if start_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
                 apply_settings()
                 reset_game_state()
                 waiting = False
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE)):
+
+            # --- Quit button ---
+            if players in [1, 2]:
+                color = RED if quit_button.collidepoint(mouse_pos) else MAROON
+            else:
+                color = GRAY  # disabled look until a mode is chosen
+
+            pygame.draw.rect(screen, color, quit_button, border_radius=0)
+            quit_text = font.render("Quit", True, (255, 255, 255))
+            screen.blit(quit_text, quit_text.get_rect(center=quit_button.center))
+
+            if quit_button.collidepoint(mouse_pos) and mouse_click:
                 pygame.quit()
                 quit()
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_y) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                if custom_color+1 == len(color_list): custom_color = 0
-                else: custom_color += 1
-                player_skins[custom_skin_number][0] = color_list[custom_color]
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_h) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                if custom_text+1 == len(color_list): custom_text = 0
-                else: custom_text += 1
-                player_skins[custom_skin_number][1] = color_list[custom_text]
-                if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
-                else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_n) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                if custom_font+1 == len(font_list): custom_font = 0
-                else: custom_font += 1
-                player_skins[custom_skin_number][3] = font_list[custom_font]
+
+            # --- P1 Skin --
+
+            pygame.draw.rect(screen, player_skins[p1_skin_color][0], p1_skin_button, border_radius=0)
+            pygame.draw.rect(screen, BLACK, black_p1_skin_button, border_radius=0)
+            p1_skin_text = skin_font.render("P1", True, player_skins[p1_skin_color][1])
+            screen.blit(p1_skin_text, p1_skin_text.get_rect(center=p1_skin_button.center))
+
+            if p1_skin_button.collidepoint(mouse_pos) and mouse_click:
+                if p1_skin_color+1 == len(player_skins): p1_skin_color = 0
+                else: p1_skin_color += 1
                 skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                pygame.time.delay(200)
+
+
+            # --- P2 Skin --
+
+            skin_match = 1
+            pygame.draw.rect(screen, player_skins[p2_skin_color][0], p2_skin_button, border_radius=0)
+            pygame.draw.rect(screen, BLACK, black_p2_skin_button, border_radius=0)
+            if p1_skin_color == p2_skin_color or p2_skin_color == 0: skin_match = 2
+            else: skin_match = 1
+            p2_skin_text = skin_2font.render("P2", True, player_skins[p2_skin_color][skin_match])
+            screen.blit(p2_skin_text, p2_skin_text.get_rect(center=p2_skin_button.center))
+
+            if p2_skin_button.collidepoint(mouse_pos) and mouse_click:
+                if p2_skin_color+1 == len(player_skins): p2_skin_color = 0
+                else: p2_skin_color += 1
                 skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_t) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                if custom_color-1 < 0: custom_color = len(color_list)-1
-                else: custom_color -= 1
-                player_skins[custom_skin_number][0] = color_list[custom_color]
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_g) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                if custom_text-1 < 0: custom_text = len(color_list)-1
-                else: custom_text -= 1
-                player_skins[custom_skin_number][1] = color_list[custom_text]
-                if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
-                else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_b) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                if custom_font-1 < 0: custom_font = len(font_list)-1
-                else: custom_font -= 1
-                player_skins[custom_skin_number][3] = font_list[custom_font]
-                skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-                skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-            
+                pygame.time.delay(200)
 
-        # --- Settings button ---
-        if players in [1, 2]:
-            color = YELLOW if settings_button.collidepoint(mouse_pos) else SULFUR
-        else:
-            color = GRAY  # disabled look until a mode is chosen
 
-        pygame.draw.rect(screen, color, settings_button, border_radius=0)
-        settings_text = font.render("Settings", True, (255, 255, 255))
-        screen.blit(settings_text, settings_text.get_rect(center=settings_button.center))
+            # --- Keyboard Controls for title --
+            custom_skin_number = len(player_skins) - 1
+            for event in pygame.event.get():
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_LEFT)) and players == 1:
+                    if p1_skin_color-1 < 0: p1_skin_color = len(player_skins)-1
+                    else: p1_skin_color -= 1
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_a)):
+                    if p1_skin_color-1 < 0: p1_skin_color = len(player_skins)-1
+                    else: p1_skin_color -= 1
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_RIGHT) and players == 1):
+                    if p1_skin_color+1 == len(player_skins): p1_skin_color = 0
+                    else: p1_skin_color += 1
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_d)):
+                    if p1_skin_color+1 == len(player_skins): p1_skin_color = 0
+                    else: p1_skin_color += 1
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_j) and players == 2):
+                    if p2_skin_color-1 < 0: p2_skin_color = len(player_skins)-1
+                    else: p2_skin_color -= 1
+                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_l) and players == 2):
+                    if p2_skin_color+1 == len(player_skins): p2_skin_color = 0
+                    else: p2_skin_color += 1
+                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE)):
+                    apply_settings()
+                    reset_game_state()
+                    waiting = False
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE)):
+                    pygame.quit()
+                    quit()
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_y) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_color+1 == len(color_list): custom_color = 0
+                    else: custom_color += 1
+                    player_skins[custom_skin_number][0] = color_list[custom_color]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_h) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_text+1 == len(color_list): custom_text = 0
+                    else: custom_text += 1
+                    player_skins[custom_skin_number][1] = color_list[custom_text]
+                    if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
+                    else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_n) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_font+1 == len(font_list): custom_font = 0
+                    else: custom_font += 1
+                    player_skins[custom_skin_number][3] = font_list[custom_font]
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_t) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_color-1 < 0: custom_color = len(color_list)-1
+                    else: custom_color -= 1
+                    player_skins[custom_skin_number][0] = color_list[custom_color]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_g) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_text-1 < 0: custom_text = len(color_list)-1
+                    else: custom_text -= 1
+                    player_skins[custom_skin_number][1] = color_list[custom_text]
+                    if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
+                    else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_b) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_font-1 < 0: custom_font = len(font_list)-1
+                    else: custom_font -= 1
+                    player_skins[custom_skin_number][3] = font_list[custom_font]
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
+                
 
-        if settings_button.collidepoint(mouse_pos) and mouse_click:
-            SETTINGS()
-            pygame.time.delay(200)   # <-- prevents instant selection
-            continue
-
-        # --- Player buttons (BELOW Start button) ---
-        for rect, label, value in [(button_1p, "1 Player", 1), (button_2p, "2 Players", 2)]:
-            if players == value:
-                color = LIME
-            elif rect.collidepoint(mouse_pos):
-                color = GREEN
+            # --- Settings button ---
+            if players in [1, 2]:
+                color = YELLOW if settings_button.collidepoint(mouse_pos) else SULFUR
             else:
-                color = FOREST
+                color = GRAY  # disabled look until a mode is chosen
 
-            pygame.draw.rect(screen, color, rect, border_radius=0)
-            text = font.render(label, True, text_color)
-            screen.blit(text, text.get_rect(center=rect.center))
+            pygame.draw.rect(screen, color, settings_button, border_radius=0)
+            settings_text = font.render("Settings", True, (255, 255, 255))
+            screen.blit(settings_text, settings_text.get_rect(center=settings_button.center))
 
-            if rect.collidepoint(mouse_pos) and mouse_click:
-                players = value
+            if settings_button.collidepoint(mouse_pos) and mouse_click:
+                SETTINGS()
+                pygame.time.delay(200)   # <-- prevents instant selection
+                continue
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+            # --- Player buttons (BELOW Start button) ---
+            for rect, label, value in [(button_1p, "1 Player", 1), (button_2p, "2 Players", 2)]:
+                if players == value:
+                    color = LIME
+                elif rect.collidepoint(mouse_pos):
+                    color = GREEN
+                else:
+                    color = FOREST
+
+                pygame.draw.rect(screen, color, rect, border_radius=0)
+                text = font.render(label, True, text_color)
+                screen.blit(text, text.get_rect(center=rect.center))
+
+                if rect.collidepoint(mouse_pos) and mouse_click:
+                    players = value
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+        else:
+            reset_game_state()
+            apply_settings()
+            waiting = False
+            campaign_start = False
 
         pygame.display.flip()
         clock.tick(15)
