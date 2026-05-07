@@ -199,31 +199,30 @@ custom_text = 0
 custom_p2text = 23
 custom_font = 0
 player_skins = [
-                [WHITE, RED, BLUE, "none"],
-                [RED, SALMON, PINK, "none"],
-                [BLUE, SKY, AZURE, "none"],
-                [YELLOW, GOLD, ORANGE, "none"],
-                [LIME, MINT, GREEN, "none"],
-                [GRAY, WHITE, SHADOW, "courier"],
-                [LAVA, GOLD, ORANGE, "Colonna"],
-                [CYAN, TEAL, LAVENDER, "modernno20"],
-                [GREEN, LIME, GREEN, "agencyfb"],
-                [PURPLE, LAVENDER, HOT_PINK, "curlz"],
-                [MAROON, RED, CRIMSON, 'Haettenschweiler'],
-                [TURQUOISE, HOT_PINK, GREEN, "mistral"],
-                [SULFUR, GRAY, AZURE, "erasitc"],
-                [CLOUD, AZURE, MAGENTA, "bernardcondensed"],
-                [SHADOW, PINK, CYAN, "chiller"],
-                [ORANGE, YELLOW, CRIMSON, "perpetua"],
-                [SKY, WHITE, BLUE, "comicsansms"],
-                [BROWN, TAN, MAROON, "papyrus"],
-                [LAVENDER, PURPLE, BLUE, "bell"],
-                [PINK, HOT_PINK, PURPLE, "palacescript"],
-                [HOT_PINK, PINK, VIOLET, "yugothic"],
-                [TEAL, BLUE, YELLOW, "onyx"],
-                [MAUVE, CYAN, LAVENDER, "oldenglishtext"],
-                [MAGENTA, VIOLET, SALMON, "microsoftnewtailue"],
-                [color_list[custom_color], color_list[custom_text], color_list[custom_p2text], font_list[custom_font]]
+                [WHITE, RED, BLUE, "none"], #Default Player
+                [RED, SALMON, PINK, "none"], #Default Red Skin
+                [BLUE, SKY, AZURE, "none"], #Default Blue Skin
+                [YELLOW, WHITE, GOLD, "none"], #Yellow man
+                [LIME, MINT, GREEN, "none"], #Default Green Skin
+                [GRAY, WHITE, SHADOW, "courier"], #Basic Skin
+                [GREEN, YELLOW, MINT, "agencyfb"], #Clingy Claustrophobia Skin
+                [AQUA, BLUE, TEAL, "onyx"], #Aqua Arena Skin
+                [PURPLE, CYAN, HOT_PINK, "curlz"], #Teleportation Trappers Skin
+                [MAROON, RED, CRIMSON, 'Haettenschweiler'], #Bullet Barage Skin
+                [BROWN, TAN, MAROON, "papyrus"], #Rocky Rage Skin
+                [SULFUR, CLOUD, AZURE, "erasitc"], #Stormy Surge Skin
+                [TUNDRA, TEAL, ICE, "modernno20"], #Frostbite Frenzy Skin
+                [LAVA, GOLD, CRIMSON, "Colonna"], #Blazing Burnout Skin
+                [LIME, RED, MAROON, "leelawadee"], #Just Juke Skin
+                [LILAC, COBALT, MINT, "playbill"], #Laggy Lab Skin
+                [SHADOW, VIOLET, OLIVE, "chiller"], #Scary Shadows Skin
+                [CLOUD, CREAM, TAN, "brushscript"], #Whirling Winds Skin
+                [GOLD, BRONZE, SILVER, "perpetua"], #Podium Projectiles Skin
+                [TURQUOISE, HOT_PINK, GREEN, "mistral"], #Laser Lunge Skin
+                [YELLOW, AZURE, CYAN, 'hightowertext'], #Lightning Legacy Skin
+                [CHARTREUSE, GREEN, TAN, "juiceitc"], #Splitter Splatter Skin
+                [TAN, CLOUD, MAUVE, "bernardcondensed"], #Disaster Defusion Skin
+                [color_list[custom_color], color_list[custom_text], color_list[custom_p2text], font_list[custom_font]] #Custom Skin
                 ]
 
 # --- Spawner ---
