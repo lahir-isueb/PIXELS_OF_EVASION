@@ -2091,8 +2091,25 @@ def CAMPAIGN_SELECT():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit(); exit()
-            if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE):
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE):
                 waiting = False
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_a or event.key == pygame.K_LEFT or event.key == pygame.K_j):
+                if level_selected == 0: level_selected = 1
+                elif ((level_selected - 1) % 10) != 0: level_selected -= 1
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_d or event.key == pygame.K_RIGHT or event.key == pygame.K_l):
+                if level_selected % 10 != 0: level_selected += 1
+                if level_selected == 0: level_selected = 1
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_s or event.key == pygame.K_DOWN or event.key == pygame.K_k):
+                if level_selected == 0: level_selected = 1
+                elif level_selected < 91: level_selected += 10
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_w or event.key == pygame.K_UP or event.key == pygame.K_i):
+                if level_selected == 0: level_selected = 1
+                if level_selected > 10: level_selected -= 10
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE):
+                if level_selected != 0:
+                    give_seed(level_seeds[level_selected])
+                    campaign_start = True
+                    waiting = False
         pygame.display.flip()
         clock.tick(60)
 
@@ -5719,6 +5736,36 @@ def apply_settings():
 
     
 
+def SKIN_MAKER():
+    global custom_color, custom_text, custom_p2text, custom_font, player_skins
+
+    skin_maker_block = 0
+    skin_maker_text = 0
+    skin_maker_alt = 1
+    skin_maker_font = 0
+    skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
+
+    skin_maker_button = pygame.Rect(WIDTH/2 - 525*SCALED_WIDTH, HEIGHT - 700*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
+    skin_maker_black_button = pygame.Rect(WIDTH/2 - 525*SCALED_WIDTH, HEIGHT - 645*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
+    waiting = True
+
+    while waiting:
+        screen.fill((0, 0, 0))
+
+        skinm_text = skinm_font.render("P1", True, color_list[skin_maker_text])
+        pygame.draw.rect(screen, color_list[skin_maker_block], skin_maker_button, border_radius=0)
+        pygame.draw.rect(screen, BLACK, skin_maker_black_button, border_radius=0)
+        screen.blit(skinm_text, skinm_text.get_rect(center=skin_maker_button.center))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit(); exit()
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE):
+                waiting = False
+
+        pygame.display.flip()
+        clock.tick(15)
+
 
 def TITLE_SCREEN():
     global players
@@ -5739,6 +5786,7 @@ def TITLE_SCREEN():
     button_2p = pygame.Rect(WIDTH/2 + 20*SCALED_WIDTH, 800*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
     settings_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 475*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
     quit_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 550*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    skin_maker = pygame.Rect(WIDTH/2 - 490*SCALED_WIDTH, 550*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
         
     p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 150*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
     p2_skin_button = pygame.Rect(WIDTH/2 + 60*SCALED_WIDTH, HEIGHT - 150*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
@@ -5814,6 +5862,21 @@ def TITLE_SCREEN():
             if quit_button.collidepoint(mouse_pos) and mouse_click:
                 pygame.quit()
                 quit()
+
+            # --- Skin Maker ---
+            if players in [1, 2]:
+                color = SILVER if skin_maker.collidepoint(mouse_pos) else GRAY
+            else:
+                color = SHADOW  # disabled look until a mode is chosen
+            
+            pygame.draw.rect(screen, color, skin_maker, border_radius=0)
+            maker_text = font.render("Skin Maker", True, (255, 255, 255))
+            screen.blit(maker_text, maker_text.get_rect(center=skin_maker.center))
+
+            if skin_maker.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
+                SKIN_MAKER()
+                pygame.time.delay(200)   # <-- prevents instant selection
+                continue
 
             # --- P1 Skin --
 
