@@ -235,6 +235,8 @@ spawner_timer = 0
 # --- Campaign Variables ---
 campaign_start = False
 
+freeplay_seed = "50_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_1_15_1_0_4_1_0_100_0_5_1_1_500_100_2_1_1_1_0_9_20_0_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_"
+
 # --- Control Point ---
 control_point_spawned = False
 
@@ -314,7 +316,7 @@ magma_hp = 4 # 17
 charger_hp = 3 # 18
 rapidshooter_hp = 1 # 19
 frostbite_hp = 4 # 20
-addictive_hp = 7 # 21
+addictive_hp = 7 # 2150_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_1_15_1_0_4_1_0_100_0_5_1_1_500_100_2_1_1_1_0_9_20_0_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_
 laser_hp = 3 # 22
 hardened_hp = 30 # 23
 accelerator_hp = 5 # 24
@@ -736,6 +738,278 @@ else: use_joke_textures = False
 
 modifiers = [0, 0, 0, 0, 0, 9, 0, 0]
 
+def give_seed(pasted):
+    global player_size_setting, enemy_size_setting, projectile_size_setting, min_spawn_delay_setting, max_spawn_delay_setting, spawn_delay_change_setting
+    global player_speed_setting, enemy_speed_setting, projectile_speed_setting
+    global regen_delay_setting, player_health_setting
+    global trail_duration_setting
+    global trail_distance_setting
+    global freeze_duration_setting
+    global burn_duration_setting
+    global invincibility_duration_setting
+    global chaser_turn_amount_setting
+    global enemy_stick_setting
+    global projectile_fire_rate_setting
+    global enemy_damage_setting
+    global burst_setting
+    global enemy_unlock_setting
+    global target_setting
+    global projectile_damage_setting
+    global unharden_death_setting
+    global insta_spawn_setting
+    global ambush_per_score_setting
+    global teleport_angle_change_setting
+    global burn_particle_lifetime_setting
+    global blocker_push_radius_setting
+    global blocker_push_strength_setting
+    global addictive_interaction_setting
+    global blocker_interaction_setting
+    global target_closest_setting
+    global growing_speed_setting
+    global ambush_start_setting
+    global annihilator_interaction_setting
+    global hardened_speed_percent_setting
+    global fatal_speed_percent_setting
+    global annihilator_speed_percent_setting
+    global freezeslip_max_setting
+    global enemy_locks
+
+    global basic_hp_setting
+    global homing_hp_setting
+    global fatal_hp_setting
+    global flow_hp_setting
+    global sticky_hp_setting, sticky_sensitive_setting
+    global gloomy_hp_setting
+    global trail_hp_setting
+    global impostor_hp_setting
+    global splitter_hp_setting
+    global split_amount_setting
+    global bomb_hp_setting
+    global bomb_projectile_amount_setting
+    global shooter_hp_setting
+    global sniper_hp_setting
+    global extra_sniper_damage_setting
+    global speedy_hp_setting
+    global shotgun_hp_setting
+    global shotgun_bullets_setting
+    global voodoo_hp_setting
+    global blind_hp_setting
+    global magma_hp_setting
+    global charger_hp_setting, charger_sensitive_setting
+    global rapidshooter_hp_setting
+    global frostbite_hp_setting
+    global frostbite_projectile_amount_setting
+    global addictive_hp_setting
+    global addictive_pull_strength_setting
+    global addictive_pull_radius_setting
+    global laser_hp_setting
+    global laser_damage_setting
+    global laser_duration_setting
+    global hardened_hp_setting
+    global harden_break_setting
+    global accelerator_hp_setting
+    global cold_hp_setting
+    global tracer_hp_setting
+    global savage_hp_setting
+    global teleporter_hp_setting
+    global phantom_hp_setting
+    global stream_hp_setting
+    global sensitive_hp_setting
+    global burstshooter_hp_setting
+    global stickyshooter_hp_setting
+    global sparker_hp_setting
+    global annihilator_hp_setting
+    global annihilator_projectile_amount_setting
+    global frostbeam_hp_setting
+    global forecast_hp_setting
+    global assassin_hp_setting
+    global motion_hp_setting
+    global invisibility_hp_setting
+    global whirly_hp_setting
+    global volcanic_hp_setting
+    global pyrobeam_hp_setting
+    global laggy_hp_setting
+    global error_hp_setting
+    global glitchy_hp_setting
+    global blocker_hp_setting
+    global gloomyshooter_hp_setting
+    global pulse_hp_setting
+    global grower_hp_setting
+    global modifiers
+    scount = 0
+    chara = ""
+    try:
+        for c in pasted:
+            if c == "_":
+                match scount:
+                    case 0: player_size_setting = int(chara)
+                    case 1: enemy_size_setting = int(chara)
+                    case 2: projectile_size_setting = int(chara)
+                    case 3: min_spawn_delay_setting = int(chara)
+                    case 4: max_spawn_delay_setting = int(chara)
+                    case 5: spawn_delay_change_setting = int(chara)
+                    case 6: player_speed_setting = int(chara)
+                    case 7: enemy_speed_setting = int(chara)
+                    case 8: projectile_speed_setting = int(chara)
+                    case 9: regen_delay_setting = int(chara)
+                    case 10: trail_duration_setting = int(chara)
+                    case 11: trail_distance_setting = int(chara)
+                    case 12: freeze_duration_setting = int(chara)
+                    case 13: invincibility_duration_setting = int(chara)
+                    case 14: chaser_turn_amount_setting = int(chara)
+                    case 15: enemy_stick_setting = int(chara)
+                    case 16: projectile_fire_rate_setting = int(chara)
+                    case 17: enemy_damage_setting = int(chara)
+                    case 18: burst_setting = int(chara)
+                    case 19: enemy_unlock_setting = int(chara)
+                    case 20: projectile_damage_setting = int(chara)
+                    case 21: enemy_locks[0] = int(chara)
+                    case 22: enemy_locks[1] = int(chara)
+                    case 23: enemy_locks[2] = int(chara)
+                    case 24: enemy_locks[3] = int(chara)
+                    case 25: enemy_locks[4] = int(chara)
+                    case 26: enemy_locks[5] = int(chara)
+                    case 27: enemy_locks[6] = int(chara)
+                    case 28: enemy_locks[7] = int(chara)
+                    case 29: enemy_locks[8] = int(chara)
+                    case 30: enemy_locks[9] = int(chara)
+                    case 31: enemy_locks[10] = int(chara)
+                    case 32: enemy_locks[11] = int(chara)
+                    case 33: enemy_locks[12] = int(chara)
+                    case 34: enemy_locks[13] = int(chara)
+                    case 35: enemy_locks[14] = int(chara)
+                    case 36: enemy_locks[15] = int(chara)
+                    case 37: enemy_locks[16] = int(chara)
+                    case 38: enemy_locks[17] = int(chara)
+                    case 39: enemy_locks[18] = int(chara)
+                    case 40: enemy_locks[19] = int(chara)
+                    case 41: enemy_locks[20] = int(chara)
+                    case 42: enemy_locks[21] = int(chara)
+                    case 43: enemy_locks[22] = int(chara)
+                    case 44: enemy_locks[23] = int(chara)
+                    case 45: enemy_locks[24] = int(chara)
+                    case 46: enemy_locks[25] = int(chara)
+                    case 47: enemy_locks[26] = int(chara)
+                    case 48: enemy_locks[27] = int(chara)
+                    case 49: enemy_locks[28] = int(chara)
+                    case 50: enemy_locks[29] = int(chara)
+                    case 51: enemy_locks[30] = int(chara)
+                    case 52: enemy_locks[31] = int(chara)
+                    case 53: enemy_locks[32] = int(chara)
+                    case 54: enemy_locks[33] = int(chara)
+                    case 55: enemy_locks[34] = int(chara)
+                    case 56: enemy_locks[35] = int(chara)
+                    case 57: basic_hp_setting = int(chara)
+                    case 58: homing_hp_setting = int(chara)
+                    case 59: fatal_hp_setting = int(chara)
+                    case 60: flow_hp_setting = int(chara)
+                    case 61: sticky_hp_setting = int(chara)
+                    case 62: gloomy_hp_setting = int(chara)
+                    case 63: trail_hp_setting = int(chara)
+                    case 64: impostor_hp_setting = int(chara)
+                    case 65: splitter_hp_setting = int(chara)
+                    case 66: split_amount_setting = int(chara)
+                    case 67: bomb_hp_setting = int(chara)
+                    case 68: bomb_projectile_amount_setting = int(chara)
+                    case 69: shooter_hp_setting = int(chara)
+                    case 70: sniper_hp_setting = int(chara)
+                    case 71: extra_sniper_damage_setting = int(chara)
+                    case 72: speedy_hp_setting = int(chara)
+                    case 73: shotgun_hp_setting = int(chara)
+                    case 74: shotgun_bullets_setting = int(chara)
+                    case 75: voodoo_hp_setting = int(chara)
+                    case 76: blind_hp_setting = int(chara)
+                    case 77: magma_hp_setting = int(chara)
+                    case 78: charger_hp_setting = int(chara)
+                    case 79: rapidshooter_hp_setting = int(chara)
+                    case 80: frostbite_hp_setting = int(chara)
+                    case 81: frostbite_projectile_amount_setting = int(chara)
+                    case 82: addictive_hp_setting = int(chara)
+                    case 83: addictive_pull_strength_setting = int(chara)
+                    case 84: addictive_pull_radius_setting = int(chara)
+                    case 85: laser_hp_setting = int(chara)
+                    case 86: laser_damage_setting = int(chara)
+                    case 87: laser_duration_setting = int(chara)
+                    case 88: hardened_hp_setting = int(chara)
+                    case 89: harden_break_setting = int(chara)
+                    case 90: accelerator_hp_setting = int(chara)
+                    case 91: cold_hp_setting = int(chara)
+                    case 92: tracer_hp_setting = int(chara)
+                    case 93: savage_hp_setting = int(chara)
+                    case 94: teleporter_hp_setting = int(chara)
+                    case 95: phantom_hp_setting = int(chara)
+                    case 96: stream_hp_setting = int(chara)
+                    case 97: sensitive_hp_setting = int(chara)
+                    case 98: burstshooter_hp_setting = int(chara)
+                    case 99: stickyshooter_hp_setting = int(chara)
+                    case 100: sparker_hp_setting = int(chara)
+                    case 101: annihilator_hp_setting = int(chara)
+                    case 102: annihilator_projectile_amount_setting = int(chara)
+                    case 103: frostbeam_hp_setting = int(chara)
+                    case 104: modifiers[0] = int(chara)
+                    case 105: player_health_setting = int(chara)
+                    case 106: unharden_death_setting = int(chara)
+                    case 107: target_setting = int(chara)
+                    case 108: modifiers[1] = int(chara)
+                    case 109: sticky_sensitive_setting = int(chara)
+                    case 110: charger_sensitive_setting = int(chara)
+                    case 111: forecast_hp_setting = int(chara)
+                    case 112: enemy_locks[36] = int(chara)
+                    case 113: assassin_hp_setting = int(chara)
+                    case 114: enemy_locks[37] = int(chara)
+                    case 115: motion_hp_setting = int(chara)
+                    case 116: enemy_locks[38] = int(chara)
+                    case 117: modifiers[2] = int(chara)
+                    case 118: invisibility_hp_setting = int(chara)
+                    case 119: enemy_locks[39] = int(chara)
+                    case 120: insta_spawn_setting = int(chara)
+                    case 121: ambush_per_score_setting = int(chara)
+                    case 122: modifiers[3] = int(chara)
+                    case 123: whirly_hp_setting = int(chara)
+                    case 124: enemy_locks[40] = int(chara)
+                    case 125: teleport_angle_change_setting = int(chara)
+                    case 126: burn_duration_setting = int(chara)
+                    case 127: burn_particle_lifetime_setting = int(chara)
+                    case 128: volcanic_hp_setting = int(chara)
+                    case 129: pyrobeam_hp_setting = int(chara)
+                    case 130: enemy_locks[41] = int(chara)
+                    case 131: enemy_locks[42] = int(chara)
+                    case 132: modifiers[4] = int(chara)
+                    case 133: modifiers[5] = int(chara)
+                    case 134: freezeslip_max_setting = int(chara)
+                    case 135: modifiers[6] = int(chara)
+                    case 136: laggy_hp_setting = int(chara)
+                    case 137: enemy_locks[43] = int(chara)
+                    case 138: error_hp_setting = int(chara)
+                    case 139: enemy_locks[44] = int(chara)
+                    case 140: glitchy_hp_setting = int(chara)
+                    case 141: enemy_locks[45] = int(chara)
+                    case 142: blocker_hp_setting = int(chara)
+                    case 143: enemy_locks[46] = int(chara)
+                    case 144: blocker_push_radius_setting = int(chara)
+                    case 145: blocker_push_strength_setting = int(chara)
+                    case 146: addictive_interaction_setting = int(chara)
+                    case 147: blocker_interaction_setting = int(chara)
+                    case 148: gloomyshooter_hp_setting = int(chara)
+                    case 149: enemy_locks[47] = int(chara)
+                    case 150: target_closest_setting = int(chara)
+                    case 151: pulse_hp_setting = int(chara)
+                    case 152: grower_hp_setting = int(chara)
+                    case 153: enemy_locks[48] = int(chara)
+                    case 154: enemy_locks[49] = int(chara)
+                    case 155: growing_speed_setting = int(chara)
+                    case 156: modifiers[7] = int(chara)
+                    case 157: ambush_start_setting = int(chara)
+                    case 158: annihilator_interaction_setting = int(chara)
+                    case 159: hardened_speed_percent_setting = int(chara)
+                    case 160: fatal_speed_percent_setting = int(chara)
+                    case 161: annihilator_speed_percent_setting = int(chara)
+                scount += 1
+                chara = ""
+            else: chara += c
+    except:
+        scount = 0
+
 def enemy_lock_setup(elock, enumber):
     global available_enemy_types
     global locked_enemy_types
@@ -853,278 +1127,6 @@ def CAMPAIGN_SELECT():
     global pulse_hp_setting
     global grower_hp_setting
     global modifiers
-
-    def give_seed(pasted):
-        global player_size_setting, enemy_size_setting, projectile_size_setting, min_spawn_delay_setting, max_spawn_delay_setting, spawn_delay_change_setting
-        global player_speed_setting, enemy_speed_setting, projectile_speed_setting
-        global regen_delay_setting, player_health_setting
-        global trail_duration_setting
-        global trail_distance_setting
-        global freeze_duration_setting
-        global burn_duration_setting
-        global invincibility_duration_setting
-        global chaser_turn_amount_setting
-        global enemy_stick_setting
-        global projectile_fire_rate_setting
-        global enemy_damage_setting
-        global burst_setting
-        global enemy_unlock_setting
-        global target_setting
-        global projectile_damage_setting
-        global unharden_death_setting
-        global insta_spawn_setting
-        global ambush_per_score_setting
-        global teleport_angle_change_setting
-        global burn_particle_lifetime_setting
-        global blocker_push_radius_setting
-        global blocker_push_strength_setting
-        global addictive_interaction_setting
-        global blocker_interaction_setting
-        global target_closest_setting
-        global growing_speed_setting
-        global ambush_start_setting
-        global annihilator_interaction_setting
-        global hardened_speed_percent_setting
-        global fatal_speed_percent_setting
-        global annihilator_speed_percent_setting
-        global freezeslip_max_setting
-        global enemy_locks
-        
-        global basic_hp_setting
-        global homing_hp_setting
-        global fatal_hp_setting
-        global flow_hp_setting
-        global sticky_hp_setting, sticky_sensitive_setting
-        global gloomy_hp_setting
-        global trail_hp_setting
-        global impostor_hp_setting
-        global splitter_hp_setting
-        global split_amount_setting
-        global bomb_hp_setting
-        global bomb_projectile_amount_setting
-        global shooter_hp_setting
-        global sniper_hp_setting
-        global extra_sniper_damage_setting
-        global speedy_hp_setting
-        global shotgun_hp_setting
-        global shotgun_bullets_setting
-        global voodoo_hp_setting
-        global blind_hp_setting
-        global magma_hp_setting
-        global charger_hp_setting, charger_sensitive_setting
-        global rapidshooter_hp_setting
-        global frostbite_hp_setting
-        global frostbite_projectile_amount_setting
-        global addictive_hp_setting
-        global addictive_pull_strength_setting
-        global addictive_pull_radius_setting
-        global laser_hp_setting
-        global laser_damage_setting
-        global laser_duration_setting
-        global hardened_hp_setting
-        global harden_break_setting
-        global accelerator_hp_setting
-        global cold_hp_setting
-        global tracer_hp_setting
-        global savage_hp_setting
-        global teleporter_hp_setting
-        global phantom_hp_setting
-        global stream_hp_setting
-        global sensitive_hp_setting
-        global burstshooter_hp_setting
-        global stickyshooter_hp_setting
-        global sparker_hp_setting
-        global annihilator_hp_setting
-        global annihilator_projectile_amount_setting
-        global frostbeam_hp_setting
-        global forecast_hp_setting
-        global assassin_hp_setting
-        global motion_hp_setting
-        global invisibility_hp_setting
-        global whirly_hp_setting
-        global volcanic_hp_setting
-        global pyrobeam_hp_setting
-        global laggy_hp_setting
-        global error_hp_setting
-        global glitchy_hp_setting
-        global blocker_hp_setting
-        global gloomyshooter_hp_setting
-        global pulse_hp_setting
-        global grower_hp_setting
-        global modifiers
-        scount = 0
-        chara = ""
-        try:
-            for c in pasted:
-                if c == "_":
-                    match scount:
-                        case 0: player_size_setting = int(chara)
-                        case 1: enemy_size_setting = int(chara)
-                        case 2: projectile_size_setting = int(chara)
-                        case 3: min_spawn_delay_setting = int(chara)
-                        case 4: max_spawn_delay_setting = int(chara)
-                        case 5: spawn_delay_change_setting = int(chara)
-                        case 6: player_speed_setting = int(chara)
-                        case 7: enemy_speed_setting = int(chara)
-                        case 8: projectile_speed_setting = int(chara)
-                        case 9: regen_delay_setting = int(chara)
-                        case 10: trail_duration_setting = int(chara)
-                        case 11: trail_distance_setting = int(chara)
-                        case 12: freeze_duration_setting = int(chara)
-                        case 13: invincibility_duration_setting = int(chara)
-                        case 14: chaser_turn_amount_setting = int(chara)
-                        case 15: enemy_stick_setting = int(chara)
-                        case 16: projectile_fire_rate_setting = int(chara)
-                        case 17: enemy_damage_setting = int(chara)
-                        case 18: burst_setting = int(chara)
-                        case 19: enemy_unlock_setting = int(chara)
-                        case 20: projectile_damage_setting = int(chara)
-                        case 21: enemy_locks[0] = int(chara)
-                        case 22: enemy_locks[1] = int(chara)
-                        case 23: enemy_locks[2] = int(chara)
-                        case 24: enemy_locks[3] = int(chara)
-                        case 25: enemy_locks[4] = int(chara)
-                        case 26: enemy_locks[5] = int(chara)
-                        case 27: enemy_locks[6] = int(chara)
-                        case 28: enemy_locks[7] = int(chara)
-                        case 29: enemy_locks[8] = int(chara)
-                        case 30: enemy_locks[9] = int(chara)
-                        case 31: enemy_locks[10] = int(chara)
-                        case 32: enemy_locks[11] = int(chara)
-                        case 33: enemy_locks[12] = int(chara)
-                        case 34: enemy_locks[13] = int(chara)
-                        case 35: enemy_locks[14] = int(chara)
-                        case 36: enemy_locks[15] = int(chara)
-                        case 37: enemy_locks[16] = int(chara)
-                        case 38: enemy_locks[17] = int(chara)
-                        case 39: enemy_locks[18] = int(chara)
-                        case 40: enemy_locks[19] = int(chara)
-                        case 41: enemy_locks[20] = int(chara)
-                        case 42: enemy_locks[21] = int(chara)
-                        case 43: enemy_locks[22] = int(chara)
-                        case 44: enemy_locks[23] = int(chara)
-                        case 45: enemy_locks[24] = int(chara)
-                        case 46: enemy_locks[25] = int(chara)
-                        case 47: enemy_locks[26] = int(chara)
-                        case 48: enemy_locks[27] = int(chara)
-                        case 49: enemy_locks[28] = int(chara)
-                        case 50: enemy_locks[29] = int(chara)
-                        case 51: enemy_locks[30] = int(chara)
-                        case 52: enemy_locks[31] = int(chara)
-                        case 53: enemy_locks[32] = int(chara)
-                        case 54: enemy_locks[33] = int(chara)
-                        case 55: enemy_locks[34] = int(chara)
-                        case 56: enemy_locks[35] = int(chara)
-                        case 57: basic_hp_setting = int(chara)
-                        case 58: homing_hp_setting = int(chara)
-                        case 59: fatal_hp_setting = int(chara)
-                        case 60: flow_hp_setting = int(chara)
-                        case 61: sticky_hp_setting = int(chara)
-                        case 62: gloomy_hp_setting = int(chara)
-                        case 63: trail_hp_setting = int(chara)
-                        case 64: impostor_hp_setting = int(chara)
-                        case 65: splitter_hp_setting = int(chara)
-                        case 66: split_amount_setting = int(chara)
-                        case 67: bomb_hp_setting = int(chara)
-                        case 68: bomb_projectile_amount_setting = int(chara)
-                        case 69: shooter_hp_setting = int(chara)
-                        case 70: sniper_hp_setting = int(chara)
-                        case 71: extra_sniper_damage_setting = int(chara)
-                        case 72: speedy_hp_setting = int(chara)
-                        case 73: shotgun_hp_setting = int(chara)
-                        case 74: shotgun_bullets_setting = int(chara)
-                        case 75: voodoo_hp_setting = int(chara)
-                        case 76: blind_hp_setting = int(chara)
-                        case 77: magma_hp_setting = int(chara)
-                        case 78: charger_hp_setting = int(chara)
-                        case 79: rapidshooter_hp_setting = int(chara)
-                        case 80: frostbite_hp_setting = int(chara)
-                        case 81: frostbite_projectile_amount_setting = int(chara)
-                        case 82: addictive_hp_setting = int(chara)
-                        case 83: addictive_pull_strength_setting = int(chara)
-                        case 84: addictive_pull_radius_setting = int(chara)
-                        case 85: laser_hp_setting = int(chara)
-                        case 86: laser_damage_setting = int(chara)
-                        case 87: laser_duration_setting = int(chara)
-                        case 88: hardened_hp_setting = int(chara)
-                        case 89: harden_break_setting = int(chara)
-                        case 90: accelerator_hp_setting = int(chara)
-                        case 91: cold_hp_setting = int(chara)
-                        case 92: tracer_hp_setting = int(chara)
-                        case 93: savage_hp_setting = int(chara)
-                        case 94: teleporter_hp_setting = int(chara)
-                        case 95: phantom_hp_setting = int(chara)
-                        case 96: stream_hp_setting = int(chara)
-                        case 97: sensitive_hp_setting = int(chara)
-                        case 98: burstshooter_hp_setting = int(chara)
-                        case 99: stickyshooter_hp_setting = int(chara)
-                        case 100: sparker_hp_setting = int(chara)
-                        case 101: annihilator_hp_setting = int(chara)
-                        case 102: annihilator_projectile_amount_setting = int(chara)
-                        case 103: frostbeam_hp_setting = int(chara)
-                        case 104: modifiers[0] = int(chara)
-                        case 105: player_health_setting = int(chara)
-                        case 106: unharden_death_setting = int(chara)
-                        case 107: target_setting = int(chara)
-                        case 108: modifiers[1] = int(chara)
-                        case 109: sticky_sensitive_setting = int(chara)
-                        case 110: charger_sensitive_setting = int(chara)
-                        case 111: forecast_hp_setting = int(chara)
-                        case 112: enemy_locks[36] = int(chara)
-                        case 113: assassin_hp_setting = int(chara)
-                        case 114: enemy_locks[37] = int(chara)
-                        case 115: motion_hp_setting = int(chara)
-                        case 116: enemy_locks[38] = int(chara)
-                        case 117: modifiers[2] = int(chara)
-                        case 118: invisibility_hp_setting = int(chara)
-                        case 119: enemy_locks[39] = int(chara)
-                        case 120: insta_spawn_setting = int(chara)
-                        case 121: ambush_per_score_setting = int(chara)
-                        case 122: modifiers[3] = int(chara)
-                        case 123: whirly_hp_setting = int(chara)
-                        case 124: enemy_locks[40] = int(chara)
-                        case 125: teleport_angle_change_setting = int(chara)
-                        case 126: burn_duration_setting = int(chara)
-                        case 127: burn_particle_lifetime_setting = int(chara)
-                        case 128: volcanic_hp_setting = int(chara)
-                        case 129: pyrobeam_hp_setting = int(chara)
-                        case 130: enemy_locks[41] = int(chara)
-                        case 131: enemy_locks[42] = int(chara)
-                        case 132: modifiers[4] = int(chara)
-                        case 133: modifiers[5] = int(chara)
-                        case 134: freezeslip_max_setting = int(chara)
-                        case 135: modifiers[6] = int(chara)
-                        case 136: laggy_hp_setting = int(chara)
-                        case 137: enemy_locks[43] = int(chara)
-                        case 138: error_hp_setting = int(chara)
-                        case 139: enemy_locks[44] = int(chara)
-                        case 140: glitchy_hp_setting = int(chara)
-                        case 141: enemy_locks[45] = int(chara)
-                        case 142: blocker_hp_setting = int(chara)
-                        case 143: enemy_locks[46] = int(chara)
-                        case 144: blocker_push_radius_setting = int(chara)
-                        case 145: blocker_push_strength_setting = int(chara)
-                        case 146: addictive_interaction_setting = int(chara)
-                        case 147: blocker_interaction_setting = int(chara)
-                        case 148: gloomyshooter_hp_setting = int(chara)
-                        case 149: enemy_locks[47] = int(chara)
-                        case 150: target_closest_setting = int(chara)
-                        case 151: pulse_hp_setting = int(chara)
-                        case 152: grower_hp_setting = int(chara)
-                        case 153: enemy_locks[48] = int(chara)
-                        case 154: enemy_locks[49] = int(chara)
-                        case 155: growing_speed_setting = int(chara)
-                        case 156: modifiers[7] = int(chara)
-                        case 157: ambush_start_setting = int(chara)
-                        case 158: annihilator_interaction_setting = int(chara)
-                        case 159: hardened_speed_percent_setting = int(chara)
-                        case 160: fatal_speed_percent_setting = int(chara)
-                        case 161: annihilator_speed_percent_setting = int(chara)
-                    scount += 1
-                    chara = ""
-                else: chara += c
-        except:
-            scount = 0
     
     level_for_campaign_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     level_names = ["Nothing lol", "Starting With Basics", "Picking Up Speed", "Clingy Claustrophobia 1", "Run Away", "Horde Alert", "Aqua Arena 1", "Teleportation Trappers 1", "Bullet Barrage 1 ", "Rocky Rage 1", "Great Gauntlet 1",
@@ -2116,6 +2118,7 @@ def CAMPAIGN_SELECT():
 def SETTINGS():
     global color_list
     global colorword_list
+    global freeplay_seed
     
     global player_size_setting
     global enemy_size_setting
@@ -2226,277 +2229,6 @@ def SETTINGS():
     global screen_size_setting, screen_full, screen, WIDTH, HEIGHT, SCALED_WIDTH, SCALED_HEIGHT, SCALED_TEXT
     global use_textures, use_joke_textures
 
-    def give_seed(pasted):
-        global player_size_setting, enemy_size_setting, projectile_size_setting, min_spawn_delay_setting, max_spawn_delay_setting, spawn_delay_change_setting
-        global player_speed_setting, enemy_speed_setting, projectile_speed_setting
-        global regen_delay_setting, player_health_setting
-        global trail_duration_setting
-        global trail_distance_setting
-        global freeze_duration_setting
-        global burn_duration_setting
-        global invincibility_duration_setting
-        global chaser_turn_amount_setting
-        global enemy_stick_setting
-        global projectile_fire_rate_setting
-        global enemy_damage_setting
-        global burst_setting
-        global enemy_unlock_setting
-        global target_setting
-        global projectile_damage_setting
-        global unharden_death_setting
-        global insta_spawn_setting
-        global ambush_per_score_setting
-        global teleport_angle_change_setting
-        global burn_particle_lifetime_setting
-        global blocker_push_radius_setting
-        global blocker_push_strength_setting
-        global addictive_interaction_setting
-        global blocker_interaction_setting
-        global target_closest_setting
-        global growing_speed_setting
-        global ambush_start_setting
-        global annihilator_interaction_setting
-        global hardened_speed_percent_setting
-        global fatal_speed_percent_setting
-        global annihilator_speed_percent_setting
-        global freezeslip_max_setting
-        global enemy_locks
-        
-        global basic_hp_setting
-        global homing_hp_setting
-        global fatal_hp_setting
-        global flow_hp_setting
-        global sticky_hp_setting, sticky_sensitive_setting
-        global gloomy_hp_setting
-        global trail_hp_setting
-        global impostor_hp_setting
-        global splitter_hp_setting
-        global split_amount_setting
-        global bomb_hp_setting
-        global bomb_projectile_amount_setting
-        global shooter_hp_setting
-        global sniper_hp_setting
-        global extra_sniper_damage_setting
-        global speedy_hp_setting
-        global shotgun_hp_setting
-        global shotgun_bullets_setting
-        global voodoo_hp_setting
-        global blind_hp_setting
-        global magma_hp_setting
-        global charger_hp_setting, charger_sensitive_setting
-        global rapidshooter_hp_setting
-        global frostbite_hp_setting
-        global frostbite_projectile_amount_setting
-        global addictive_hp_setting
-        global addictive_pull_strength_setting
-        global addictive_pull_radius_setting
-        global laser_hp_setting
-        global laser_damage_setting
-        global laser_duration_setting
-        global hardened_hp_setting
-        global harden_break_setting
-        global accelerator_hp_setting
-        global cold_hp_setting
-        global tracer_hp_setting
-        global savage_hp_setting
-        global teleporter_hp_setting
-        global phantom_hp_setting
-        global stream_hp_setting
-        global sensitive_hp_setting
-        global burstshooter_hp_setting
-        global stickyshooter_hp_setting
-        global sparker_hp_setting
-        global annihilator_hp_setting
-        global annihilator_projectile_amount_setting
-        global frostbeam_hp_setting
-        global forecast_hp_setting
-        global assassin_hp_setting
-        global motion_hp_setting
-        global invisibility_hp_setting
-        global whirly_hp_setting
-        global volcanic_hp_setting
-        global pyrobeam_hp_setting
-        global laggy_hp_setting
-        global error_hp_setting
-        global glitchy_hp_setting
-        global blocker_hp_setting
-        global gloomyshooter_hp_setting
-        global pulse_hp_setting
-        global grower_hp_setting
-        global modifiers
-        scount = 0
-        chara = ""
-        try:
-            for c in pasted:
-                if c == "_":
-                    match scount:
-                        case 0: player_size_setting = int(chara)
-                        case 1: enemy_size_setting = int(chara)
-                        case 2: projectile_size_setting = int(chara)
-                        case 3: min_spawn_delay_setting = int(chara)
-                        case 4: max_spawn_delay_setting = int(chara)
-                        case 5: spawn_delay_change_setting = int(chara)
-                        case 6: player_speed_setting = int(chara)
-                        case 7: enemy_speed_setting = int(chara)
-                        case 8: projectile_speed_setting = int(chara)
-                        case 9: regen_delay_setting = int(chara)
-                        case 10: trail_duration_setting = int(chara)
-                        case 11: trail_distance_setting = int(chara)
-                        case 12: freeze_duration_setting = int(chara)
-                        case 13: invincibility_duration_setting = int(chara)
-                        case 14: chaser_turn_amount_setting = int(chara)
-                        case 15: enemy_stick_setting = int(chara)
-                        case 16: projectile_fire_rate_setting = int(chara)
-                        case 17: enemy_damage_setting = int(chara)
-                        case 18: burst_setting = int(chara)
-                        case 19: enemy_unlock_setting = int(chara)
-                        case 20: projectile_damage_setting = int(chara)
-                        case 21: enemy_locks[0] = int(chara)
-                        case 22: enemy_locks[1] = int(chara)
-                        case 23: enemy_locks[2] = int(chara)
-                        case 24: enemy_locks[3] = int(chara)
-                        case 25: enemy_locks[4] = int(chara)
-                        case 26: enemy_locks[5] = int(chara)
-                        case 27: enemy_locks[6] = int(chara)
-                        case 28: enemy_locks[7] = int(chara)
-                        case 29: enemy_locks[8] = int(chara)
-                        case 30: enemy_locks[9] = int(chara)
-                        case 31: enemy_locks[10] = int(chara)
-                        case 32: enemy_locks[11] = int(chara)
-                        case 33: enemy_locks[12] = int(chara)
-                        case 34: enemy_locks[13] = int(chara)
-                        case 35: enemy_locks[14] = int(chara)
-                        case 36: enemy_locks[15] = int(chara)
-                        case 37: enemy_locks[16] = int(chara)
-                        case 38: enemy_locks[17] = int(chara)
-                        case 39: enemy_locks[18] = int(chara)
-                        case 40: enemy_locks[19] = int(chara)
-                        case 41: enemy_locks[20] = int(chara)
-                        case 42: enemy_locks[21] = int(chara)
-                        case 43: enemy_locks[22] = int(chara)
-                        case 44: enemy_locks[23] = int(chara)
-                        case 45: enemy_locks[24] = int(chara)
-                        case 46: enemy_locks[25] = int(chara)
-                        case 47: enemy_locks[26] = int(chara)
-                        case 48: enemy_locks[27] = int(chara)
-                        case 49: enemy_locks[28] = int(chara)
-                        case 50: enemy_locks[29] = int(chara)
-                        case 51: enemy_locks[30] = int(chara)
-                        case 52: enemy_locks[31] = int(chara)
-                        case 53: enemy_locks[32] = int(chara)
-                        case 54: enemy_locks[33] = int(chara)
-                        case 55: enemy_locks[34] = int(chara)
-                        case 56: enemy_locks[35] = int(chara)
-                        case 57: basic_hp_setting = int(chara)
-                        case 58: homing_hp_setting = int(chara)
-                        case 59: fatal_hp_setting = int(chara)
-                        case 60: flow_hp_setting = int(chara)
-                        case 61: sticky_hp_setting = int(chara)
-                        case 62: gloomy_hp_setting = int(chara)
-                        case 63: trail_hp_setting = int(chara)
-                        case 64: impostor_hp_setting = int(chara)
-                        case 65: splitter_hp_setting = int(chara)
-                        case 66: split_amount_setting = int(chara)
-                        case 67: bomb_hp_setting = int(chara)
-                        case 68: bomb_projectile_amount_setting = int(chara)
-                        case 69: shooter_hp_setting = int(chara)
-                        case 70: sniper_hp_setting = int(chara)
-                        case 71: extra_sniper_damage_setting = int(chara)
-                        case 72: speedy_hp_setting = int(chara)
-                        case 73: shotgun_hp_setting = int(chara)
-                        case 74: shotgun_bullets_setting = int(chara)
-                        case 75: voodoo_hp_setting = int(chara)
-                        case 76: blind_hp_setting = int(chara)
-                        case 77: magma_hp_setting = int(chara)
-                        case 78: charger_hp_setting = int(chara)
-                        case 79: rapidshooter_hp_setting = int(chara)
-                        case 80: frostbite_hp_setting = int(chara)
-                        case 81: frostbite_projectile_amount_setting = int(chara)
-                        case 82: addictive_hp_setting = int(chara)
-                        case 83: addictive_pull_strength_setting = int(chara)
-                        case 84: addictive_pull_radius_setting = int(chara)
-                        case 85: laser_hp_setting = int(chara)
-                        case 86: laser_damage_setting = int(chara)
-                        case 87: laser_duration_setting = int(chara)
-                        case 88: hardened_hp_setting = int(chara)
-                        case 89: harden_break_setting = int(chara)
-                        case 90: accelerator_hp_setting = int(chara)
-                        case 91: cold_hp_setting = int(chara)
-                        case 92: tracer_hp_setting = int(chara)
-                        case 93: savage_hp_setting = int(chara)
-                        case 94: teleporter_hp_setting = int(chara)
-                        case 95: phantom_hp_setting = int(chara)
-                        case 96: stream_hp_setting = int(chara)
-                        case 97: sensitive_hp_setting = int(chara)
-                        case 98: burstshooter_hp_setting = int(chara)
-                        case 99: stickyshooter_hp_setting = int(chara)
-                        case 100: sparker_hp_setting = int(chara)
-                        case 101: annihilator_hp_setting = int(chara)
-                        case 102: annihilator_projectile_amount_setting = int(chara)
-                        case 103: frostbeam_hp_setting = int(chara)
-                        case 104: modifiers[0] = int(chara)
-                        case 105: player_health_setting = int(chara)
-                        case 106: unharden_death_setting = int(chara)
-                        case 107: target_setting = int(chara)
-                        case 108: modifiers[1] = int(chara)
-                        case 109: sticky_sensitive_setting = int(chara)
-                        case 110: charger_sensitive_setting = int(chara)
-                        case 111: forecast_hp_setting = int(chara)
-                        case 112: enemy_locks[36] = int(chara)
-                        case 113: assassin_hp_setting = int(chara)
-                        case 114: enemy_locks[37] = int(chara)
-                        case 115: motion_hp_setting = int(chara)
-                        case 116: enemy_locks[38] = int(chara)
-                        case 117: modifiers[2] = int(chara)
-                        case 118: invisibility_hp_setting = int(chara)
-                        case 119: enemy_locks[39] = int(chara)
-                        case 120: insta_spawn_setting = int(chara)
-                        case 121: ambush_per_score_setting = int(chara)
-                        case 122: modifiers[3] = int(chara)
-                        case 123: whirly_hp_setting = int(chara)
-                        case 124: enemy_locks[40] = int(chara)
-                        case 125: teleport_angle_change_setting = int(chara)
-                        case 126: burn_duration_setting = int(chara)
-                        case 127: burn_particle_lifetime_setting = int(chara)
-                        case 128: volcanic_hp_setting = int(chara)
-                        case 129: pyrobeam_hp_setting = int(chara)
-                        case 130: enemy_locks[41] = int(chara)
-                        case 131: enemy_locks[42] = int(chara)
-                        case 132: modifiers[4] = int(chara)
-                        case 133: modifiers[5] = int(chara)
-                        case 134: freezeslip_max_setting = int(chara)
-                        case 135: modifiers[6] = int(chara)
-                        case 136: laggy_hp_setting = int(chara)
-                        case 137: enemy_locks[43] = int(chara)
-                        case 138: error_hp_setting = int(chara)
-                        case 139: enemy_locks[44] = int(chara)
-                        case 140: glitchy_hp_setting = int(chara)
-                        case 141: enemy_locks[45] = int(chara)
-                        case 142: blocker_hp_setting = int(chara)
-                        case 143: enemy_locks[46] = int(chara)
-                        case 144: blocker_push_radius_setting = int(chara)
-                        case 145: blocker_push_strength_setting = int(chara)
-                        case 146: addictive_interaction_setting = int(chara)
-                        case 147: blocker_interaction_setting = int(chara)
-                        case 148: gloomyshooter_hp_setting = int(chara)
-                        case 149: enemy_locks[47] = int(chara)
-                        case 150: target_closest_setting = int(chara)
-                        case 151: pulse_hp_setting = int(chara)
-                        case 152: grower_hp_setting = int(chara)
-                        case 153: enemy_locks[48] = int(chara)
-                        case 154: enemy_locks[49] = int(chara)
-                        case 155: growing_speed_setting = int(chara)
-                        case 156: modifiers[7] = int(chara)
-                        case 157: ambush_start_setting = int(chara)
-                        case 158: annihilator_interaction_setting = int(chara)
-                        case 159: hardened_speed_percent_setting = int(chara)
-                        case 160: fatal_speed_percent_setting = int(chara)
-                        case 161: annihilator_speed_percent_setting = int(chara)
-                    scount += 1
-                    chara = ""
-                else: chara += c
-        except:
-            scount = 0
 
     SLIST = ["textures", "joke-textures", "screen-size", "fullscreen", "presets",
 
@@ -2550,6 +2282,7 @@ def SETTINGS():
 
     player_size_plus_button = pygame.Rect(WIDTH/2 + 120, HEIGHT/2 - 20, 60, 60)
     player_size_minus_button = pygame.Rect(WIDTH/2 - 180, HEIGHT/2 - 20, 60, 60)
+    give_seed(freeplay_seed)
     
     while waiting:
         screen.fill(BLACK)
@@ -5476,7 +5209,66 @@ def SETTINGS():
             if event.type == pygame.QUIT:
                 pygame.quit(); exit()
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE):
-                if 0 in enemy_locks: waiting = False
+                if 0 in enemy_locks:
+                    copied = ""
+            
+                    copy_setting_list = [player_size_setting, enemy_size_setting, projectile_size_setting,
+                                         min_spawn_delay_setting, max_spawn_delay_setting, spawn_delay_change_setting,
+                                         player_speed_setting, enemy_speed_setting, projectile_speed_setting,
+                                         regen_delay_setting, trail_duration_setting, trail_distance_setting,
+                                         freeze_duration_setting, invincibility_duration_setting,
+                                         chaser_turn_amount_setting, enemy_stick_setting,
+                                         projectile_fire_rate_setting, enemy_damage_setting, burst_setting,
+                                         enemy_unlock_setting, projectile_damage_setting,
+                                         enemy_locks[0], enemy_locks[1], enemy_locks[2], enemy_locks[3],
+                                         enemy_locks[4], enemy_locks[5], enemy_locks[6], enemy_locks[7],
+                                         enemy_locks[8], enemy_locks[9], enemy_locks[10], enemy_locks[11],
+                                         enemy_locks[12], enemy_locks[13], enemy_locks[14], enemy_locks[15],
+                                         enemy_locks[16], enemy_locks[17], enemy_locks[18], enemy_locks[19],
+                                         enemy_locks[20], enemy_locks[21], enemy_locks[22], enemy_locks[23],
+                                         enemy_locks[24], enemy_locks[25], enemy_locks[26], enemy_locks[27],
+                                         enemy_locks[28], enemy_locks[29], enemy_locks[30], enemy_locks[31],
+                                         enemy_locks[32], enemy_locks[33], enemy_locks[34], enemy_locks[35],
+                                         basic_hp_setting, homing_hp_setting, fatal_hp_setting,
+                                         flow_hp_setting, sticky_hp_setting, gloomy_hp_setting,
+                                         trail_hp_setting, impostor_hp_setting, splitter_hp_setting,
+                                         split_amount_setting, bomb_hp_setting, bomb_projectile_amount_setting,
+                                         shooter_hp_setting, sniper_hp_setting, extra_sniper_damage_setting,
+                                         speedy_hp_setting, shotgun_hp_setting, shotgun_bullets_setting,
+                                         voodoo_hp_setting, blind_hp_setting, magma_hp_setting, charger_hp_setting,
+                                         rapidshooter_hp_setting, frostbite_hp_setting,
+                                         frostbite_projectile_amount_setting, addictive_hp_setting,
+                                         addictive_pull_strength_setting, addictive_pull_radius_setting,
+                                         laser_hp_setting, laser_damage_setting, laser_duration_setting,
+                                         hardened_hp_setting, harden_break_setting, accelerator_hp_setting,
+                                         cold_hp_setting, tracer_hp_setting, savage_hp_setting,
+                                         teleporter_hp_setting, phantom_hp_setting, stream_hp_setting,
+                                         sensitive_hp_setting, burstshooter_hp_setting, stickyshooter_hp_setting,
+                                         sparker_hp_setting, annihilator_hp_setting,
+                                         annihilator_projectile_amount_setting, frostbeam_hp_setting, modifiers[0],
+                                         player_health_setting, unharden_death_setting, target_setting,
+                                         modifiers[1], sticky_sensitive_setting, charger_sensitive_setting,
+                                         forecast_hp_setting, enemy_locks[36], assassin_hp_setting, enemy_locks[37],
+                                         motion_hp_setting, enemy_locks[38], modifiers[2], invisibility_hp_setting,
+                                         enemy_locks[39], insta_spawn_setting, ambush_per_score_setting,
+                                         modifiers[3], whirly_hp_setting, enemy_locks[40], teleport_angle_change_setting,
+                                         burn_duration_setting, burn_particle_lifetime_setting, volcanic_hp_setting,
+                                         pyrobeam_hp_setting, enemy_locks[41], enemy_locks[42], modifiers[4], modifiers[5],
+                                         freezeslip_max_setting, modifiers[6], laggy_hp_setting, enemy_locks[43],
+                                         error_hp_setting, enemy_locks[44], glitchy_hp_setting, enemy_locks[45],
+                                         blocker_hp_setting, enemy_locks[46], addictive_pull_radius_setting, addictive_pull_strength_setting,
+                                         addictive_interaction_setting, blocker_interaction_setting, gloomyshooter_hp_setting,
+                                         enemy_locks[47], target_closest_setting, pulse_hp_setting, grower_hp_setting,
+                                         enemy_locks[48], enemy_locks[49], growing_speed_setting, modifiers[7], ambush_start_setting,
+                                         annihilator_interaction_setting, hardened_speed_percent_setting, fatal_speed_percent_setting, annihilator_speed_percent_setting]
+
+            
+                    for x in copy_setting_list: copied += f"{x}_"
+
+                    freeplay_seed = copied
+                    
+                    waiting = False
+                    
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if scrollbar_handle.collidepoint(event.pos):
                     dragging_scrollbar = True
@@ -5767,6 +5559,7 @@ def SKIN_MAKER():
         clock.tick(15)
 
 
+
 def TITLE_SCREEN():
     global players
     global player_skins
@@ -5845,6 +5638,7 @@ def TITLE_SCREEN():
             screen.blit(start_text, start_text.get_rect(center=start_button.center))
 
             if start_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
+                give_seed(freeplay_seed)
                 apply_settings()
                 reset_game_state()
                 waiting = False
