@@ -1253,7 +1253,8 @@ def CAMPAIGN_SELECT():
     white_cbox = pygame.Rect(0,0,WIDTH,190)
     white_ccbox = pygame.Rect(1100,185,10,HEIGHT)
 
-    start_button = pygame.Rect(1150*SCALED_WIDTH, 950*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    start_button = pygame.Rect(1150*SCALED_WIDTH, 870*SCALED_HEIGHT, 735*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    copy_button = pygame.Rect(1150*SCALED_WIDTH, 950*SCALED_HEIGHT, 735*SCALED_WIDTH, 60*SCALED_HEIGHT)
     
     while waiting:
         screen.fill(BLACK)
@@ -1275,7 +1276,7 @@ def CAMPAIGN_SELECT():
 
         if level_selected != 0:
             if players in [1, 2]:
-                color = LIME if start_button.collidepoint(mouse_pos) else GREEN
+                color = BLUE if start_button.collidepoint(mouse_pos) else NAVY
             else:
                 color = GRAY  # disabled look until a mode is chosen
 
@@ -1287,7 +1288,21 @@ def CAMPAIGN_SELECT():
                 give_seed(level_seeds[level_selected])
                 campaign_start = True
                 waiting = False
-        
+
+
+            if players in [1, 2]:
+                color = GREEN if copy_button.collidepoint(mouse_pos) else FOREST
+            else:
+                color = GRAY  # disabled look until a mode is chosen
+
+            pygame.draw.rect(screen, color, copy_button, border_radius=0)
+            copy_text = font.render("Copy Settings", True, (255, 255, 255))
+            screen.blit(copy_text, copy_text.get_rect(center=copy_button.center))
+
+            if copy_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
+                pyperclip.copy(level_seeds[level_selected])
+                pygame.time.delay(200)
+            
         level_one_text = font.render("1", True, WHITE)
         level_one_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(1)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, GRAY, level_one_button, border_radius=0)
@@ -5578,9 +5593,9 @@ def TITLE_SCREEN():
     button_1p = pygame.Rect(WIDTH/2 - 220*SCALED_WIDTH, 800*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
     button_2p = pygame.Rect(WIDTH/2 + 20*SCALED_WIDTH, 800*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
     settings_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 475*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
-    quit_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 550*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
-    skin_maker = pygame.Rect(WIDTH/2 - 490*SCALED_WIDTH, 550*SCALED_HEIGHT, 200*SCALED_WIDTH, 60*SCALED_HEIGHT)
-        
+    skin_maker = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 550*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    quit_button = pygame.Rect(WIDTH/2 - 225*SCALED_WIDTH, 625*SCALED_HEIGHT, 450*SCALED_WIDTH, 60*SCALED_HEIGHT)
+    
     p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 150*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
     p2_skin_button = pygame.Rect(WIDTH/2 + 60*SCALED_WIDTH, HEIGHT - 150*SCALED_HEIGHT, 100*SCALED_WIDTH, 100*SCALED_HEIGHT)
     black_p1_skin_button = pygame.Rect(WIDTH/2 - 160*SCALED_WIDTH, HEIGHT - 142.5*SCALED_HEIGHT, 85*SCALED_WIDTH, 85*SCALED_HEIGHT)
@@ -5659,7 +5674,7 @@ def TITLE_SCREEN():
 
             # --- Skin Maker ---
             if players in [1, 2]:
-                color = SILVER if skin_maker.collidepoint(mouse_pos) else GRAY
+                color = MAGENTA if skin_maker.collidepoint(mouse_pos) else VIOLET
             else:
                 color = SHADOW  # disabled look until a mode is chosen
             
