@@ -54,17 +54,17 @@ try:
     sparker_texture = pygame.image.load('textures/sparker_enemy.png').convert_alpha()
     annihilator_texture = pygame.image.load('textures/annihilator_enemy.png').convert_alpha()
     frostbeam_texture = pygame.image.load('textures/frostbeam_enemy.png').convert_alpha()
-    #forecast_texture = pygame.image.load('textures/forecast_enemy.png').convert_alpha()
-    #assassin_texture = pygame.image.load('textures/assassin_enemy.png').convert_alpha()
+    forecast_texture = pygame.image.load('textures/forecast_enemy.png').convert_alpha()
+    assassin_texture = pygame.image.load('textures/assassin_enemy.png').convert_alpha()
     motion_texture = pygame.image.load('textures/motion_enemy.png').convert_alpha()
-    #invisibility_texture = pygame.image.load('textures/invisibility_enemy.png').convert_alpha()
+    invisibility_texture = pygame.image.load('textures/invisibility_enemy.png').convert_alpha()
     whirly_texture = pygame.image.load('textures/whirly_enemy.png').convert_alpha()
     volcanic_texture = pygame.image.load('textures/volcanic_enemy.png').convert_alpha()
     pyrobeam_texture = pygame.image.load('textures/pyrobeam_enemy.png').convert_alpha()
     laggy_texture = pygame.image.load('textures/laggy_enemy.png').convert_alpha()
     error_texture = pygame.image.load('textures/error_enemy.png').convert_alpha()
     glitchy_texture = pygame.image.load('textures/glitchy_enemy.png').convert_alpha()
-    #blocker_texture = pygame.image.load('textures/blocker_enemy.png').convert_alpha()
+    blocker_texture = pygame.image.load('textures/blocker_enemy.png').convert_alpha()
     gloomyshooter_texture = pygame.image.load('textures/gloomyshooter_enemy.png').convert_alpha()
     pulse_texture = pygame.image.load('textures/pulse_enemy.png').convert_alpha()
     grower_texture = pygame.image.load('textures/grower_enemy.png').convert_alpha()
@@ -234,6 +234,20 @@ spawner_timer = 0
 
 # --- Campaign Variables ---
 campaign_start = False
+doing_campaign = False
+campaign_level = 0
+victory_conditions = [0,
+                      200, 300, 350, 350, 400, 350, 500, 400, 350, 700, # 10
+                      650, 450, 800, 800, 100, 750, 400, 700, 850, 600, # 20
+                      700, 500, 500, 500, 600, 800, 700, 500, 900, 700, # 30
+                      400, 500, 500, 1000, 250, 850, 750, 750, 800, 700, # 40
+                      500, 550, 500, 700, 700, 800, 800, 850, 700, 850, # 50
+                      700, 900, 950, 600, 500, 750, 850, 850, 950, 950, # 60
+                      1000, 800, 750, 750, 500, 800, 600, 550, 850, 850, # 70
+                      900, 700, 700, 1000, 550, 1000, 777, 550, 700, 1150, # 80
+                      1000, 750, 500, 850, 200, 700, 700, 700, 1000, 1000, # 90
+                      600, 600, 700, 1200, 600, 750, 750, 1000, 700, 2500 # 100
+                      ]
 
 freeplay_seed = "50_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_1_15_1_0_4_1_0_100_0_5_1_1_500_100_2_1_1_1_0_9_20_0_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_"
 
@@ -316,7 +330,7 @@ magma_hp = 4 # 17
 charger_hp = 3 # 18
 rapidshooter_hp = 1 # 19
 frostbite_hp = 4 # 20
-addictive_hp = 7 # 2150_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_1_15_1_0_4_1_0_100_0_5_1_1_500_100_2_1_1_1_0_9_20_0_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_
+addictive_hp = 7 # 21
 laser_hp = 3 # 22
 hardened_hp = 30 # 23
 accelerator_hp = 5 # 24
@@ -1019,7 +1033,7 @@ def enemy_lock_setup(elock, enumber):
     elif elock == 3: ambush_enemy_types.append(enumber + 1)
 
 def CAMPAIGN_SELECT():
-    global campaign_start
+    global campaign_start, doing_campaign, campaign_level, victory_conditions
     global WIDTH, HEIGHT, SCALED_WIDTH, SCALED_HEIGHT, SCALED_TEXT
 
     global player_size_setting
@@ -1269,8 +1283,10 @@ def CAMPAIGN_SELECT():
         screen.blit(info, (810*SCALED_WIDTH, 100*SCALED_HEIGHT))
         level_text = slightly_big_font.render("Level " + str(level_selected) + ": " + level_names[level_selected], True, WHITE)
         lzero_text = slightly_big_font.render("Click a level to select it.", True, WHITE)
+        victoryc_text = font.render("Victory Condition: " + str(victory_conditions[level_selected]), True, WHITE)
         if level_selected != 0: screen.blit(level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         else: screen.blit(lzero_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
+        if level_selected != 0: screen.blit(victoryc_text, (1150*SCALED_WIDTH, 700*SCALED_HEIGHT))
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
 
@@ -1288,7 +1304,9 @@ def CAMPAIGN_SELECT():
 
             if start_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
                 give_seed(level_seeds[level_selected])
+                campaign_level = level_selected
                 campaign_start = True
+                doing_campaign = True
                 waiting = False
 
 
@@ -5592,7 +5610,7 @@ def SKIN_MAKER():
 
 
 def TITLE_SCREEN():
-    global players
+    global players, doing_campaign
     global player_skins
     global p1_skin_color, p2_skin_color, skin_match
     global custom_color, custom_text, custom_p2text, custom_font
@@ -5671,6 +5689,7 @@ def TITLE_SCREEN():
             if start_button.collidepoint(mouse_pos) and mouse_click and players in [1, 2]:
                 give_seed(freeplay_seed)
                 apply_settings()
+                doing_campaign = False
                 reset_game_state()
                 waiting = False
 
@@ -8657,9 +8676,8 @@ while running:
         pygame.draw.circle(screen, pulse_color, center, spawner_size / 2, 2)
 
     # --- spawner core ---
-    pygame.draw.rect(screen, BLACK, (*spawner_pos, spawner_width, spawner_height))
+    pygame.draw.rect(screen, LIME if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] else BLACK, (*spawner_pos, spawner_width, spawner_height))
     pygame.draw.rect(screen, spawner_color, (*spawner_pos, spawner_width, spawner_height), math.ceil(3*SCALED_TEXT))
-
 
     frost_overlay = pygame.Surface((player_size * 1.2*SCALED_WIDTH, player_size * 1.2*SCALED_HEIGHT), pygame.SRCALPHA)
     frost_overlay.fill((175, 255, 255, 180))
@@ -8851,8 +8869,8 @@ while running:
             textures = [basic_texture, homing_texture, fatal_texture, flow_texture, sticky_texture, gloomy_texture, trail_texture, "None", splitter_texture, bomb_texture,
                         shooter_texture, sniper_texture, speedy_texture, shotgun_texture, voodoo_texture, blind_texture, magma_texture, charger_texture, rapidshooter_texture, frostbite_texture,
                         addictive_texture, laser_texture, hardened_texture, accelerator_texture, cold_texture, tracer_texture, savage_texture, teleporter_texture, phantom_texture, stream_texture,
-                        sensitive_texture, burstshooter_texture, stickyshooter_texture, sparker_texture, annihilator_texture, frostbeam_texture, "None", "None", motion_texture, "None",
-                        whirly_texture, volcanic_texture, pyrobeam_texture, laggy_texture, error_texture, glitchy_texture, "None", gloomyshooter_texture, pulse_texture, grower_texture]
+                        sensitive_texture, burstshooter_texture, stickyshooter_texture, sparker_texture, annihilator_texture, frostbeam_texture, forecast_texture, assassin_texture, motion_texture, invisibility_texture,
+                        whirly_texture, volcanic_texture, pyrobeam_texture, laggy_texture, error_texture, glitchy_texture, blocker_texture, gloomyshooter_texture, pulse_texture, grower_texture]
         else:
             textures = ["None", "None", "None", "None", "None", "None", "None", "None", "None", "None",
                         "None", "None", "None", "None", "None", "None", "None", "None", "None", "None",
