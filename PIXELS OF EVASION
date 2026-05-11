@@ -1289,6 +1289,50 @@ def CAMPAIGN_SELECT():
                     "50_50_10_100_3500_10_20_5_25_50_200_25_500_1000_5_100_10_1_20_100_1_2_2_2_2_2_2_2_2_2_3_0_2_2_3_3_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_3_2_5_2_3_3_7_9_3_5_3_2_99_64_6_1_0_5_4_21_1_9_4_3_2_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_4_2_1_1_128_1_0_5_1_1_0_0_1_3_2_3_2_15_2_3_4_2_1_100_0_5_2_1_500_100_2_1_2_2_0_16_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_3_50_75_100_",
                     "50_50_10_10000_10000_2_8_5_5_6969_200_25_500_0_5_100_10_1_10_100_1_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_99_1_1_0_0_1_3_0_3_0_15_0_0_4_0_50_250_0_5_0_1_500_100_2_1_0_0_0_9_20_2_5_0_6_0_1_0_5_0_300_10_2_1_4_0_0_2_4_0_0_45_0_0_2_50_75_35_"
                     ]
+    line_one = ["",
+                "Dodge the squares and survive as long as", "Watch out for the new speedy enemies", "Sticky enemies and charger enemies like", "Homing enemies chase you.", "A horde of speedy enemies will ambush", "Flow enemies move faster when they are", "Teleporter enemies teleport to the spawner", "Shooter enemies shoot projectiles at you.", "Accelerator enemies get faster as", "This gauntlet has every single enemy you",
+                "First level but harder.", "Watch out for the rainy weather.", "Cold enemies make you frozen upon", "Magma enemies burn you upon touching", "Kill homing enemies by forcing them", "No more enemy descriptions.", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", ""]
+    line_two = ["",
+                "possible.", "which are much faster than basic enemies.", "to cling onto the edge for a bit.", "", "you every 100 score.", "closer to you.", "whenever they touch the edge. Stream enemies", "", "they move. Hardened enemies lose health", "have encountered so far.",
+                "", "", "touching them, but they don't deal", "them. Trail enemies create a trail of", "to ram into the edge.", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", ""]
+    line_three = ["",
+                "", "", "", "", "", "", "do the same but also move faster when close", "", "while they are near you.", "",
+                "", "", "damage.", "projectiles.", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", ""]
+    line_four = ["",
+                "", "", "", "", "", "", "to you.", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "", "", ""]
     if finished_campaign == True: level_selected = campaign_level
     else: level_selected = 0
     ready_to_select = False
@@ -1320,6 +1364,14 @@ def CAMPAIGN_SELECT():
         if level_selected != 0: screen.blit(level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         else: screen.blit(lzero_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         if level_selected != 0: screen.blit(victoryc_text, (1150*SCALED_WIDTH, 700*SCALED_HEIGHT))
+        desc_text = font.render(line_one[level_selected], True, WHITE)
+        if level_selected != 0: screen.blit(desc_text, (1150*SCALED_WIDTH, 350*SCALED_HEIGHT))
+        desc2_text = font.render(line_two[level_selected], True, WHITE)
+        if level_selected != 0: screen.blit(desc2_text, (1150*SCALED_WIDTH, 390*SCALED_HEIGHT))
+        desc3_text = font.render(line_three[level_selected], True, WHITE)
+        if level_selected != 0: screen.blit(desc3_text, (1150*SCALED_WIDTH, 430*SCALED_HEIGHT))
+        desc4_text = font.render(line_four[level_selected], True, WHITE)
+        if level_selected != 0: screen.blit(desc4_text, (1150*SCALED_WIDTH, 470*SCALED_HEIGHT))
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
 
@@ -5924,7 +5976,6 @@ def TITLE_SCREEN():
 
         pygame.display.flip()
         clock.tick(15)
-
 
 TITLE_SCREEN()
 spawn_enabled = False
