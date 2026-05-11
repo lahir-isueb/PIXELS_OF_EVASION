@@ -584,6 +584,7 @@ def get_target_position(enemy):
     else:
         return None
 
+
 def reset_game_state():
     global player_x, player_y, player2_x, player2_y
     global player_lives, player2_lives
@@ -6235,10 +6236,10 @@ while running:
 
         if ambush_fully_started == False and truescore + max(p1_xtra_score, p2_xtra_score) >= ambush_start:
             ambushes = insta_spawn
-            ambush_score += ambush_start
+            ambush_score = ambush_start + ambush_per_score
             ambush_fully_started = True
 
-        if truescore + max(p1_xtra_score, p2_xtra_score) >= ambush_score and ambush_per_score != 6969 and ambush_fully_started == True:
+        if ambush_fully_started and ambush_per_score != 6969 and truescore + max(p1_xtra_score, p2_xtra_score) >= ambush_score:
             ambushes = insta_spawn
             ambush_score += ambush_per_score
 
@@ -9313,7 +9314,7 @@ while running:
         controlpoint_surface.fill((spawner_color[0], spawner_color[1], spawner_color[2], 100))
         if enemy["type"] == 6767: screen.blit(controlpoint_surface, ((enemy["x"] - enemy["size"] / 2)*SCALED_WIDTH, (enemy["y"] - enemy["size"] / 2)* SCALED_HEIGHT))
 
-    if campaign_victory_flash != 0: campaign_victory_flash += 1
+    if campaign_victory_flash != 0: campaign_victory_flash += 0.05
     if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] and campaign_victory_flash == 0: campaign_victory_flash = 1
     if campaign_victory_flash > 0 and campaign_victory_flash <= 13:
         victory_surface = pygame.Surface((spawner_size*SCALED_WIDTH*campaign_victory_flash, spawner_size*SCALED_HEIGHT*campaign_victory_flash), pygame.SRCALPHA)
