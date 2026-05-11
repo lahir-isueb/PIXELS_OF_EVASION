@@ -6715,7 +6715,7 @@ while running:
                                     "spawn_time": pygame.time.get_ticks(),
                                     "drip timer": enemy["drip timer"]
                                 })
-                        elif modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6: score+=5/(split_amount*splitter_hp)
+                        elif modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6: score+=5/(split_amount**(splitter_hp-enemy["health"]))
                         enemy["dead"] = True
                     continue
                 if enemy.get("waiting"):
@@ -8390,7 +8390,9 @@ while running:
                         damage_flash_time = current_time
                         invincible_until = current_time + invincibility_duration
                         enemy["dead"] = True
-                        if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6: score+=5
+                        if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6:
+                            if enemy["type"] == 9: score+=5/(split_amount**(splitter_hp-enemy["health"]))
+                            else: score+=5
                         if player_lives <= 0:
                             player_alive = False
                     
@@ -8492,13 +8494,17 @@ while running:
                         player2_damage_flash_time = current_time
                         player2_invincible_until = current_time + invincibility_duration
                         enemy["dead"] = True
-                        if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6: score+=5
+                        if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6:
+                            if enemy["type"] == 9: score+=5/(split_amount**(splitter_hp-enemy["health"]))
+                            else: score+=5
                         if player2_lives <= 0:
                             player2_alive = False
             if enemy_died:
                 if enemy in enemies:
                     enemy["dead"] = True
-                    if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6: score+=5
+                    if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6:
+                        if enemy["type"] == 9: score+=5/(split_amount**(splitter_hp-enemy["health"]))
+                        else: score+=5
 
 
         # --- Trail squares update ---
