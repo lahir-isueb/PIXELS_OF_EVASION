@@ -5649,6 +5649,8 @@ def TITLE_SCREEN():
     global p1_skin_color, p2_skin_color, skin_match
     global custom_color, custom_text, custom_p2text, custom_font
     global campaign_start
+
+    title_keyboard_select = 0
     
     skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
     skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
@@ -5696,7 +5698,7 @@ def TITLE_SCREEN():
 
             # --- Start Game button (TOP) ---
             if players in [1, 2]:
-                color = BLUE if campaign_button.collidepoint(mouse_pos) else NAVY
+                color = BLUE if campaign_button.collidepoint(mouse_pos) or title_keyboard_select == 1 else NAVY
             else:
                 color = GRAY  # disabled look until a mode is chosen
 
@@ -5712,7 +5714,7 @@ def TITLE_SCREEN():
 
 
             if players in [1, 2]:
-                color = CYAN if start_button.collidepoint(mouse_pos) else TEAL
+                color = CYAN if start_button.collidepoint(mouse_pos) or title_keyboard_select == 2 else TEAL
             else:
                 color = GRAY  # disabled look until a mode is chosen
 
@@ -5729,7 +5731,7 @@ def TITLE_SCREEN():
 
             # --- Quit button ---
             if players in [1, 2]:
-                color = RED if quit_button.collidepoint(mouse_pos) else MAROON
+                color = RED if quit_button.collidepoint(mouse_pos) or title_keyboard_select == 5 else MAROON
             else:
                 color = GRAY  # disabled look until a mode is chosen
 
@@ -5743,7 +5745,7 @@ def TITLE_SCREEN():
 
             # --- Skin Maker ---
             if players in [1, 2]:
-                color = MAGENTA if skin_maker.collidepoint(mouse_pos) else VIOLET
+                color = MAGENTA if skin_maker.collidepoint(mouse_pos) or title_keyboard_select == 4 else VIOLET
             else:
                 color = SHADOW  # disabled look until a mode is chosen
             
@@ -5814,10 +5816,6 @@ def TITLE_SCREEN():
                     if p2_skin_color+1 == len(player_skins): p2_skin_color = 0
                     else: p2_skin_color += 1
                     skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE)):
-                    apply_settings()
-                    reset_game_state()
-                    waiting = False
                 if (event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE)):
                     pygame.quit()
                     quit()
@@ -5853,11 +5851,39 @@ def TITLE_SCREEN():
                     player_skins[custom_skin_number][3] = font_list[custom_font]
                     skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
                     skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-                
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_s or event.key == pygame.K_DOWN or event.key == pygame.K_k)):
+                    if title_keyboard_select == 0: title_keyboard_select = 1
+                    elif title_keyboard_select != 5: title_keyboard_select += 1
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_w or event.key == pygame.K_UP or event.key == pygame.K_i)):
+                    if title_keyboard_select == 0: title_keyboard_select = 5
+                    elif title_keyboard_select != 1: title_keyboard_select -= 1
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE)):
+                    match title_keyboard_select:
+                        case 1:
+                            CAMPAIGN_SELECT()
+                            pygame.time.delay(200)
+                            continue
+                        case 2:
+                            give_seed(freeplay_seed)
+                            apply_settings()
+                            doing_campaign = False
+                            reset_game_state()
+                            waiting = False
+                        case 3:
+                            SETTINGS()
+                            pygame.time.delay(200)
+                            continue
+                        case 4:
+                            SKIN_MAKER()
+                            pygame.time.delay(200)
+                            continue
+                        case 5:
+                            pygame.quit()
+                            quit()
 
             # --- Settings button ---
             if players in [1, 2]:
-                color = YELLOW if settings_button.collidepoint(mouse_pos) else SULFUR
+                color = YELLOW if settings_button.collidepoint(mouse_pos) or title_keyboard_select == 3 else SULFUR
             else:
                 color = GRAY  # disabled look until a mode is chosen
 
