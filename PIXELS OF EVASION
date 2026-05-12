@@ -274,7 +274,8 @@ victory_conditions = [0,
                       1000, 800, 750, 750, 500, 800, 600, 550, 850, 850, # 70
                       900, 700, 700, 1000, 550, 1000, 777, 550, 700, 1150, # 80
                       1000, 750, 500, 850, 200, 700, 700, 700, 1000, 1000, # 90
-                      600, 600, 700, 1200, 600, 750, 750, 1000, 700, 2500 # 100
+                      600, 600, 700, 1200, 600, 750, 750, 1000, 700, 2500, # 100
+                      6969
                       ]
 finished_campaign = False
 campaign_victory_flash = 0
@@ -583,7 +584,6 @@ def get_target_position(enemy):
         return player2_x, player2_y
     else:
         return None
-
 
 def reset_game_state():
     global player_x, player_y, player2_x, player2_y
@@ -1177,17 +1177,17 @@ def CAMPAIGN_SELECT():
 
     global players
     
-    level_for_campaign_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    level_for_campaign_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     level_names = ["Nothing lol", "Starting With Basics", "Picking Up Speed", "Clingy Claustrophobia 1", "Run Away", "Horde Alert", "Aqua Arena 1", "Teleportation Trappers 1", "Bullet Barrage 1 ", "Rocky Rage 1", "Great Gauntlet 1",
                    "Back To Basics", "Stormy Surge 1", "Frostbite Frenzy 1", "Blazing Burnout 1", "Just Juke 1", "Teleportation Trappers 2", "Bullet Barrage 2", "Clingy Claustrophobia 2", "Laggy Lab 1", "Great Gauntlet 2",
-                   "So Gloomy I Forgot", "Stormy Surge 2", "Whirling Winds 1", "Two Souls One Life", "Back To Deadly Basics", "Bullet Barrage 3", "Rocky Rage 2", "Teleportation Trappers 3", "Laggy Lab 2", "Great Gauntlet 3",
-                   "Whirling Winds 2", "Scary Shadows 1", "Podium Projectiles 1", "Clingy Claustrophobia 3", "Just Juke 2", "Scary Shadows 2", "Frostbite Frenzy 2", "Blazing Burnout 2", "Scary Shadows 3", "Great Gauntlet 4",
+                   "Scary Shadows 1", "Stormy Surge 2", "Whirling Winds 1", "Two Souls One Life", "Back To Deadly Basics", "Bullet Barrage 3", "Rocky Rage 2", "Teleportation Trappers 3", "Laggy Lab 2", "Great Gauntlet 3",
+                   "Whirling Winds 2", "Scary Shadows 2", "Podium Projectiles 1", "Clingy Claustrophobia 3", "Just Juke 2", "Scary Shadows 3", "Frostbite Frenzy 2", "Blazing Burnout 2", "Scary Shadows 4", "Great Gauntlet 4",
                    "Frostbite Frenzy 3", "Blazing Burnout 3", "Whirling Winds 3", "Laggy Lab 3", "Stormy Surge 3", "Rocky Rage 3", "Laser Lunge 1", "Aqua Arena 2", "Lightning Legacy 1", "Great Gauntlet 5",
-                   "Aqua Arena 3", "Scary Shadows 4", "Frostbite Frenzy 4", "Blazing Burnout 4", "Lightning Legacy 2", "Scary Shadows 5", "Laggy Lab 4", "Laser Lunge 2", "Scary Shadows 6", "Great Gauntlet 6",
+                   "Aqua Arena 3", "Scary Shadows 5", "Frostbite Frenzy 4", "Blazing Burnout 4", "Lightning Legacy 2", "Scary Shadows 6", "Laggy Lab 4", "Laser Lunge 2", "Scary Shadows 7", "Great Gauntlet 6",
                    "Aqua Arena 4", "Clingy Claustrophobia 4", "Frostbite Frenzy 5", "Blazing Burnout 5", "Laser Lunge 3", "Podium Projectiles 2", "Lightning Legacy 3", "Laggy Lab 5", "Aqua Arena 5", "Great Gauntlet 7",
-                   "Splitter Splatter 1", "Scary Shadows 7", "Disaster Defusion 1", "Rocky Rage 4", "Clingy Claustrophobia 5", "Scary Shadows 8", "Lucky Seven", "Frostbite Frenzy 6", "Blazing Burnout 6", "Great Gauntlet 8",
+                   "Splitter Splatter 1", "Scary Shadows 8", "Disaster Defusion 1", "Rocky Rage 4", "Clingy Claustrophobia 5", "Scary Shadows 9", "Lucky Seven", "Frostbite Frenzy 6", "Blazing Burnout 6", "Great Gauntlet 8",
                    "Teleportation Trappers 4", "Laggy Lab 6", "Splitter Splatter 2", "Whirling Winds 4", "Just Juke 3", "Aqua Arena 6", "Laser Lunge 4", "Rocky Rage 5", "Clingy Claustrophobia 6", "Great Gauntlet 9",
-                   "Teleportation Trappers 5", "Stormy Surge 4", "Scary Shadows 9", "Bullet Barrage 4", "Lightning Legacy 4", "Frostbite Frenzy 7", "Blazing Burnout 7", "Disaster Defusion 2", "Podium Projectiles 3", "Gigantic Gauntlet X"]
+                   "Teleportation Trappers 5", "Stormy Surge 4", "Scary Shadows 10", "Bullet Barrage 4", "Lightning Legacy 4", "Frostbite Frenzy 7", "Blazing Burnout 7", "Disaster Defusion 2", "Podium Projectiles 3", "Gigantic Gauntlet X", "SUGAR"]
     level_seeds = ["50_50_10_500_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_1_15_1_0_4_1_0_100_0_5_1_1_500_100_2_1_1_1_0_9_20_0_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_", # 0
                     "50_50_10_100_2000_10_8_5_5_50_200_25_500_1000_5_100_10_1_10_100_1_0_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_11_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
                     "50_50_10_100_2000_16_8_5_5_50_200_25_500_1000_5_100_10_1_10_50_1_0_2_2_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_15_2_0_4_2_0_100_0_5_2_1_500_100_2_1_2_2_0_34_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_100_2_50_75_35_",
@@ -1288,52 +1288,113 @@ def CAMPAIGN_SELECT():
                     "50_50_20_100_3000_10_8_10_5_50_200_25_2000_1000_3_800_20_1_10_150_1_2_2_0_2_2_2_0_2_2_2_2_2_2_1_2_2_0_2_2_2_2_2_2_2_2_2_1_2_2_2_2_2_2_2_1_2_5_2_6_3_7_9_5_5_3_2_8_8_4_1_1_5_4_21_5_6_12_3_1_4_32_7_10_300_3_1_250_40_40_5_6_1_3_6_3_4_10_3_2_1_3_32_1_0_3_1_1_0_0_1_3_2_3_2_5_3_1_4_2_30_90_0_5_2_1_500_100_3_1_1_1_0_10_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_1_2_4_2_2_45_0_50_3_75_100_35_",
                     "30_50_30_100_2000_8_10_10_5_30_500_30_1000_1000_5_600_5_1_10_200_1_2_2_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_0_2_2_2_2_2_2_2_1_2_2_2_2_2_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_7_6_7_3_1_4_32_7_10_300_3_1_250_50_20_5_6_1_2_6_3_4_20_3_2_1_3_32_1_0_3_1_1_1_0_1_99_3_5_2_15_2_0_4_2_1_50_0_5_2_1_500_100_2_1_2_2_0_2_20_4_5_2_6_2_1_1_5_2_300_10_2_2_4_2_0_2_4_2_2_45_0_50_2_25_75_35_",
                     "50_50_10_100_3500_10_20_5_25_50_200_25_500_1000_5_100_10_1_20_100_1_2_2_2_2_2_2_2_2_2_3_0_2_2_3_3_2_2_2_0_2_2_2_2_2_2_2_2_2_2_2_2_0_2_2_3_2_5_2_3_3_7_9_3_5_3_2_99_64_6_1_0_5_4_21_1_9_4_3_2_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_4_2_1_1_128_1_0_5_1_1_0_0_1_3_2_3_2_15_2_3_4_2_1_100_0_5_2_1_500_100_2_1_2_2_0_16_20_0_5_2_6_2_1_2_5_2_300_10_2_1_4_2_0_2_4_2_2_45_0_200_3_50_75_100_",
-                    "50_50_10_10000_10000_2_8_5_5_6969_200_25_500_0_5_100_10_1_10_100_1_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_99_1_1_0_0_1_3_0_3_0_15_0_0_4_0_50_250_0_5_0_1_500_100_2_1_0_0_0_9_20_2_5_0_6_0_1_0_5_0_300_10_2_1_4_0_0_2_4_0_0_45_0_0_2_50_75_35_"
+                    "50_50_10_10000_10000_2_8_5_5_6969_200_25_500_0_5_100_10_1_10_100_1_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_0_5_2_3_3_7_9_3_5_3_2_8_8_4_1_0_5_4_5_5_9_4_3_1_4_32_7_10_300_3_1_100_40_10_5_5_1_2_6_2_4_15_3_2_1_3_32_1_0_99_1_1_0_0_1_3_0_3_0_15_0_0_4_0_50_250_0_5_0_1_500_100_2_1_0_0_0_9_20_2_5_0_6_0_1_0_5_0_300_10_2_1_4_0_0_2_4_0_0_45_0_0_2_50_75_35_",
+                    "10_40_10_100_500_10_8_20_1_50_1000_50_500_0_5_600_10_1_10_50_1_0_1_1_1_1_1_1_3_1_3_1_1_3_3_2_1_1_1_3_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_5_2_3_3_7_9_3_5_3_2_8_8_4_1_1_5_4_5_5_9_7_3_1_4_32_7_10_300_3_1_250_30_8_5_6_1_2_6_2_4_10_3_2_1_3_32_1_1_99_1_1_0_0_1_3_1_4_1_15_1_0_4_1_90_100_0_5_1_1_500_100_2_1_1_1_0_0_30_1_5_1_6_1_1_1_5_1_300_10_2_1_4_1_0_2_4_1_1_45_0_100_2_50_75_35_"
                     ]
-    line_one = ["",
-                "Dodge the squares and survive as long as", "Watch out for the new speedy enemies", "Sticky enemies and charger enemies like", "Homing enemies chase you.", "A horde of speedy enemies will ambush", "Flow enemies move faster when they are", "Teleporter enemies teleport to the spawner", "Shooter enemies shoot projectiles at you.", "Accelerator enemies get faster as", "This gauntlet has every single enemy you",
-                "First level but harder.", "Watch out for the rainy weather.", "Cold enemies make you frozen upon", "Magma enemies burn you upon touching", "Kill homing enemies by forcing them", "No more enemy descriptions.", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", ""]
-    line_two = ["",
-                "possible.", "which are much faster than basic enemies.", "to cling onto the edge for a bit.", "", "you every 100 score.", "closer to you.", "whenever they touch the edge. Stream enemies", "", "they move. Hardened enemies lose health", "have encountered so far.",
-                "", "", "touching them, but they don't deal", "them. Trail enemies create a trail of", "to ram into the edge.", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", ""]
-    line_three = ["",
-                "", "", "", "", "", "", "do the same but also move faster when close", "", "while they are near you.", "",
-                "", "", "damage.", "projectiles.", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", ""]
-    line_four = ["",
-                "", "", "", "", "", "", "to you.", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", ""]
+    level_description = [
+                "No Description",
+                "Dodge the enemy squares and try to survive for as long as possible.",
+                "NEW Speedy enemies will appear, which move faster than the basic enemy.",
+                "NEW Sticky and charger enemies will stick to walls when bouncing. The charger enemy moves faster than the sticky enemy and will move when you're close to them.",
+                "NEW Homing enemies will track you down.",
+                "A horde of 6 speedy enemies will ambush you every 100 score, starting at 50 score.",
+                "NEW Flow enemies will move faster when close to you.",
+                "NEW Teleporter and Stream enemies will teleport to the center when 'bouncing' off a wall. Stream enemies also have the property of a Flow enemy.",
+                "NEW Shooter enemies will fire moving projectiles at you.",
+                "NEW Accelerator and Hardened enemies. The accelerator will accelerate after bouncing off a wall and the hardened enemy will lose health when near you.",
+                "Every enemy you've seen so far will appear in this Gauntlet.", # Great Gauntlet 1 Description
+                "It's just basic enemies again. However, they will now ambush you at certain intervals.",
+                "It's raining heavy drops! Don't touch the rain and beware of the Charger enemies as they will now wait to strike.",
+                "NEW Cold enemies will freeze you instead of damaging you when touched. Being frozen will make your movement slippery.",
+                "NEW Magma enemies will burn you when touched. Being burned will leave harmful trails behind you that damage both you and certain enemies.",
+                "You can only get score when an enemy dies in this level. Try finding a way to kill the homing enemies.",
+                "NEW Whirly enemies will circle around the spawner and teleport back to the middle when hitting a wall.",
+                "NEW Burst shooter enemies will fire projectiles in bursts of 10 towards you.",
+                "Find your way around the large sticky and hardned enemies.",
+                "new lAGGY AND eRROR ENEMIES WILL MOVE AROUND AT A WEIRD PACE. tHE wall WILL ALSO DAMAGE YOU UPON TOUCHING IT, SO STAY AWAY FROM IT.",
+                "Every enemy you've seen so far will appear along with rain. You also only get 10 HP with no regeneration.", # Great Gauntlet 2 Description
+                "NEW Gloomy enemies will stop in place when near you.",
+                "The rain has gotten more rapid. Dodge familiar enemies with a large amount of rain falling upon you.",
+                "Beware of the strong wind that will push you in a certain direction. Also make sure to dodge the windy projectiles.",
+                "NEW Motion and Blind enemies will be damaged depending on your movement, with Motion being damaged if you're moving and Blind being damaged if you're standing still.",
+                "It's just a basic level, right?",
+                "NEW Bomb enemies will explode into projectiles when near you. You also have 20 HP and no invisibility, so be wary on how much projectiles hit you.",
+                "NEW Tracer enemies will home in onto you while leaving a harmful trail behind them. Beware of the quick accelerators and tanky hardened enemies too.",
+                "Hope you enjoy crowds, because every enemy has 99 HP here.",
+                "",
+                "", # Great Gauntlet 3 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "", # Great Gauntlet 4 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "", # Great Gauntlet 5 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "", # Great Gauntlet 6 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "", # Great Gauntlet 7 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "", # Great Gauntlet 8 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "", # Great Gauntlet 9 Description
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "You only get score upon enemy death, 50 enemies will ambush you every 250 score, every enemy can appear, and you only get 99 health with no regen or invinsibility. Good luck.", # Gigantic Gauntlet X Description
+                "SUGAR! YES PLEASE!"
+                ]
     if finished_campaign == True: level_selected = campaign_level
     else: level_selected = 0
     ready_to_select = False
@@ -1362,16 +1423,38 @@ def CAMPAIGN_SELECT():
         level_text = slightly_big_font.render("Level " + str(level_selected) + ": " + level_names[level_selected], True, WHITE)
         lzero_text = slightly_big_font.render("Click a level to select it.", True, WHITE)
         victoryc_text = font.render("Victory Condition: " + str(victory_conditions[level_selected]), True, WHITE)
+        full_line = level_description[level_selected]
+        seperated_lines = full_line.split(' ')
+        line_one = ''
+        line_two = ''
+        line_three = ''
+        line_four = ''
+        for x in seperated_lines:
+            if len(line_one) + len(x) < 45:
+                line_one += x + ' '
+            elif len(line_two) + len(x) < 45:
+                line_two += x + ' '
+                if len(line_one) < 45: line_one += '               '
+            elif len(line_three) + len(x) < 45:
+                line_three += x + ' '
+                if len(line_two) < 45: line_two += '               '
+                if len(line_one) < 45: line_one += '               '
+            elif len(line_four) + len(x) < 45:
+                line_four += x + ' '
+                if len(line_three) < 45: line_three += '           '
+                if len(line_two) < 45: line_two += '            '
+                if len(line_one) < 45: line_one += '            '
+            
         if level_selected != 0: screen.blit(level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         else: screen.blit(lzero_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         if level_selected != 0: screen.blit(victoryc_text, (1150*SCALED_WIDTH, 700*SCALED_HEIGHT))
-        desc_text = font.render(line_one[level_selected], True, WHITE)
+        desc_text = font.render(line_one, True, WHITE)
         if level_selected != 0: screen.blit(desc_text, (1150*SCALED_WIDTH, 350*SCALED_HEIGHT))
-        desc2_text = font.render(line_two[level_selected], True, WHITE)
+        desc2_text = font.render(line_two, True, WHITE)
         if level_selected != 0: screen.blit(desc2_text, (1150*SCALED_WIDTH, 390*SCALED_HEIGHT))
-        desc3_text = font.render(line_three[level_selected], True, WHITE)
+        desc3_text = font.render(line_three, True, WHITE)
         if level_selected != 0: screen.blit(desc3_text, (1150*SCALED_WIDTH, 430*SCALED_HEIGHT))
-        desc4_text = font.render(line_four[level_selected], True, WHITE)
+        desc4_text = font.render(line_four, True, WHITE)
         if level_selected != 0: screen.blit(desc4_text, (1150*SCALED_WIDTH, 470*SCALED_HEIGHT))
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
@@ -1608,9 +1691,9 @@ def CAMPAIGN_SELECT():
             level_selected = 23
             pygame.time.delay(200)
 
-        level_twentyfour_text = font.render("24", True, WHITE)
+        level_twentyfour_text = font.render("24", True, BLUE)
         level_twentyfour_button = pygame.Rect(345*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(3)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
-        pygame.draw.rect(screen, WHITE if level_selected == 24 else GRAY, level_twentyfour_button, border_radius=0)
+        pygame.draw.rect(screen, WHITE if level_selected == 24 else ORANGE, level_twentyfour_button, border_radius=0)
         screen.blit(level_twentyfour_text, level_twentyfour_text.get_rect(center=level_twentyfour_button.center))
         if level_twentyfour_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 24
@@ -2224,6 +2307,15 @@ def CAMPAIGN_SELECT():
         screen.blit(level_onehundred_text, level_onehundred_text.get_rect(center=level_onehundred_button.center))
         if level_onehundred_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
             level_selected = 100
+            pygame.time.delay(200)
+
+        level_sugar_text = font.render("SUGAR", True, WHITE if level_selected == 101 else BLACK)
+        level_sugar_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(11)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        pygame.draw.rect(screen, WHITE if level_selected == 101 else BLACK, level_sugar_button, border_radius=0)
+        level_sugar_button_again = pygame.Rect(980*SCALED_WIDTH, 235*SCALED_HEIGHT+level_for_campaign_list.index(11)*85*SCALED_HEIGHT - button_offset, 80*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        screen.blit(level_sugar_text, level_sugar_text.get_rect(center=level_sugar_button.center))
+        if level_sugar_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
+            level_selected = 101
             pygame.time.delay(200)
 
         for event in pygame.event.get():
@@ -6238,7 +6330,7 @@ while running:
 
         if ambush_fully_started == False and truescore + max(p1_xtra_score, p2_xtra_score) >= ambush_start:
             ambushes = insta_spawn
-            ambush_score = ambush_start + ambush_per_score
+            ambush_score += ambush_start + ambush_per_score
             ambush_fully_started = True
 
         if ambush_fully_started and ambush_per_score != 6969 and truescore + max(p1_xtra_score, p2_xtra_score) >= ambush_score:
@@ -8506,8 +8598,8 @@ while running:
                 if enemy in enemies:
                     enemy["dead"] = True
                     if modifiers[6] == 1 or modifiers[6] == 2 or modifiers[6] == 5 or modifiers[6] == 6:
-                        if enemy["type"] == 9: score+=5/(split_amount**(splitter_hp-enemy["health"]))
-                        else: score+=5
+                            if enemy["type"] == 9: score+=5/(split_amount**(splitter_hp-enemy["health"]))
+                            else: score+=5
 
 
         # --- Trail squares update ---
@@ -8736,7 +8828,7 @@ while running:
 
         enemies[:] = [e for e in enemies if not e.get("dead", False)]
 
-    if campaign_victory_flash != 0: campaign_victory_flash += 1
+    if campaign_victory_flash != 0: campaign_victory_flash += 0.05
     if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] and campaign_victory_flash == 0: campaign_victory_flash = 1
     
     # --- Drawing ---
@@ -9316,7 +9408,7 @@ while running:
         controlpoint_surface.fill((spawner_color[0], spawner_color[1], spawner_color[2], 100))
         if enemy["type"] == 6767: screen.blit(controlpoint_surface, ((enemy["x"] - enemy["size"] / 2)*SCALED_WIDTH, (enemy["y"] - enemy["size"] / 2)* SCALED_HEIGHT))
 
-    if campaign_victory_flash != 0: campaign_victory_flash += 0.05
+    if campaign_victory_flash != 0: campaign_victory_flash += 1
     if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] and campaign_victory_flash == 0: campaign_victory_flash = 1
     if campaign_victory_flash > 0 and campaign_victory_flash <= 13:
         victory_surface = pygame.Surface((spawner_size*SCALED_WIDTH*campaign_victory_flash, spawner_size*SCALED_HEIGHT*campaign_victory_flash), pygame.SRCALPHA)
