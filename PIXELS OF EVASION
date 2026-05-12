@@ -2246,8 +2246,10 @@ def CAMPAIGN_SELECT():
                 if level_selected > 10: level_selected -= 10
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE):
                 if level_selected != 0:
+                    campaign_level = level_selected
                     give_seed(level_seeds[level_selected])
                     campaign_start = True
+                    doing_campaign = True
                     waiting = False
         pygame.display.flip()
         clock.tick(60)
