@@ -1321,7 +1321,7 @@ def CAMPAIGN_SELECT():
                 "NEW Bomb and shotgun enemies. Bomb enemies explode into slow projectiles when near you. Shotgun enemies shoot multiple bullets at you.",
                 "NEW Tracer enemies will home in onto you while leaving a harmful trail behind them.",
                 "Includes even more enemies with teleporter properties.",
-                "Stay inside the control point to gain score. You can also use the walls to teleport to the other side for this level.",
+                "stay INSIDE THE CONTROL POINT TO GAIN SCORE. you CAN ALSO USE THE WALLS TO TELEPORT TO THE OTHER SIDE FOR THIS LEVEL.",
                 "This gauntlet has Windy weather, a control point, and wall teleportation enemies. Like usual, every enemy you've seen so far will appear.", # Great Gauntlet 3 Description
                 "It's windy and walls damage you. Don't let the wind push you towards the edge.",
                 "NEW Voodoo enemies will damage you if they die. Touch them before they lose all their health due to touching the edge.",
@@ -1332,22 +1332,22 @@ def CAMPAIGN_SELECT():
                 "It's snowing. The snow projectiles will freeze you.",
                 "The shotgun enemies shoot more bullets than usual.",
                 "NEW Sensitive enemies act like both a hardened enemy and a flow enemy.",
-                "", # Great Gauntlet 4 Description
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "", # Great Gauntlet 5 Description
-                "",
-                "",
-                "",
-                "",
-                "",
+                "Facing every enemy seen so far again, but in the snow, and ambushed by rapidshooter enemies. But most importantly, the edge instantly KILLS you this time.", # Great Gauntlet 4 Description
+                "We are facing a blizzard, which creates a lot more snow projectiles. The edge also damages you.",
+                "Trail projectiles are everywhere, and watch out for magma ambush.",
+                "NEW addictive enemies pull you towards it.",
+                "wATCH OUT!!!! tHE WEATHER IS GETTING WEIRD AND LAGGY!!!! it's A LAGSTORM!!!!",
+                "NEW sparker and pulse enemies. Sparker enemies and pulse enemies shoot rapidly in their own unique ways. The weather is getting really bad! It's a bad storm!",
+                "New blocker enemies repel you away from them. The hardened enemies will survive at 1 HP when you are near it.",
+                "NEW laser enemies create a laser that covers the screen upon death.",
+                "Watch out for these aquatic ambushes!",
+                "The charger ambushes will shock you.",
+                "Enemies deal 20 damage and projectiles deal 10 damage. You are at the halfway point.", # Great Gauntlet 5 Description
+                "Spending to much time in the ocean must have made you feel really cold.",
+                "NEW invisibility enemies are invisible while they are not near you.",
+                "NEW frostbite enemies create a ton of frost projectiles when near you only once.",
+                "NEW savage enemies track you down and move fast when they are near you. The blood rain projectiles instantly kill you.",
+                "All enemies instakill and the edge instakills you too. The tracer enemies strike like lightning.",
                 "",
                 "",
                 "",
@@ -6320,7 +6320,7 @@ while running:
             if p2_dy < 0.1 and p2_dy > -0.1: p2_dy = 0
         player_moving = (p1_dx != 0 or p1_dy != 0)
         
-        if spawn_enabled and weathers[weather] == "Windy" or weathers[weather] == "Sandstorm":
+        if spawn_enabled and (weathers[weather] == "Windy" or weathers[weather] == "Sandstorm"):
             player_x += sandstorm_direction * 3 * game_speed
             player2_x += sandstorm_direction * 3 * game_speed
 
