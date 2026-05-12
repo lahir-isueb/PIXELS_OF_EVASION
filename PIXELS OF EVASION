@@ -1299,7 +1299,7 @@ def CAMPAIGN_SELECT():
                 "NEW Homing enemies will track you down.",
                 "A horde of 6 speedy enemies will ambush you every 100 score, starting at 50 score.",
                 "NEW Flow enemies will move faster when close to you.",
-                "NEW Teleporter and Stream enemies will teleport to the center when 'bouncing' off a wall. Stream enemies also have the property of a Flow enemy.",
+                "NEW Teleporter and Stream enemies will teleport to the center when touching a wall. Stream enemies also have the property of a Flow enemy.",
                 "NEW Shooter enemies will fire moving projectiles at you.",
                 "NEW Accelerator and Hardened enemies. The accelerator will accelerate after bouncing off a wall and the hardened enemy will lose health when near you.",
                 "Every enemy you've seen so far will appear in this Gauntlet.", # Great Gauntlet 1 Description
@@ -2326,16 +2326,24 @@ def CAMPAIGN_SELECT():
                 waiting = False
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_a or event.key == pygame.K_LEFT or event.key == pygame.K_j):
                 if level_selected == 0: level_selected = 1
-                elif ((level_selected - 1) % 10) != 0: level_selected -= 1
+                elif level_selected == 101: level_selected = 100
+                elif ((level_selected - 1) % 10) == 0: level_selected += 9
+                else: level_selected -= 1
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_d or event.key == pygame.K_RIGHT or event.key == pygame.K_l):
-                if level_selected % 10 != 0: level_selected += 1
                 if level_selected == 0: level_selected = 1
+                elif level_selected == 101: level_selected = 92
+                elif level_selected % 10 == 0: level_selected -= 9
+                else: level_selected += 1
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_s or event.key == pygame.K_DOWN or event.key == pygame.K_k):
                 if level_selected == 0: level_selected = 1
-                elif level_selected < 91: level_selected += 10
+                elif level_selected == 101: level_selected = 1
+                elif level_selected >= 91: level_selected -= 90
+                else: level_selected += 10
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_w or event.key == pygame.K_UP or event.key == pygame.K_i):
                 if level_selected == 0: level_selected = 1
-                if level_selected > 10: level_selected -= 10
+                elif level_selected == 101: level_selected = 91
+                elif level_selected <= 10: level_selected += 90
+                else: level_selected -= 10
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE):
                 if level_selected != 0:
                     campaign_level = level_selected
