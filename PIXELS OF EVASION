@@ -1299,28 +1299,28 @@ def CAMPAIGN_SELECT():
                 "NEW Homing enemies will track you down.",
                 "A horde of 6 speedy enemies will ambush you every 100 score, starting at 50 score.",
                 "NEW Flow enemies will move faster when close to you.",
-                "NEW Teleporter and Stream enemies will teleport to the center when touching a wall. Stream enemies also have the property of a Flow enemy.",
+                "NEW Teleporter and Stream enemies will teleport to the center when touching a wall. Stream enemies has the properties of Flow and Teleporter enemies.",
                 "NEW Shooter enemies will fire moving projectiles at you.",
                 "NEW Accelerator and Hardened enemies. The accelerator will accelerate after bouncing off a wall and the hardened enemy will lose health when near you.",
                 "Every enemy you've seen so far will appear in this Gauntlet.", # Great Gauntlet 1 Description
                 "It's just basic enemies again. However, they will now ambush you at certain intervals.",
-                "It's raining heavy drops! Don't touch the rain and beware of the Charger enemies as they will now wait to strike.",
-                "NEW Cold enemies will freeze you instead of damaging you when touched. Being frozen will make your movement slippery.",
-                "NEW Magma enemies will burn you when touched. Being burned will leave harmful trails behind you that damage both you and certain enemies.",
+                "It's raining! Don't touch the rain and beware of the Charger enemies as they act a bit different in this level.",
+                "NEW Cold enemies will freeze you instead of damaging you when touched. Being frozen will slow you and make your movement slippery.",
+                "NEW Magma enemies will burn you when touched. Being burned will leave harmful trails behind you that can damage both you and certain enemies.",
                 "You can only get score when an enemy dies in this level. Try finding a way to kill the homing enemies.",
                 "NEW Whirly enemies will circle around the spawner and teleport back to the middle when hitting a wall.",
-                "NEW Burst shooter enemies will fire projectiles in bursts of 10 towards you.",
-                "Find your way around the large sticky and hardned enemies.",
-                "new lAGGY AND eRROR ENEMIES WILL MOVE AROUND AT A WEIRD PACE. tHE wall WILL ALSO DAMAGE YOU UPON TOUCHING IT, SO STAY AWAY FROM IT.",
-                "Every enemy you've seen so far will appear along with rain. You also only get 10 HP with no regeneration.", # Great Gauntlet 2 Description
+                "NEW Burst shooter enemies will fire projectiles in bursts.",
+                "Find your way around the large sticky and hardened enemies.",
+                "new lAGGY AND eRROR ENEMIES WILL MOVE AROUND AT A WEIRD PACE. eRROR ENEMIES HAVE TELEPORTER PROPERTIES AS WELL. tHE wall DAMAGES YOU UPON CONTACT.",
+                "Every enemy you've seen so far will appear along with rain. You only get 10 HP with no regeneration.", # Great Gauntlet 2 Description
                 "NEW Gloomy enemies will stop in place when near you.",
-                "The rain has gotten more rapid. Dodge familiar enemies with a large amount of rain falling upon you.",
-                "Beware of the strong wind that will push you in a certain direction. Also make sure to dodge the windy projectiles.",
-                "NEW Motion and Blind enemies will be damaged depending on your movement, with Motion being damaged if you're moving and Blind being damaged if you're standing still.",
-                "It's just a basic level, right?",
-                "NEW Bomb enemies will explode into projectiles when near you. You also have 20 HP and no invisibility, so be wary on how much projectiles hit you.",
-                "NEW Tracer enemies will home in onto you while leaving a harmful trail behind them. Beware of the quick accelerators and tanky hardened enemies too.",
-                "Hope you enjoy crowds, because every enemy has 99 HP here.",
+                "The rain has gotten heavier. Dodge familiar enemies with even more rain falling upon you.",
+                "Beware of the strong wind that will push you in a certain direction. Make sure to dodge the windy projectiles.",
+                "NEW Motion and Blind enemies will be damaged depending on your movement, with Motion (Orange) being damaged if you're moving and Blind (Blue) being damaged if you're standing still.",
+                "NEW Fatal enemies instantly kill you.",
+                "NEW Bomb and shotgun enemies. Bomb enemies explode into slow projectiles when near you. Shotgun enemies shoot multiple bullets at you.",
+                "NEW Tracer enemies will home in onto you while leaving a harmful trail behind them.",
+                "Includes even more enemies with teleporter properties.",
                 "",
                 "", # Great Gauntlet 3 Description
                 "",
@@ -1392,7 +1392,7 @@ def CAMPAIGN_SELECT():
                 "",
                 "",
                 "",
-                "You only get score upon enemy death, 50 enemies will ambush you every 250 score, every enemy can appear, and you only get 99 health with no regen or invinsibility. Good luck.", # Gigantic Gauntlet X Description
+                "You are going to have to survive many waves of enemies. Good luck.", # Gigantic Gauntlet X Description
                 "SUGAR! YES PLEASE!"
                 ]
     if finished_campaign == True: level_selected = campaign_level
