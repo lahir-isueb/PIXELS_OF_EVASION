@@ -1389,8 +1389,8 @@ def CAMPAIGN_SELECT():
             screen.blit(start_text, start_text.get_rect(center=start_button.center))
 
             if start_button.collidepoint(mouse_pos) and mouse_click and ready_to_select:
-                give_seed(level_seeds[level_selected])
                 campaign_level = level_selected
+                give_seed(level_seeds[level_selected])
                 campaign_start = True
                 doing_campaign = True
                 waiting = False
@@ -8112,14 +8112,14 @@ while running:
                     dxp = dxp / dist * sparker_projectile_speed
                     dyp = dyp / dist * sparker_projectile_speed
                     projectiles.append({
-                        "x": enemy["lag x"] + projectile_size/2,
-                        "y": enemy["lag y"] + projectile_size/2,
+                        "x": enemy["x"] + projectile_size/2,
+                        "y": enemy["y"] + projectile_size/2,
                         "dx": dxp,
                         "dy": dyp,
                         "color": colorblind_list[colorblind] if colorblind != 0 else MINT,
                         "ability": "lag",
-                        "lag x": enemy["lag x"] + projectile_size/2,
-                        "lag y": enemy["lag y"] + projectile_size/2,
+                        "lag x": enemy["x"] + projectile_size/2,
+                        "lag y": enemy["y"] + projectile_size/2,
                         "lag show": 0
                     })
                     enemy["trail/shot_charge"] = 0
