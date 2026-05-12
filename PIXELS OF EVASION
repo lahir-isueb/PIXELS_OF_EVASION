@@ -1383,17 +1383,17 @@ def CAMPAIGN_SELECT():
                 "The enemies are giant in this mode. Watch for the projectiles and plan your next move as you have no invincibility.",
                 "You are small. They are big. Use your tiny size to squeeze between small gaps and clear the area of chargers, stickyshooters, and hardened enemies.",
                 "Every enemy can appear, but you won't know which ones. Use your knowledge on enemy behavior to determine which enemy is what.", # Great Gauntlet 9 Description
-                "",
-                "",
-                "",
-                "",
-                "",
+                "Several teleporter enemies along with homing enemies with potent turning power are after you. Use the teleporting walls to effectivly get enemies off your tail.",
+                "Invisible enemies with rapid projectile rates. Dodge the tracers and stormy weather and use the projectile spawning to discover where each enemy is.",
+                "All of the enemies are colored in a dark shadow. Use your knowledge of enemy properties to determine what each enemy does.",
+                "Every projectile enemy will appear in this level. Avoid interacting with the enemies themselves as they'll do 10 damage each. You also have no invinsibility.",
+                "These enemies are FAST! Watch for the quick chargers and sparkers and get the tracers off your tail. You have no invinsibility.",
                 "",
                 "",
                 "",
                 "",
                 "You are going to have to survive many waves of enemies. Good luck.", # Gigantic Gauntlet X Description
-                "SUGAR! YES PLEASE!"
+                "SUGAR? YES PLEASE!!!"
                 ]
     if finished_campaign == True: level_selected = campaign_level
     else: level_selected = 0
