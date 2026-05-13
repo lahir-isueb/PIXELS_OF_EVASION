@@ -272,7 +272,7 @@ victory_conditions = [0,
                       500, 550, 500, 700, 700, 800, 800, 850, 700, 850, # 50
                       700, 900, 950, 600, 500, 750, 850, 850, 950, 950, # 60
                       1000, 800, 750, 750, 500, 800, 600, 550, 850, 850, # 70
-                      900, 700, 700, 1000, 550, 1000, 777, 550, 700, 1150, # 80
+                      900, 700, 700, 1000, 750, 1000, 777, 550, 700, 1150, # 80
                       1000, 750, 500, 850, 200, 700, 700, 700, 1000, 1000, # 90
                       600, 600, 700, 1200, 600, 750, 750, 1000, 700, 2500, # 100
                       6969
@@ -1311,7 +1311,7 @@ def CAMPAIGN_SELECT():
                 "NEW Whirly enemies will circle around the spawner and teleport back to the middle when hitting a wall.",
                 "NEW Burst shooter enemies will fire projectiles in bursts.",
                 "Find your way around the large sticky and hardened enemies.",
-                "new lAGGY AND eRROR ENEMIES WILL MOVE AROUND AT A WEIRD PACE. eRROR ENEMIES HAVE TELEPORTER PROPERTIES AS WELL. tHE wall DAMAGES YOU UPON CONTACT.",
+                "new lAGGY AND ERROR ENEMIES WILL MOVE AROUND AT A WEIRD PACE. eRROR ENEMIES HAVE TELEPORTER PROPERTIES AS WELL. tHE WALL DAMAGES YOU UPON CONTACT.",
                 "Every enemy you've seen so far will appear along with rain. You only get 10 HP with no regeneration.", # Great Gauntlet 2 Description
                 "NEW Gloomy enemies will stop in place when near you.",
                 "The rain has gotten heavier. Dodge familiar enemies with even more rain falling upon you.",
@@ -1321,7 +1321,7 @@ def CAMPAIGN_SELECT():
                 "NEW Bomb and shotgun enemies. Bomb enemies explode into slow projectiles when near you. Shotgun enemies shoot multiple bullets at you.",
                 "NEW Tracer enemies will home in onto you while leaving a harmful trail behind them.",
                 "Includes even more enemies with teleporter properties.",
-                "stay INSIDE THE CONTROL POINT TO GAIN SCORE. you CAN ALSO USE THE WALLS TO TELEPORT TO THE OTHER SIDE FOR THIS LEVEL.",
+                "sTAY INSIDE THE CONTROL POINT TO GAIN SCORE. yOU CAN ALSO USE THE WALLS TO TELEPORT TO THE OTHER SIDE FOR THIS LEVEL.",
                 "This gauntlet has Windy weather, a control point, and wall teleportation enemies. Like usual, every enemy you've seen so far will appear.", # Great Gauntlet 3 Description
                 "It's windy and walls damage you. Don't let the wind push you towards the edge.",
                 "NEW Voodoo enemies will damage you if they die. Touch them before they lose all their health due to touching the edge.",
@@ -1336,7 +1336,7 @@ def CAMPAIGN_SELECT():
                 "We are facing a blizzard, which creates a lot more snow projectiles. The edge also damages you.",
                 "Trail projectiles are everywhere, and watch out for magma ambush.",
                 "NEW addictive enemies pull you towards it.",
-                "wATCH OUT!!!! tHE WEATHER IS GETTING WEIRD AND LAGGY!!!! it's A LAGSTORM!!!!",
+                "wATCH OUT!!!! tHE WEATHER IS GETTING WEIRD AND LAGGY!!!! iT'S A LAGSTORM!!!!",
                 "NEW sparker and pulse enemies. Sparker enemies and pulse enemies shoot rapidly in their own unique ways. The weather is getting really bad! It's a bad storm!",
                 "New blocker enemies repel you away from them. The hardened enemies will survive at 1 HP when you are near it.",
                 "NEW laser enemies create a laser that covers the screen upon death.",
@@ -1348,31 +1348,31 @@ def CAMPAIGN_SELECT():
                 "NEW frostbite enemies create a ton of frost projectiles when near you only once.",
                 "NEW savage enemies track you down and move fast when they are near you. The blood rain projectiles instantly kill you.",
                 "All enemies instakill and the edge instakills you too. The tracer enemies strike like lightning.",
-                "",
-                "",
-                "",
-                "",
-                "", # Great Gauntlet 6 Description
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "", # Great Gauntlet 7 Description
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
+                "NEW Phantom enemies have the properties of homing enemies, invisbility enemies, and teleporter enemies. Don't let them sneak up on you.",
+                "new GLITCHY ENEMIES FILL THE SCREEN WITH LAGGY PROJECTILES.",
+                "NEW annihilators create a laser and lots of projectiles upon death. They can be stopped by touching them before they die.",
+                "Something isn't right. Enemies that usually don't have the power of invisbility are gaining that power.",
+                "Watch out for the blood rain and the laser ambush as you dodge every enemy you have faced so far.", # Great Gauntlet 6 Description
+                "All enemies are dripping projectiles. Watch out!",
+                "NEW stickyshooter enemies will shoot projectiles toward you while they are stuck. Get near them to stop their shooting.",
+                "NEW frostbeam enemies creates a laser that freeze the player upon death.",
+                "NEW frostbeam enemies creates a laser that burns the player upon death.",
+                "These annihilators cannot be stopped by touching them. Use the walls to teleport to avoid the huge amount of projectiles.",
+                "These enemies shoot gigantic bullets.",
+                "Avoid the lightning speed sparkers and their projectiles.",
+                "aVOID THE GLITCHY ENEMIES AND THEIR PROJECTILES.",
+                "Water projectiles are everywhere.",
+                "In this gauntlet, you will have to deal with the lagstorm, the dripping enemies, and the constant dripping voodoo.", # Great Gauntlet 7 Description
+                "NEW Splitter enemies split into multiple enemies upon touching the edge. Also, have fun with dripping enemies again.",
+                "The darkness blinds me from telling you what these 3 new enemies do. You'll have to figure it out for yourself.",
+                "NEW Forecast enemies change the weather when you touch them.",
+                "Endure the rage!",
+                "Things are getting sticky.",
+                "All enemies are the same color in this level.",
                 "If you beat this level, you are lucky.",
-                "",
-                "",
-                "", # Great Gauntlet 8 Description
+                "The addictive enemies damage you this time. Try to find out which enemies are whirly enemies and which ones you have to avoid even more. The edge instakills you.",
+                "Don't let the blocker enemies push you into your own burn projectiles or the edge.",
+                "In this gauntlet, all enemies are invisible. Thanks to the luck that you've gathered on Level 77, you can change the weather by touching the forecast enemies.", # Great Gauntlet 8 Description
                 "Watch for the giant teleporter and whirly enemies and manage your time inside the control point to score big.",
                 "eVERYTHING IS LAGGY! tHE ENEMIES ARE ALSO INVISIBLE AND MOVE QUICKLY, SO KEEP AN EYE ON YOUR SURROUNDINGS AND REACT QUICKLY!",
                 "Each splitter enemy splits into 20 copies of itself. You only get 5 HP with no regen, so use the teleporting walls to find openings and dodge the splitters.",
@@ -1383,17 +1383,17 @@ def CAMPAIGN_SELECT():
                 "The enemies are giant in this mode. Watch for the projectiles and plan your next move as you have no invincibility.",
                 "You are small. They are big. Use your tiny size to squeeze between small gaps and clear the area of chargers, stickyshooters, and hardened enemies.",
                 "Every enemy can appear, but you won't know which ones. Use your knowledge on enemy behavior to determine which enemy is what.", # Great Gauntlet 9 Description
-                "Several teleporter enemies along with homing enemies with potent turning power are after you. Use the teleporting walls to effectivly get enemies off your tail.",
+                "Several teleporter enemies along with homing enemies with potent turning power are after you. Use the teleporting walls to effectively get enemies off your tail.",
                 "Invisible enemies with rapid projectile rates. Dodge the tracers and stormy weather and use the projectile spawning to discover where each enemy is.",
                 "All of the enemies are colored in a dark shadow. Use your knowledge of enemy properties to determine what each enemy does.",
                 "Every projectile enemy will appear in this level. Avoid interacting with the enemies themselves as they'll do 10 damage each. You also have no invinsibility.",
                 "These enemies are FAST! Watch for the quick chargers and sparkers and get the tracers off your tail. You have no invinsibility.",
-                "",
-                "",
-                "",
-                "",
+                "Don't freeze into a popsicle. Touching the edge damages you.",
+                "Don't burn into a crisp. Touching the edge damages you.",
+                "Things become insanely chaotic as the weather creates bigger projectiles and constantly changes. You'll also have to touch the voodoo enemies as well.",
+                "Only a true golden champion is going to survive this fast onslaught of projectiles. Use the walls to teleport to your advantage.",
                 "You are going to have to survive many waves of enemies. Good luck.", # Gigantic Gauntlet X Description
-                "SUGAR? YES PLEASE!!!"
+                "SUGAR! YES PLEASE!"
                 ]
     if finished_campaign == True: level_selected = campaign_level
     else: level_selected = 0
