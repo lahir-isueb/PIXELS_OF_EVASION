@@ -1356,7 +1356,7 @@ def CAMPAIGN_SELECT():
                 "All enemies are dripping projectiles. Watch out!",
                 "NEW stickyshooter enemies will shoot projectiles toward you while they are stuck. Get near them to stop their shooting.",
                 "NEW frostbeam enemies creates a laser that freeze the player upon death.",
-                "NEW frostbeam enemies creates a laser that burns the player upon death.",
+                "NEW pyrobeam and volcanic enemies. Pyrobeam enemies creates a laser that burns the player. Volcanic enemies ignite when close to a player, shooting burning projectiles.",
                 "These annihilators cannot be stopped by touching them. Use the walls to teleport to avoid the huge amount of projectiles.",
                 "These enemies shoot gigantic bullets.",
                 "Avoid the lightning speed sparkers and their projectiles.",
@@ -1421,6 +1421,7 @@ def CAMPAIGN_SELECT():
         info = font.render("Press Escape to return", True, SILVER)
         screen.blit(info, (810*SCALED_WIDTH, 100*SCALED_HEIGHT))
         level_text = slightly_big_font.render("Level " + str(level_selected) + ": " + level_names[level_selected], True, WHITE)
+        bonus_level_text = slightly_big_font.render("Bonus Level: " + level_names[level_selected], True, WHITE)
         lzero_text = slightly_big_font.render("Click a level to select it.", True, WHITE)
         victoryc_text = font.render("Victory Condition: " + str(victory_conditions[level_selected]), True, WHITE)
         full_line = level_description[level_selected]
@@ -1445,8 +1446,11 @@ def CAMPAIGN_SELECT():
                 if len(line_two) < 45: line_two += '            '
                 if len(line_one) < 45: line_one += '            '
             
-        if level_selected != 0: screen.blit(level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
-        else: screen.blit(lzero_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
+        if level_selected != 0:
+            if level_selected <= 100: screen.blit(level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
+            else: screen.blit(bonus_level_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
+        else:
+            screen.blit(lzero_text, (1150*SCALED_WIDTH, 230*SCALED_HEIGHT))
         if level_selected != 0: screen.blit(victoryc_text, (1150*SCALED_WIDTH, 700*SCALED_HEIGHT))
         desc_text = font.render(line_one, True, WHITE)
         if level_selected != 0: screen.blit(desc_text, (1150*SCALED_WIDTH, 350*SCALED_HEIGHT))
@@ -2310,7 +2314,7 @@ def CAMPAIGN_SELECT():
             pygame.time.delay(200)
 
         level_sugar_text = font.render("SUGAR", True, WHITE if level_selected == 101 else BLACK)
-        level_sugar_button = pygame.Rect(30*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(11)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
+        level_sugar_button = pygame.Rect(-75*SCALED_WIDTH, 230*SCALED_HEIGHT+level_for_campaign_list.index(11)*85*SCALED_HEIGHT - button_offset, 90*SCALED_WIDTH, 70*SCALED_HEIGHT)
         pygame.draw.rect(screen, WHITE if level_selected == 101 else BLACK, level_sugar_button, border_radius=0)
         level_sugar_button_again = pygame.Rect(980*SCALED_WIDTH, 235*SCALED_HEIGHT+level_for_campaign_list.index(11)*85*SCALED_HEIGHT - button_offset, 80*SCALED_WIDTH, 60*SCALED_HEIGHT)
         screen.blit(level_sugar_text, level_sugar_text.get_rect(center=level_sugar_button.center))
@@ -2331,7 +2335,7 @@ def CAMPAIGN_SELECT():
                 else: level_selected -= 1
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_d or event.key == pygame.K_RIGHT or event.key == pygame.K_l):
                 if level_selected == 0: level_selected = 1
-                elif level_selected == 101: level_selected = 92
+                elif level_selected == 101: level_selected = 91
                 elif level_selected % 10 == 0: level_selected -= 9
                 else: level_selected += 1
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_s or event.key == pygame.K_DOWN or event.key == pygame.K_k):
@@ -9438,6 +9442,8 @@ while running:
         screen.blit(pause_message_text, (WIDTH/2-220*SCALED_TEXT, HEIGHT/2-45*SCALED_TEXT))
         pause_message_text = biggish_font.render("Press escape to exit.", True, spawner_color)
         screen.blit(pause_message_text, (WIDTH/2-240*SCALED_TEXT, HEIGHT/2+25*SCALED_TEXT))
+        pause_message_text = biggish_font.render("Victory Condition: " + str(victory_conditions[campaign_level]), True, LIME if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] else RED)
+        if doing_campaign: screen.blit(pause_message_text, (WIDTH/2-260*SCALED_TEXT, HEIGHT-100*SCALED_TEXT))
 
     if current_time > everyone_died_at and everyone_died_at != 0:
         if doing_campaign: result = CAMPAIGN_GAME_OVER(truescore, score_p1, score_p2, victory_conditions[campaign_level])
