@@ -8846,6 +8846,29 @@ while running:
     # --- Drawing ---
     screen.fill(BLACK)
 
+    # --- Wall Effects ---
+
+    if modifiers[2] == 0:
+        pygame.draw.rect(screen, SHADOW, (0, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, SHADOW, (0, 0, WIDTH, 5*SCALED_HEIGHT))
+        pygame.draw.rect(screen, SHADOW, (WIDTH - 5*SCALED_WIDTH, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, SHADOW, (0, HEIGHT - 5*SCALED_HEIGHT, WIDTH, 5*SCALED_HEIGHT))
+    elif modifiers[2] == 1:
+        pygame.draw.rect(screen, MAROON, (0, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, MAROON, (0, 0, WIDTH, 5*SCALED_HEIGHT))
+        pygame.draw.rect(screen, MAROON, (WIDTH - 5*SCALED_WIDTH, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, MAROON, (0, HEIGHT - 5*SCALED_HEIGHT, WIDTH, 5*SCALED_HEIGHT))
+    elif modifiers[2] == 2:
+        pygame.draw.rect(screen, RED, (0, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, RED, (0, 0, WIDTH, 5*SCALED_HEIGHT))
+        pygame.draw.rect(screen, RED, (WIDTH - 5*SCALED_WIDTH, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, RED, (0, HEIGHT - 5*SCALED_HEIGHT, WIDTH, 5*SCALED_HEIGHT))
+    elif modifiers[2] == 3:
+        pygame.draw.rect(screen, PURPLE, (0, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, PURPLE, (0, 0, WIDTH, 5*SCALED_HEIGHT))
+        pygame.draw.rect(screen, PURPLE, (WIDTH - 5*SCALED_WIDTH, 0, 5*SCALED_WIDTH, HEIGHT))
+        pygame.draw.rect(screen, PURPLE, (0, HEIGHT - 5*SCALED_HEIGHT, WIDTH, 5*SCALED_HEIGHT))
+
     # draw spawner
     pygame.draw.rect(screen, BLACK, (*spawner_pos, spawner_width, spawner_height))
     pygame.draw.rect(screen, (spawner_color[0]/2, spawner_color[1]/2, spawner_color[2]/2), (*spawner_pos, spawner_width, spawner_height), int(3*SCALED_TEXT))
