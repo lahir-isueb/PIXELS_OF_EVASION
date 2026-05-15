@@ -8850,7 +8850,17 @@ while running:
     if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] and campaign_victory_flash == 0: campaign_victory_flash = 1
     
     # --- Drawing ---
-    screen.fill(BLACK)
+    background_color = BLACK
+    if weather == 2: background_color = (2, 0, 20)
+    elif weather == 3: background_color = (15, 20, 40)
+    elif weather == 5: background_color = (0, 32, 32)
+    elif weather == 6: background_color = (20, 20, 20)
+    elif weather == 7: background_color = (20, 10, 0)
+    elif weather == 8: background_color = (35, 0, 0)
+    elif weather == 9: background_color = (25, 0, 25)
+
+    screen.fill(background_color)
+    
 
     # --- Wall Effects ---
 
@@ -8876,7 +8886,7 @@ while running:
         pygame.draw.rect(screen, PURPLE, (0, HEIGHT - 5*SCALED_HEIGHT, WIDTH, 5*SCALED_HEIGHT))
 
     # draw spawner
-    pygame.draw.rect(screen, BLACK, (*spawner_pos, spawner_width, spawner_height))
+    pygame.draw.rect(screen, background_color, (*spawner_pos, spawner_width, spawner_height))
     pygame.draw.rect(screen, (spawner_color[0]/2, spawner_color[1]/2, spawner_color[2]/2), (*spawner_pos, spawner_width, spawner_height), int(3*SCALED_TEXT))
 
 
@@ -8931,7 +8941,7 @@ while running:
         pygame.draw.circle(screen, pulse_color, center, spawner_size / 2, 2)
 
     # --- spawner core ---
-    pygame.draw.rect(screen, LIME if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] else BLACK, (*spawner_pos, spawner_width, spawner_height))
+    pygame.draw.rect(screen, LIME if doing_campaign and truescore + max(p1_xtra_score, p2_xtra_score) >= victory_conditions[campaign_level] else background_color, (*spawner_pos, spawner_width, spawner_height))
     pygame.draw.rect(screen, spawner_color, (*spawner_pos, spawner_width, spawner_height), math.ceil(3*SCALED_TEXT))
 
     frost_overlay = pygame.Surface((player_size * 1.2*SCALED_WIDTH, player_size * 1.2*SCALED_HEIGHT), pygame.SRCALPHA)
@@ -9281,12 +9291,12 @@ while running:
 
     # draw HUD
     if players == 1:
-        p1_text = font.render(f"Score: {score_p1}", True, player_skins[p1_skin_color][0])
+        p1_text = font.render(f"Score: {score_p1} ({max(0, player_lives)} HP)", True, player_skins[p1_skin_color][0])
         screen.blit(p1_text, (20*SCALED_TEXT, 20*SCALED_TEXT))
     elif players == 2:
-        p1_text = font.render(f"P1 Score: {score_p1}", True, player_skins[p1_skin_color][0])
+        p1_text = font.render(f"P1 Score: {score_p1} ({max(0, player_lives)} HP)", True, player_skins[p1_skin_color][0])
         screen.blit(p1_text, (20*SCALED_TEXT, 20*SCALED_TEXT))
-        p2_text = font.render(f"P2 Score: {score_p2}", True, player_skins[p2_skin_color][0])
+        p2_text = font.render(f"P2 Score: {score_p2} ({max(0, player2_lives)} HP)", True, player_skins[p2_skin_color][0])
         screen.blit(p2_text, (20*SCALED_TEXT, 60*SCALED_TEXT))
 
         
