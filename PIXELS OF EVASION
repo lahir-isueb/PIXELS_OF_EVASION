@@ -6100,9 +6100,15 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE and paused == True:
-            reset_game_state()
-            TITLE_SCREEN()
-            continue
+            if doing_campaign:
+                finished_campaign = True
+                CAMPAIGN_SELECT()
+                TITLE_SCREEN()
+                continue
+            else:
+                finished_campaign = False
+                TITLE_SCREEN()
+                continue
         if event.type == pygame.KEYDOWN and (event.key == pygame.K_p or event.key == pygame.K_ESCAPE):
                 if paused == True:
                     paused = False
