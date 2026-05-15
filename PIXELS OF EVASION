@@ -9242,7 +9242,8 @@ while running:
         pygame.draw.rect(screen, BLACK, ((player2_x - (player_size*0.85)/2)*SCALED_WIDTH, (player2_y - (player_size*0.85)/2)*SCALED_HEIGHT, player_size*0.85*SCALED_WIDTH, player_size*0.85*SCALED_HEIGHT))
 
     if spawn_enabled and paused == False:
-        if modifiers[6] == 0 or modifiers[6] == 1 or modifiers[6] == 4 or modifiers[6] == 6: score += 0.1 * (60 / FPS) #SCORE SET
+        if modifiers[6] == 0 or modifiers[6] == 1 or modifiers[6] == 4 or modifiers[6] == 6:
+            if player_alive or (player2_alive and players == 2): score += 0.1 * (60 / FPS) #SCORE SET
         if truescore < score:
             truescore = math.floor(score)
         if player_alive:
