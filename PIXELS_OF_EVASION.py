@@ -5743,28 +5743,28 @@ def SKIN_MAKER():
         text = big_font.render("SKIN MAKER", True, WHITE)
         screen.blit(text, (50*SCALED_WIDTH, 50*SCALED_HEIGHT))
         info = font.render("Press Escape to return", True, SILVER)
-        screen.blit(info, (600*SCALED_WIDTH, 100*SCALED_HEIGHT))
+        screen.blit(info, (700*SCALED_WIDTH, 100*SCALED_HEIGHT))
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()[0]
-        plus_txt = font.render("+", True, BLACK)
-        minus_txt = font.render("-", True, BLACK)
+        plus_txt = font.render(">", True, BLACK)
+        minus_txt = font.render("<", True, BLACK)
 
         skinm_text = skinm_font.render("P1", True, color_list[skin_maker_text])
         pygame.draw.rect(screen, color_list[skin_maker_block], skin_maker_button, border_radius=0)
         pygame.draw.rect(screen, BLACK, skin_maker_black_button, border_radius=0)
         screen.blit(skinm_text, skinm_text.get_rect(center=skin_maker_button.center))
 
-        block_background = pygame.Rect(1085*SCALED_WIDTH, 180*SCALED_HEIGHT, 600*SCALED_WIDTH, 50*SCALED_HEIGHT)
-        block_black_background = pygame.Rect(1095*SCALED_WIDTH, 185*SCALED_HEIGHT, 580*SCALED_WIDTH, 40*SCALED_HEIGHT)
+        block_background = pygame.Rect(1085*SCALED_WIDTH, 180*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        block_black_background = pygame.Rect(1095*SCALED_WIDTH, 185*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_block], block_background, border_radius=0)
         pygame.draw.rect(screen, BLACK, block_black_background, border_radius=0)
         skin_block_label = biggish_font.render("Block Color - " + str(colorword_list[skin_maker_block]), True, color_list[skin_maker_block])
-        screen.blit(skin_block_label, (1100*SCALED_WIDTH, 180*SCALED_HEIGHT))
-        skin_block_minus_button = pygame.Rect(1025*SCALED_WIDTH, 180*SCALED_HEIGHT, 50*SCALED_WIDTH, 50*SCALED_HEIGHT)
-        skin_block_plus_button = pygame.Rect(1700*SCALED_WIDTH, 180*SCALED_HEIGHT, 50*SCALED_WIDTH, 50*SCALED_HEIGHT)
-        pygame.draw.rect(screen, GREEN, skin_block_plus_button, border_radius=0)
+        screen.blit(skin_block_label, (1100*SCALED_WIDTH, 190*SCALED_HEIGHT))
+        skin_block_minus_button = pygame.Rect(1020*SCALED_WIDTH, 180*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_block_plus_button = pygame.Rect(1690*SCALED_WIDTH, 180*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        pygame.draw.rect(screen, color_list[skin_maker_block], skin_block_plus_button, border_radius=0)
         screen.blit(plus_txt, plus_txt.get_rect(center=skin_block_plus_button.center))
-        pygame.draw.rect(screen, RED, skin_block_minus_button, border_radius=0)
+        pygame.draw.rect(screen, color_list[skin_maker_block], skin_block_minus_button, border_radius=0)
         screen.blit(minus_txt, minus_txt.get_rect(center=skin_block_minus_button.center))
         if skin_block_plus_button.collidepoint(mouse_pos) and mouse_click:
             if skin_maker_block + 1 == len(color_list): skin_maker_block = 0
@@ -5773,6 +5773,71 @@ def SKIN_MAKER():
         if skin_block_minus_button.collidepoint(mouse_pos) and mouse_click:
             if skin_maker_block - 1 == -1: skin_maker_block = len(color_list)-1
             else: skin_maker_block -= 1
+            pygame.time.delay(100)
+
+        text_background = pygame.Rect(1085*SCALED_WIDTH, 380*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        text_black_background = pygame.Rect(1095*SCALED_WIDTH, 385*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        pygame.draw.rect(screen, color_list[skin_maker_text], text_background, border_radius=0)
+        pygame.draw.rect(screen, BLACK, text_black_background, border_radius=0)
+        skin_text_label = biggish_font.render("Text Color - " + str(colorword_list[skin_maker_text]), True, color_list[skin_maker_text])
+        screen.blit(skin_text_label, (1100*SCALED_WIDTH, 390*SCALED_HEIGHT))
+        skin_text_minus_button = pygame.Rect(1020*SCALED_WIDTH, 380*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_text_plus_button = pygame.Rect(1690*SCALED_WIDTH, 380*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        pygame.draw.rect(screen, color_list[skin_maker_text], skin_text_plus_button, border_radius=0)
+        screen.blit(plus_txt, plus_txt.get_rect(center=skin_text_plus_button.center))
+        pygame.draw.rect(screen, color_list[skin_maker_text], skin_text_minus_button, border_radius=0)
+        screen.blit(minus_txt, minus_txt.get_rect(center=skin_text_minus_button.center))
+        if skin_text_plus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_text + 1 == len(color_list): skin_maker_text = 0
+            else: skin_maker_text += 1
+            pygame.time.delay(100)
+        if skin_text_minus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_text - 1 == -1: skin_maker_text = len(color_list)-1
+            else: skin_maker_text -= 1
+            pygame.time.delay(100)
+
+        text2_background = pygame.Rect(1085*SCALED_WIDTH, 580*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        text2_black_background = pygame.Rect(1095*SCALED_WIDTH, 585*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        pygame.draw.rect(screen, color_list[skin_maker_alt], text2_background, border_radius=0)
+        pygame.draw.rect(screen, BLACK, text2_black_background, border_radius=0)
+        skin_text2_label = biggish_font.render("Alt Color - " + str(colorword_list[skin_maker_alt]), True, color_list[skin_maker_alt])
+        screen.blit(skin_text2_label, (1100*SCALED_WIDTH, 590*SCALED_HEIGHT))
+        skin_text2_minus_button = pygame.Rect(1020*SCALED_WIDTH, 580*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_text2_plus_button = pygame.Rect(1690*SCALED_WIDTH, 580*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        pygame.draw.rect(screen, color_list[skin_maker_alt], skin_text2_plus_button, border_radius=0)
+        screen.blit(plus_txt, plus_txt.get_rect(center=skin_text2_plus_button.center))
+        pygame.draw.rect(screen, color_list[skin_maker_alt], skin_text2_minus_button, border_radius=0)
+        screen.blit(minus_txt, minus_txt.get_rect(center=skin_text2_minus_button.center))
+        if skin_text2_plus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_alt + 1 == len(color_list): skin_maker_alt = 0
+            else: skin_maker_alt += 1
+            pygame.time.delay(100)
+        if skin_text2_minus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_alt - 1 == -1: skin_maker_alt = len(color_list)-1
+            else: skin_maker_alt -= 1
+            pygame.time.delay(100)
+
+        font_background = pygame.Rect(1085*SCALED_WIDTH, 780*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        font_black_background = pygame.Rect(1095*SCALED_WIDTH, 785*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        pygame.draw.rect(screen, WHITE, font_background, border_radius=0)
+        pygame.draw.rect(screen, BLACK, font_black_background, border_radius=0)
+        skin_font_label = biggish_font.render("Font - " + str(font_list[skin_maker_font]), True, WHITE)
+        screen.blit(skin_font_label, (1100*SCALED_WIDTH, 790*SCALED_HEIGHT))
+        skin_font_minus_button = pygame.Rect(1020*SCALED_WIDTH, 780*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_font_plus_button = pygame.Rect(1690*SCALED_WIDTH, 780*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        pygame.draw.rect(screen, WHITE, skin_font_plus_button, border_radius=0)
+        screen.blit(plus_txt, plus_txt.get_rect(center=skin_font_plus_button.center))
+        pygame.draw.rect(screen, WHITE, skin_font_minus_button, border_radius=0)
+        screen.blit(minus_txt, minus_txt.get_rect(center=skin_font_minus_button.center))
+        if skin_font_plus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_font + 1 == len(font_list): skin_maker_font = 0
+            else: skin_maker_font += 1
+            skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
+            pygame.time.delay(100)
+        if skin_font_minus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_font - 1 == -1: skin_maker_font = len(font_list)-1
+            else: skin_maker_font -= 1
+            skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
             pygame.time.delay(100)
 
         for event in pygame.event.get():
