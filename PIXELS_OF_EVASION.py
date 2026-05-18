@@ -607,10 +607,10 @@ def reset_game_state():
     global control_point_spawned
     global campaign_victory_flash
     FPS = 60
-    player_x = (WIDTH) / 3
-    player_y = spawner_pos[1] + spawner_size / 2
-    player2_x = ((WIDTH) * 2) / 3
-    player2_y = spawner_pos[1] + spawner_size / 2
+    player_x = (WIDTH) / (3*SCALED_WIDTH)
+    player_y = (spawner_pos[1]/SCALED_HEIGHT + spawner_size / 2)
+    player2_x = ((WIDTH) * 2) / (3*SCALED_WIDTH)
+    player2_y = (spawner_pos[1]/SCALED_HEIGHT + spawner_size / 2)
     player_lives = player_health_setting
     player2_lives = player_health_setting
     player_alive = True
