@@ -4,8 +4,8 @@ import math
 import pyperclip
 
 pygame.init()
-#screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN | pygame.SCALED)
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+#screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN | pygame.SCALED)
 #screen = pygame.display.set_mode((1280, 720))
 #Recommended Screen Resolutions:
     #(1920, 1080), (1680, 1050), (1600, 900), (1440, 900), (1400, 1050), (1366, 768), (1360, 768), (1280, 1024), (1280, 960)
@@ -1401,9 +1401,9 @@ def CAMPAIGN_SELECT():
     
     waiting = True
     button_offset = 10
-    black_cbox = pygame.Rect(0,0,WIDTH,180)
-    white_cbox = pygame.Rect(0,0,WIDTH,190)
-    white_ccbox = pygame.Rect(1100,185,10,HEIGHT)
+    black_cbox = pygame.Rect(0,0,WIDTH,180*SCALED_HEIGHT)
+    white_cbox = pygame.Rect(0,0,WIDTH,190*SCALED_HEIGHT)
+    white_ccbox = pygame.Rect(1100*SCALED_WIDTH,185*SCALED_HEIGHT,SCALED_WIDTH*10,HEIGHT)
 
     button_1p = pygame.Rect(1150*SCALED_WIDTH, 790*SCALED_HEIGHT, 350*SCALED_WIDTH, 60*SCALED_HEIGHT)
     button_2p = pygame.Rect(1535*SCALED_WIDTH, 790*SCALED_HEIGHT, 350*SCALED_WIDTH, 60*SCALED_HEIGHT)
@@ -2473,7 +2473,7 @@ def SETTINGS():
     global use_textures, use_joke_textures
 
 
-    SLIST = ["textures", "joke-textures", "screen-size", "fullscreen", "presets",
+    SLIST = ["textures", "joke-textures", "presets",
 
              "starting sd", "ending sd", "sd change", "enemy unlock",
              "instaspawn score", "instaspawn", "ambush start",
@@ -2674,53 +2674,6 @@ def SETTINGS():
             joke_true_or_false_button = pygame.Rect(1385*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("joke-textures")*60*SCALED_HEIGHT - button_offset + scroll_y, 115*SCALED_WIDTH, 50*SCALED_HEIGHT)
             pygame.draw.rect(screen, SHADOW, joke_true_or_false_button, border_radius=0)
             screen.blit(true_or_false_txt, true_or_false_txt.get_rect(center=joke_true_or_false_button.center))
-
-        screen_sizes = [[1920, 1080], [1680, 1050], [1600, 900], [1440, 900], [1400, 1050], [1366, 768], [1360, 768], [1280, 1024], [1280, 960], [1280, 800], [1280, 768], [1280, 720], [1280, 600], [1152, 864],
-                        [1024, 768], [800, 600]]
-        screen_resolution_label = font.render("Screen Resolution: " + str(screen_sizes[screen_size_setting][0]) + " : " + str(screen_sizes[screen_size_setting][1]), True, WHITE)
-        screen.blit(screen_resolution_label, (50*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("screen-size")*60*SCALED_HEIGHT + scroll_y))
-        screen_resolution_minus_button = pygame.Rect(1385*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("screen-size")*60*SCALED_HEIGHT - button_offset + scroll_y, 50*SCALED_WIDTH, 50*SCALED_HEIGHT)
-        screen_resolution_plus_button = pygame.Rect(1450*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("screen-size")*60*SCALED_HEIGHT - button_offset + scroll_y, 50*SCALED_WIDTH, 50*SCALED_HEIGHT)
-        pygame.draw.rect(screen, GREEN, screen_resolution_plus_button, border_radius=0)
-        screen.blit(plus_txt, plus_txt.get_rect(center=screen_resolution_plus_button.center))
-        pygame.draw.rect(screen, RED, screen_resolution_minus_button, border_radius=0)
-        screen.blit(minus_txt, minus_txt.get_rect(center=screen_resolution_minus_button.center))
-        if screen_resolution_plus_button.collidepoint(mouse_pos) and mouse_click:
-            screen_size_setting -= 1
-            if screen_size_setting < 0: screen_size_setting = 0
-            if screen_full: screen = pygame.display.set_mode((screen_sizes[screen_size_setting][0], screen_sizes[screen_size_setting][1]), pygame.FULLSCREEN | pygame.SCALED)
-            else: screen = pygame.display.set_mode((screen_sizes[screen_size_setting][0], screen_sizes[screen_size_setting][1]))
-            WIDTH, HEIGHT = screen.get_size()
-            SCALED_WIDTH = WIDTH / 1920
-            SCALED_HEIGHT = HEIGHT / 1080
-            SCALED_TEXT = (SCALED_WIDTH + SCALED_HEIGHT)/2
-            pygame.time.delay(50)
-        if screen_resolution_minus_button.collidepoint(mouse_pos) and mouse_click:
-            screen_size_setting += 1
-            if screen_size_setting == len(screen_sizes): screen_size_setting = len(screen_sizes) - 1
-            if screen_full: screen = pygame.display.set_mode((screen_sizes[screen_size_setting][0], screen_sizes[screen_size_setting][1]), pygame.FULLSCREEN | pygame.SCALED)
-            else: screen = pygame.display.set_mode((screen_sizes[screen_size_setting][0], screen_sizes[screen_size_setting][1]))
-            WIDTH, HEIGHT = screen.get_size()
-            SCALED_WIDTH = WIDTH / 1920
-            SCALED_HEIGHT = HEIGHT / 1080
-            SCALED_TEXT = (SCALED_WIDTH + SCALED_HEIGHT)/2
-            pygame.time.delay(50)
-
-        if screen_full: fullscreen_text = "Fullscreen: True"
-        else: fullscreen_text = "Fullscreen: False"
-        fullscreen_label = font.render(fullscreen_text, True, WHITE)
-        screen.blit(fullscreen_label, (100*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("fullscreen")*60*SCALED_HEIGHT + scroll_y))
-        fullscreen_true_or_false_button = pygame.Rect(1385*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("fullscreen")*60*SCALED_HEIGHT - button_offset + scroll_y, 115*SCALED_WIDTH, 50*SCALED_HEIGHT)
-        pygame.draw.rect(screen, YELLOW, fullscreen_true_or_false_button, border_radius=0)
-        screen.blit(true_or_false_txt, true_or_false_txt.get_rect(center=fullscreen_true_or_false_button.center))
-        if fullscreen_true_or_false_button.collidepoint(mouse_pos) and mouse_click:
-            if screen_full:
-                screen_full = False
-                screen = pygame.display.set_mode((screen_sizes[screen_size_setting][0], screen_sizes[screen_size_setting][1]))
-            else:
-                screen_full = True
-                screen = pygame.display.set_mode((screen_sizes[screen_size_setting][0], screen_sizes[screen_size_setting][1]), pygame.FULLSCREEN | pygame.SCALED)
-            pygame.time.delay(200)
 
         max_spawn_delay_label = font.render("Starting Spawn Delay: " + str(max_spawn_delay_setting), True, MAROON)
         screen.blit(max_spawn_delay_label, (50*SCALED_WIDTH, 180*SCALED_HEIGHT+SLIST.index("starting sd")*60*SCALED_HEIGHT + scroll_y))
