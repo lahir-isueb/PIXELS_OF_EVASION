@@ -19,55 +19,55 @@ pygame.display.set_caption("Pixels Of Evasion")
 
 # --- Textures ---
 try:
-    basic_texture = pygame.image.load('basic_enemy.png').convert_alpha()
-    homing_texture = pygame.image.load('homing_enemy.png').convert_alpha()
-    fatal_texture = pygame.image.load('fatal_enemy.png').convert_alpha()
-    flow_texture = pygame.image.load('flow_enemy.png').convert_alpha()
-    sticky_texture = pygame.image.load('sticky_enemy.png').convert_alpha()
-    gloomy_texture = pygame.image.load('gloomy_enemy.png').convert_alpha()
-    trail_texture = pygame.image.load('trail_enemy.png').convert_alpha()
-    splitter_texture = pygame.image.load('splitter_enemy.png').convert_alpha()
-    bomb_texture = pygame.image.load('bomb_enemy.png').convert_alpha()
-    shooter_texture = pygame.image.load('shooter_enemy.png').convert_alpha()
-    sniper_texture = pygame.image.load('sniper_enemy.png').convert_alpha()
-    speedy_texture = pygame.image.load('speedy_enemy.png').convert_alpha()
-    shotgun_texture = pygame.image.load('shotgun_enemy.png').convert_alpha()
-    voodoo_texture = pygame.image.load('voodoo_enemy.png').convert_alpha()
-    blind_texture = pygame.image.load('blind_enemy.png').convert_alpha()
-    magma_texture = pygame.image.load('magma_enemy.png').convert_alpha()
-    charger_texture = pygame.image.load('charger_enemy.png').convert_alpha()
-    rapidshooter_texture = pygame.image.load('rapidshooter_enemy.png').convert_alpha()
-    frostbite_texture = pygame.image.load('frostbite_enemy.png').convert_alpha()
-    addictive_texture = pygame.image.load('addictive_enemy.png').convert_alpha()
-    laser_texture = pygame.image.load('laser_enemy.png').convert_alpha()
-    hardened_texture = pygame.image.load('hardened_enemy.png').convert_alpha()
-    accelerator_texture = pygame.image.load('accelerator_enemy.png').convert_alpha()
-    cold_texture = pygame.image.load('cold_enemy.png').convert_alpha()
-    tracer_texture = pygame.image.load('tracer_enemy.png').convert_alpha()
-    savage_texture = pygame.image.load('savage_enemy.png').convert_alpha()
-    teleporter_texture = pygame.image.load('teleporter_enemy.png').convert_alpha()
-    phantom_texture = pygame.image.load('phantom_enemy.png').convert_alpha()
-    stream_texture = pygame.image.load('stream_enemy.png').convert_alpha()
-    sensitive_texture = pygame.image.load('sensitive_enemy.png').convert_alpha()
-    burstshooter_texture = pygame.image.load('burstshooter_enemy.png').convert_alpha()
-    stickyshooter_texture = pygame.image.load('stickyshooter_enemy.png').convert_alpha()
-    sparker_texture = pygame.image.load('sparker_enemy.png').convert_alpha()
-    annihilator_texture = pygame.image.load('annihilator_enemy.png').convert_alpha()
-    frostbeam_texture = pygame.image.load('frostbeam_enemy.png').convert_alpha()
-    forecast_texture = pygame.image.load('forecast_enemy.png').convert_alpha()
-    assassin_texture = pygame.image.load('assassin_enemy.png').convert_alpha()
-    motion_texture = pygame.image.load('motion_enemy.png').convert_alpha()
-    invisibility_texture = pygame.image.load('invisibility_enemy.png').convert_alpha()
-    whirly_texture = pygame.image.load('whirly_enemy.png').convert_alpha()
-    volcanic_texture = pygame.image.load('volcanic_enemy.png').convert_alpha()
-    pyrobeam_texture = pygame.image.load('pyrobeam_enemy.png').convert_alpha()
-    laggy_texture = pygame.image.load('laggy_enemy.png').convert_alpha()
-    error_texture = pygame.image.load('error_enemy.png').convert_alpha()
-    glitchy_texture = pygame.image.load('glitchy_enemy.png').convert_alpha()
-    blocker_texture = pygame.image.load('blocker_enemy.png').convert_alpha()
-    gloomyshooter_texture = pygame.image.load('gloomyshooter_enemy.png').convert_alpha()
-    pulse_texture = pygame.image.load('pulse_enemy.png').convert_alpha()
-    grower_texture = pygame.image.load('grower_enemy.png').convert_alpha()
+    basic_texture = pygame.image.load('textures/basic_enemy.png').convert_alpha()
+    homing_texture = pygame.image.load('textures/homing_enemy.png').convert_alpha()
+    fatal_texture = pygame.image.load('textures/fatal_enemy.png').convert_alpha()
+    flow_texture = pygame.image.load('textures/flow_enemy.png').convert_alpha()
+    sticky_texture = pygame.image.load('textures/sticky_enemy.png').convert_alpha()
+    gloomy_texture = pygame.image.load('textures/gloomy_enemy.png').convert_alpha()
+    trail_texture = pygame.image.load('textures/trail_enemy.png').convert_alpha()
+    splitter_texture = pygame.image.load('textures/splitter_enemy.png').convert_alpha()
+    bomb_texture = pygame.image.load('textures/bomb_enemy.png').convert_alpha()
+    shooter_texture = pygame.image.load('textures/shooter_enemy.png').convert_alpha()
+    sniper_texture = pygame.image.load('textures/sniper_enemy.png').convert_alpha()
+    speedy_texture = pygame.image.load('textures/speedy_enemy.png').convert_alpha()
+    shotgun_texture = pygame.image.load('textures/shotgun_enemy.png').convert_alpha()
+    voodoo_texture = pygame.image.load('textures/voodoo_enemy.png').convert_alpha()
+    blind_texture = pygame.image.load('textures/blind_enemy.png').convert_alpha()
+    magma_texture = pygame.image.load('textures/magma_enemy.png').convert_alpha()
+    charger_texture = pygame.image.load('textures/charger_enemy.png').convert_alpha()
+    rapidshooter_texture = pygame.image.load('textures/rapidshooter_enemy.png').convert_alpha()
+    frostbite_texture = pygame.image.load('textures/frostbite_enemy.png').convert_alpha()
+    addictive_texture = pygame.image.load('textures/addictive_enemy.png').convert_alpha()
+    laser_texture = pygame.image.load('textures/laser_enemy.png').convert_alpha()
+    hardened_texture = pygame.image.load('textures/hardened_enemy.png').convert_alpha()
+    accelerator_texture = pygame.image.load('textures/accelerator_enemy.png').convert_alpha()
+    cold_texture = pygame.image.load('textures/cold_enemy.png').convert_alpha()
+    tracer_texture = pygame.image.load('textures/tracer_enemy.png').convert_alpha()
+    savage_texture = pygame.image.load('textures/savage_enemy.png').convert_alpha()
+    teleporter_texture = pygame.image.load('textures/teleporter_enemy.png').convert_alpha()
+    phantom_texture = pygame.image.load('textures/phantom_enemy.png').convert_alpha()
+    stream_texture = pygame.image.load('textures/stream_enemy.png').convert_alpha()
+    sensitive_texture = pygame.image.load('textures/sensitive_enemy.png').convert_alpha()
+    burstshooter_texture = pygame.image.load('textures/burstshooter_enemy.png').convert_alpha()
+    stickyshooter_texture = pygame.image.load('textures/stickyshooter_enemy.png').convert_alpha()
+    sparker_texture = pygame.image.load('textures/sparker_enemy.png').convert_alpha()
+    annihilator_texture = pygame.image.load('textures/annihilator_enemy.png').convert_alpha()
+    frostbeam_texture = pygame.image.load('textures/frostbeam_enemy.png').convert_alpha()
+    forecast_texture = pygame.image.load('textures/forecast_enemy.png').convert_alpha()
+    assassin_texture = pygame.image.load('textures/assassin_enemy.png').convert_alpha()
+    motion_texture = pygame.image.load('textures/motion_enemy.png').convert_alpha()
+    invisibility_texture = pygame.image.load('textures/invisibility_enemy.png').convert_alpha()
+    whirly_texture = pygame.image.load('textures/whirly_enemy.png').convert_alpha()
+    volcanic_texture = pygame.image.load('textures/volcanic_enemy.png').convert_alpha()
+    pyrobeam_texture = pygame.image.load('textures/pyrobeam_enemy.png').convert_alpha()
+    laggy_texture = pygame.image.load('textures/laggy_enemy.png').convert_alpha()
+    error_texture = pygame.image.load('textures/error_enemy.png').convert_alpha()
+    glitchy_texture = pygame.image.load('textures/glitchy_enemy.png').convert_alpha()
+    blocker_texture = pygame.image.load('textures/blocker_enemy.png').convert_alpha()
+    gloomyshooter_texture = pygame.image.load('textures/gloomyshooter_enemy.png').convert_alpha()
+    pulse_texture = pygame.image.load('textures/pulse_enemy.png').convert_alpha()
+    grower_texture = pygame.image.load('textures/grower_enemy.png').convert_alpha()
     can_use_textures = True
 
 except:
@@ -251,7 +251,8 @@ player_skins = [
                 [TURQUOISE, HOT_PINK, GREEN, "mistral"], #Laser Lunge Skin
                 [YELLOW, AZURE, CYAN, 'hightowertext'], #Lightning Legacy Skin
                 [CHARTREUSE, GREEN, TAN, "juiceitc"], #Splitter Splatter Skin
-                [TAN, CLOUD, MAUVE, "bernardcondensed"] #Disaster Defusion Skin
+                [TAN, CLOUD, MAUVE, "bernardcondensed"], #Disaster Defusion Skin
+                [color_list[custom_color], color_list[custom_text], color_list[custom_p2text], font_list[custom_font]] #Custom Skin
                 ]
 
 # --- Spawner ---
@@ -5753,13 +5754,13 @@ def SKIN_MAKER():
         pygame.draw.rect(screen, BLACK, skin_maker_black_button, border_radius=0)
         screen.blit(skinm_text, skinm_text.get_rect(center=skin_maker_button.center))
 
-        block_background = pygame.Rect(1085*SCALED_WIDTH, 180*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
-        block_black_background = pygame.Rect(1095*SCALED_WIDTH, 185*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        block_background = pygame.Rect(685*SCALED_WIDTH, 180*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        block_black_background = pygame.Rect(695*SCALED_WIDTH, 185*SCALED_HEIGHT, 980*SCALED_WIDTH, 50*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_block], block_background, border_radius=0)
         pygame.draw.rect(screen, BLACK, block_black_background, border_radius=0)
-        skin_block_label = biggish_font.render("Block Color - " + str(colorword_list[skin_maker_block]), True, color_list[skin_maker_block])
-        screen.blit(skin_block_label, (1100*SCALED_WIDTH, 190*SCALED_HEIGHT))
-        skin_block_minus_button = pygame.Rect(1020*SCALED_WIDTH, 180*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_block_label = biggish_font.render("Block Color: " + str(colorword_list[skin_maker_block]), True, color_list[skin_maker_block])
+        screen.blit(skin_block_label, (720*SCALED_WIDTH, 190*SCALED_HEIGHT))
+        skin_block_minus_button = pygame.Rect(620*SCALED_WIDTH, 180*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         skin_block_plus_button = pygame.Rect(1690*SCALED_WIDTH, 180*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_block], skin_block_plus_button, border_radius=0)
         screen.blit(plus_txt, plus_txt.get_rect(center=skin_block_plus_button.center))
@@ -5774,13 +5775,13 @@ def SKIN_MAKER():
             else: skin_maker_block -= 1
             pygame.time.delay(100)
 
-        text_background = pygame.Rect(1085*SCALED_WIDTH, 380*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
-        text_black_background = pygame.Rect(1095*SCALED_WIDTH, 385*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        text_background = pygame.Rect(685*SCALED_WIDTH, 380*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        text_black_background = pygame.Rect(695*SCALED_WIDTH, 385*SCALED_HEIGHT, 980*SCALED_WIDTH, 50*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_text], text_background, border_radius=0)
         pygame.draw.rect(screen, BLACK, text_black_background, border_radius=0)
-        skin_text_label = biggish_font.render("Text Color - " + str(colorword_list[skin_maker_text]), True, color_list[skin_maker_text])
-        screen.blit(skin_text_label, (1100*SCALED_WIDTH, 390*SCALED_HEIGHT))
-        skin_text_minus_button = pygame.Rect(1020*SCALED_WIDTH, 380*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_text_label = biggish_font.render("Text Color: " + str(colorword_list[skin_maker_text]), True, color_list[skin_maker_text])
+        screen.blit(skin_text_label, (720*SCALED_WIDTH, 390*SCALED_HEIGHT))
+        skin_text_minus_button = pygame.Rect(620*SCALED_WIDTH, 380*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         skin_text_plus_button = pygame.Rect(1690*SCALED_WIDTH, 380*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_text], skin_text_plus_button, border_radius=0)
         screen.blit(plus_txt, plus_txt.get_rect(center=skin_text_plus_button.center))
@@ -5795,13 +5796,13 @@ def SKIN_MAKER():
             else: skin_maker_text -= 1
             pygame.time.delay(100)
 
-        text2_background = pygame.Rect(1085*SCALED_WIDTH, 580*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
-        text2_black_background = pygame.Rect(1095*SCALED_WIDTH, 585*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        text2_background = pygame.Rect(685*SCALED_WIDTH, 580*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        text2_black_background = pygame.Rect(695*SCALED_WIDTH, 585*SCALED_HEIGHT, 980*SCALED_WIDTH, 50*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_alt], text2_background, border_radius=0)
         pygame.draw.rect(screen, BLACK, text2_black_background, border_radius=0)
-        skin_text2_label = biggish_font.render("Alt Color - " + str(colorword_list[skin_maker_alt]), True, color_list[skin_maker_alt])
-        screen.blit(skin_text2_label, (1100*SCALED_WIDTH, 590*SCALED_HEIGHT))
-        skin_text2_minus_button = pygame.Rect(1020*SCALED_WIDTH, 580*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_text2_label = biggish_font.render("Alt Color: " + str(colorword_list[skin_maker_alt]), True, color_list[skin_maker_alt])
+        screen.blit(skin_text2_label, (720*SCALED_WIDTH, 590*SCALED_HEIGHT))
+        skin_text2_minus_button = pygame.Rect(620*SCALED_WIDTH, 580*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         skin_text2_plus_button = pygame.Rect(1690*SCALED_WIDTH, 580*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         pygame.draw.rect(screen, color_list[skin_maker_alt], skin_text2_plus_button, border_radius=0)
         screen.blit(plus_txt, plus_txt.get_rect(center=skin_text2_plus_button.center))
@@ -5816,13 +5817,13 @@ def SKIN_MAKER():
             else: skin_maker_alt -= 1
             pygame.time.delay(100)
 
-        font_background = pygame.Rect(1085*SCALED_WIDTH, 780*SCALED_HEIGHT, 600*SCALED_WIDTH, 60*SCALED_HEIGHT)
-        font_black_background = pygame.Rect(1095*SCALED_WIDTH, 785*SCALED_HEIGHT, 580*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        font_background = pygame.Rect(685*SCALED_WIDTH, 780*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        font_black_background = pygame.Rect(695*SCALED_WIDTH, 785*SCALED_HEIGHT, 980*SCALED_WIDTH, 50*SCALED_HEIGHT)
         pygame.draw.rect(screen, WHITE, font_background, border_radius=0)
         pygame.draw.rect(screen, BLACK, font_black_background, border_radius=0)
-        skin_font_label = biggish_font.render("Font - " + str(font_list[skin_maker_font]), True, WHITE)
-        screen.blit(skin_font_label, (1100*SCALED_WIDTH, 790*SCALED_HEIGHT))
-        skin_font_minus_button = pygame.Rect(1020*SCALED_WIDTH, 780*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        skin_font_label = biggish_font.render("Font: " + str(font_list[skin_maker_font]), True, WHITE)
+        screen.blit(skin_font_label, (720*SCALED_WIDTH, 790*SCALED_HEIGHT))
+        skin_font_minus_button = pygame.Rect(620*SCALED_WIDTH, 780*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         skin_font_plus_button = pygame.Rect(1690*SCALED_WIDTH, 780*SCALED_HEIGHT, 60*SCALED_WIDTH, 60*SCALED_HEIGHT)
         pygame.draw.rect(screen, WHITE, skin_font_plus_button, border_radius=0)
         screen.blit(plus_txt, plus_txt.get_rect(center=skin_font_plus_button.center))
@@ -5854,6 +5855,7 @@ def TITLE_SCREEN():
     global players, doing_campaign
     global player_skins
     global p1_skin_color, p2_skin_color, skin_match
+    global custom_color, custom_text, custom_p2text, custom_font
     global campaign_start
 
     title_keyboard_select = 0
@@ -6025,6 +6027,38 @@ def TITLE_SCREEN():
                 if (event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE)):
                     pygame.quit()
                     quit()
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_y) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_color+1 == len(color_list): custom_color = 0
+                    else: custom_color += 1
+                    player_skins[custom_skin_number][0] = color_list[custom_color]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_h) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_text+1 == len(color_list): custom_text = 0
+                    else: custom_text += 1
+                    player_skins[custom_skin_number][1] = color_list[custom_text]
+                    if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
+                    else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_n) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_font+1 == len(font_list): custom_font = 0
+                    else: custom_font += 1
+                    player_skins[custom_skin_number][3] = font_list[custom_font]
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_t) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_color-1 < 0: custom_color = len(color_list)-1
+                    else: custom_color -= 1
+                    player_skins[custom_skin_number][0] = color_list[custom_color]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_g) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_text-1 < 0: custom_text = len(color_list)-1
+                    else: custom_text -= 1
+                    player_skins[custom_skin_number][1] = color_list[custom_text]
+                    if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
+                    else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
+                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_b) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
+                    if custom_font-1 < 0: custom_font = len(font_list)-1
+                    else: custom_font -= 1
+                    player_skins[custom_skin_number][3] = font_list[custom_font]
+                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
+                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
                 if (event.type == pygame.KEYDOWN and (event.key == pygame.K_s or event.key == pygame.K_DOWN or event.key == pygame.K_k)):
                     if title_keyboard_select == 0: title_keyboard_select = 1
                     elif title_keyboard_select != 5: title_keyboard_select += 1
