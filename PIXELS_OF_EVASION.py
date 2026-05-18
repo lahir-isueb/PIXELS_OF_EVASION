@@ -219,6 +219,8 @@ font_list = ['none', "comicsansms", "couriernew", 'gabriola', 'impact', 'microso
              'onyx', 'palacescript', 'papyrus', 'parchment', 'perpetua', 'playbill', 'poorrichard', 'rockwellcondensed', 'rockwell', 'script', 'twcencondensed',
              'twcencondensedextra', 'simsunextg']
 
+killed_fonts_sad = ["courier", "agencyfb", "onyx", "curlz", "Haettenschweiler", "papyrus", "erasitc", "modernno20", "Colonna", "leelawadee", "playbill", "chiller", "brushscript", "perpetua", "mistral", "hightowertext", "juiceitc", "bernardcondensed"]
+
 # --- Player Skins ---
 p1_skin_color = 0
 p2_skin_color = 0
@@ -5732,17 +5734,46 @@ def SKIN_MAKER():
     skin_maker_font = 0
     skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
 
-    skin_maker_button = pygame.Rect(WIDTH/2 - 525*SCALED_WIDTH, HEIGHT - 700*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
-    skin_maker_black_button = pygame.Rect(WIDTH/2 - 525*SCALED_WIDTH, HEIGHT - 645*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
+    skin_maker_button = pygame.Rect(WIDTH/2 - 725*SCALED_WIDTH, HEIGHT - 700*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
+    skin_maker_black_button = pygame.Rect(WIDTH/2 - 705*SCALED_WIDTH, HEIGHT - 677*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
     waiting = True
 
     while waiting:
         screen.fill((0, 0, 0))
+        text = big_font.render("SKIN MAKER", True, WHITE)
+        screen.blit(text, (50*SCALED_WIDTH, 50*SCALED_HEIGHT))
+        info = font.render("Press Escape to return", True, SILVER)
+        screen.blit(info, (600*SCALED_WIDTH, 100*SCALED_HEIGHT))
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_click = pygame.mouse.get_pressed()[0]
+        plus_txt = font.render("+", True, BLACK)
+        minus_txt = font.render("-", True, BLACK)
 
         skinm_text = skinm_font.render("P1", True, color_list[skin_maker_text])
         pygame.draw.rect(screen, color_list[skin_maker_block], skin_maker_button, border_radius=0)
         pygame.draw.rect(screen, BLACK, skin_maker_black_button, border_radius=0)
         screen.blit(skinm_text, skinm_text.get_rect(center=skin_maker_button.center))
+
+        block_background = pygame.Rect(1085*SCALED_WIDTH, 180*SCALED_HEIGHT, 600*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        block_black_background = pygame.Rect(1095*SCALED_WIDTH, 185*SCALED_HEIGHT, 580*SCALED_WIDTH, 40*SCALED_HEIGHT)
+        pygame.draw.rect(screen, color_list[skin_maker_block], block_background, border_radius=0)
+        pygame.draw.rect(screen, BLACK, block_black_background, border_radius=0)
+        skin_block_label = biggish_font.render("Block Color - " + str(colorword_list[skin_maker_block]), True, color_list[skin_maker_block])
+        screen.blit(skin_block_label, (1100*SCALED_WIDTH, 180*SCALED_HEIGHT))
+        skin_block_minus_button = pygame.Rect(1025*SCALED_WIDTH, 180*SCALED_HEIGHT, 50*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        skin_block_plus_button = pygame.Rect(1700*SCALED_WIDTH, 180*SCALED_HEIGHT, 50*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        pygame.draw.rect(screen, GREEN, skin_block_plus_button, border_radius=0)
+        screen.blit(plus_txt, plus_txt.get_rect(center=skin_block_plus_button.center))
+        pygame.draw.rect(screen, RED, skin_block_minus_button, border_radius=0)
+        screen.blit(minus_txt, minus_txt.get_rect(center=skin_block_minus_button.center))
+        if skin_block_plus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_block + 1 == len(color_list): skin_maker_block = 0
+            else: skin_maker_block += 1
+            pygame.time.delay(100)
+        if skin_block_minus_button.collidepoint(mouse_pos) and mouse_click:
+            if skin_maker_block - 1 == -1: skin_maker_block = len(color_list)-1
+            else: skin_maker_block -= 1
+            pygame.time.delay(100)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -5791,7 +5822,7 @@ def TITLE_SCREEN():
             pygame.draw.rect(screen, WHITE, white_sbox, border_radius=0)
             pygame.draw.rect(screen, BLACK, black_sbox, border_radius=0)
             
-            title_text = big_font.render("Pixels Of Evasion", True, (255, 0, 0))
+            title_text = big_font.render("Pixels of Evasion", True, (255, 0, 0))
             screen.blit(title_text, title_text.get_rect(center=(WIDTH/2, 150*SCALED_HEIGHT)))
             
             if players == 2:
