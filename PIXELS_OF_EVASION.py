@@ -5744,6 +5744,12 @@ def SKIN_MAKER():
     waiting = True
 
     while waiting:
+        player_custom_skin = {
+            "block": color_list[skin_maker_block],
+            "text": color_list[skin_maker_text],
+            "text2": color_list[skin_maker_alt],
+            "font": font_list[skin_maker_font]
+        }
         screen.fill((0, 0, 0))
         text = big_font.render("SKIN MAKER", True, WHITE)
         screen.blit(text, (50*SCALED_WIDTH, 50*SCALED_HEIGHT))
@@ -5844,6 +5850,15 @@ def SKIN_MAKER():
             else: skin_maker_font -= 1
             skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
             pygame.time.delay(100)
+
+        save_background = pygame.Rect(685*SCALED_WIDTH, 850*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
+        save_black_background = pygame.Rect(690*SCALED_WIDTH, 855*SCALED_HEIGHT, 990*SCALED_WIDTH, 50*SCALED_HEIGHT)
+        pygame.draw.rect(screen, SILVER, save_background, border_radius=0)
+        pygame.draw.rect(screen, BLACK, save_black_background, border_radius=0)
+        save_label = biggish_font.render(("Save Skin"), True, WHITE)
+        screen.blit(save_label, (1100*SCALED_WIDTH, 857*SCALED_HEIGHT))
+        if save_black_background.collidepoint(mouse_pos) and mouse_click:
+            pygame.time.delay(1000)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
