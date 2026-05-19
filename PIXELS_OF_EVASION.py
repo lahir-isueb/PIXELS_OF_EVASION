@@ -224,10 +224,6 @@ killed_fonts_sad = ["courier", "agencyfb", "onyx", "curlz", "Haettenschweiler", 
 # --- Player Skins ---
 p1_skin_color = 0
 p2_skin_color = 0
-custom_color = 0
-custom_text = 0
-custom_p2text = 23
-custom_font = 0
 player_skins = [
                 [WHITE, RED, BLUE, "none"], #Default
                 [RED, ORANGE, YELLOW, "none"], #Default
@@ -256,8 +252,7 @@ player_skins = [
                 [SALMON, LIME, SULFUR, "none"], #Just Juke Skin
                 [TUNDRA, ICE, TEAL, "none"], #Frostbite Frenzy Skin
                 [LAVA, GOLD, CRIMSON, "none"], #Blazing Burnout Skin
-                [GOLD, SILVER, BRONZE, "none"], #Podium Projectiles Skin
-                [color_list[custom_color], color_list[custom_text], color_list[custom_p2text], font_list[custom_font]] #Custom Skin
+                [GOLD, SILVER, BRONZE, "none"] #Podium Projectiles Skin
                 ]
 
 # --- Spawner ---
@@ -5731,7 +5726,7 @@ def apply_settings():
     
 
 def SKIN_MAKER():
-    global custom_color, custom_text, custom_p2text, custom_font, player_skins
+    global player_skins
 
     skin_maker_block = 0
     skin_maker_text = 0
@@ -5739,8 +5734,10 @@ def SKIN_MAKER():
     skin_maker_font = 0
     skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
 
-    skin_maker_button = pygame.Rect(150*SCALED_WIDTH, 330*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
-    skin_maker_black_button = pygame.Rect(170*SCALED_WIDTH, 350*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
+    skin_maker_button = pygame.Rect(150*SCALED_WIDTH, 280*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
+    skin_maker_black_button = pygame.Rect(170*SCALED_WIDTH, 300*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
+    skin_maker_button2 = pygame.Rect(150*SCALED_WIDTH, 680*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
+    skin_maker_black_button2 = pygame.Rect(170*SCALED_WIDTH, 700*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
     waiting = True
 
     while waiting:
@@ -5764,6 +5761,11 @@ def SKIN_MAKER():
         pygame.draw.rect(screen, color_list[skin_maker_block], skin_maker_button, border_radius=0)
         pygame.draw.rect(screen, BLACK, skin_maker_black_button, border_radius=0)
         screen.blit(skinm_text, skinm_text.get_rect(center=skin_maker_button.center))
+
+        skinm_text2 = skinm_font.render("P2", True, color_list[skin_maker_alt])
+        pygame.draw.rect(screen, color_list[skin_maker_block], skin_maker_button2, border_radius=0)
+        pygame.draw.rect(screen, BLACK, skin_maker_black_button2, border_radius=0)
+        screen.blit(skinm_text2, skinm_text2.get_rect(center=skin_maker_button2.center))
 
         block_background = pygame.Rect(685*SCALED_WIDTH, 270*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
         block_black_background = pygame.Rect(690*SCALED_WIDTH, 275*SCALED_HEIGHT, 990*SCALED_WIDTH, 50*SCALED_HEIGHT)
@@ -5801,10 +5803,16 @@ def SKIN_MAKER():
         if skin_text_plus_button.collidepoint(mouse_pos) and mouse_click:
             if skin_maker_text + 1 == len(color_list): skin_maker_text = 0
             else: skin_maker_text += 1
+            if skin_maker_text == skin_maker_alt:
+                if skin_maker_text + 1 == len(color_list): skin_maker_text = 0
+                else: skin_maker_text += 1
             pygame.time.delay(100)
         if skin_text_minus_button.collidepoint(mouse_pos) and mouse_click:
             if skin_maker_text - 1 == -1: skin_maker_text = len(color_list)-1
             else: skin_maker_text -= 1
+            if skin_maker_text == skin_maker_alt:
+                if skin_maker_text - 1 == -1: skin_maker_text = len(color_list)-1
+                else: skin_maker_text -= 1
             pygame.time.delay(100)
 
         text2_background = pygame.Rect(685*SCALED_WIDTH, 510*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
@@ -5822,10 +5830,16 @@ def SKIN_MAKER():
         if skin_text2_plus_button.collidepoint(mouse_pos) and mouse_click:
             if skin_maker_alt + 1 == len(color_list): skin_maker_alt = 0
             else: skin_maker_alt += 1
+            if skin_maker_alt == skin_maker_text:
+                if skin_maker_alt + 1 == len(color_list): skin_maker_alt = 0
+                else: skin_maker_alt += 1
             pygame.time.delay(100)
         if skin_text2_minus_button.collidepoint(mouse_pos) and mouse_click:
             if skin_maker_alt - 1 == -1: skin_maker_alt = len(color_list)-1
             else: skin_maker_alt -= 1
+            if skin_maker_alt == skin_maker_text:
+                if skin_maker_alt - 1 == -1: skin_maker_alt = len(color_list)-1
+                else: skin_maker_alt -= 1
             pygame.time.delay(100)
 
         font_background = pygame.Rect(685*SCALED_WIDTH, 630*SCALED_HEIGHT, 1000*SCALED_WIDTH, 60*SCALED_HEIGHT)
@@ -5858,7 +5872,8 @@ def SKIN_MAKER():
         save_label = biggish_font.render(("Save Skin"), True, WHITE)
         screen.blit(save_label, (1100*SCALED_WIDTH, 857*SCALED_HEIGHT))
         if save_black_background.collidepoint(mouse_pos) and mouse_click:
-            pygame.time.delay(1000)
+            player_skins.append([color_list[skin_maker_block], color_list[skin_maker_text], color_list[skin_maker_alt], font_list[skin_maker_font]])
+            pygame.time.delay(100)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -5875,7 +5890,6 @@ def TITLE_SCREEN():
     global players, doing_campaign
     global player_skins
     global p1_skin_color, p2_skin_color, skin_match
-    global custom_color, custom_text, custom_p2text, custom_font
     global campaign_start
 
     title_keyboard_select = 0
