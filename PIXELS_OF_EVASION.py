@@ -229,29 +229,34 @@ custom_text = 0
 custom_p2text = 23
 custom_font = 0
 player_skins = [
-                [WHITE, RED, BLUE, "none"], #Default Player
-                [RED, SALMON, PINK, "none"], #Default Red Skin
-                [BLUE, SKY, AZURE, "none"], #Default Blue Skin
-                [YELLOW, WHITE, GOLD, "none"], #Yellow man
-                [LIME, MINT, GREEN, "none"], #Default Green Skin
-                [GRAY, WHITE, SHADOW, "courier"], #Basic Skin
-                [GREEN, YELLOW, MINT, "agencyfb"], #Clingy Claustrophobia Skin
-                [AQUA, BLUE, TEAL, "onyx"], #Aqua Arena Skin
-                [PURPLE, CYAN, HOT_PINK, "curlz"], #Teleportation Trappers Skin
-                [MAROON, RED, CRIMSON, 'Haettenschweiler'], #Bullet Barage Skin
-                [BROWN, TAN, MAROON, "papyrus"], #Rocky Rage Skin
-                [SULFUR, CLOUD, AZURE, "erasitc"], #Stormy Surge Skin
-                [TUNDRA, TEAL, ICE, "modernno20"], #Frostbite Frenzy Skin
-                [LAVA, GOLD, CRIMSON, "Colonna"], #Blazing Burnout Skin
-                [LIME, RED, MAROON, "leelawadee"], #Just Juke Skin
-                [LILAC, COBALT, MINT, "playbill"], #Laggy Lab Skin
-                [SHADOW, VIOLET, OLIVE, "chiller"], #Scary Shadows Skin
-                [CLOUD, CREAM, TAN, "brushscript"], #Whirling Winds Skin
-                [GOLD, BRONZE, SILVER, "perpetua"], #Podium Projectiles Skin
-                [TURQUOISE, HOT_PINK, GREEN, "mistral"], #Laser Lunge Skin
-                [YELLOW, AZURE, CYAN, 'hightowertext'], #Lightning Legacy Skin
-                [CHARTREUSE, GREEN, TAN, "juiceitc"], #Splitter Splatter Skin
-                [TAN, CLOUD, MAUVE, "bernardcondensed"], #Disaster Defusion Skin
+                [WHITE, RED, BLUE, "none"], #Default
+                [RED, ORANGE, YELLOW, "none"], #Default
+                [BLUE, CYAN, PURPLE, "none"], #Default
+                [YELLOW, LIME, ORANGE, "none"], #Yellow man
+                [LIME, CYAN, MAGENTA, "none"], #Default
+                [MAGENTA, PINK, RED, "none"], #Default
+                [ORANGE, YELLOW, BLUE, "none"], #Default
+                [CYAN, TEAL, YELLOW, "none"], #Default
+                [VIOLET, MAGENTA, BLUE, "none"], #Default
+                [GRAY, WHITE, SHADOW, "none"], #Default
+                
+                [GREEN, LIME, YELLOW, "none"], #Clingy Claustrophobia Skin
+                [PURPLE, COBALT, CYAN, "none"], #Teleportation Trappers Skin
+                [BROWN, TAN, LAVA, "none"], #Rocky Rage Skin
+                [AQUA, BLUE, CORAL, "none"], #Aqua Arena Skin
+                [CLOUD, CREAM, GRAY, "none"], #Whirling Winds Skin
+                [OLIVE, BLUE, CLOUD, "none"], #Stormy Surge Skin
+                [LILAC, COBALT, MINT, "none"], #Laggy Lab Skin
+                [TAN, CLOUD, BLUE, "none"], #Disaster Defusion Skin
+                [TURQUOISE, HOT_PINK, YELLOW, "none"], #Laser Lunge Skin
+                [CHARTREUSE, ACID, AQUA, "none"], #Splitter Splatter Skin
+                [SHADOW, VIOLET, RED, "none"], #Scary Shadows Skin
+                [MAROON, RED, SILVER, 'none'], #Bullet Barage Skin
+                [SULFUR, CYAN, LIME, 'none'], #Lightning Legacy Skin
+                [SALMON, LIME, SULFUR, "none"], #Just Juke Skin
+                [TUNDRA, ICE, TEAL, "none"], #Frostbite Frenzy Skin
+                [LAVA, GOLD, CRIMSON, "none"], #Blazing Burnout Skin
+                [GOLD, SILVER, BRONZE, "none"], #Podium Projectiles Skin
                 [color_list[custom_color], color_list[custom_text], color_list[custom_p2text], font_list[custom_font]] #Custom Skin
                 ]
 
@@ -5735,7 +5740,7 @@ def SKIN_MAKER():
     skinm_font = pygame.font.SysFont(font_list[skin_maker_font], int(210*SCALED_TEXT))
 
     skin_maker_button = pygame.Rect(150*SCALED_WIDTH, 330*SCALED_HEIGHT, 300*SCALED_WIDTH, 300*SCALED_HEIGHT)
-    skin_maker_black_button = pygame.Rect(170*SCALED_WIDTH, 345*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
+    skin_maker_black_button = pygame.Rect(170*SCALED_WIDTH, 350*SCALED_HEIGHT, 255*SCALED_WIDTH, 255*SCALED_HEIGHT)
     waiting = True
 
     while waiting:
@@ -6027,38 +6032,6 @@ def TITLE_SCREEN():
                 if (event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE)):
                     pygame.quit()
                     quit()
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_y) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                    if custom_color+1 == len(color_list): custom_color = 0
-                    else: custom_color += 1
-                    player_skins[custom_skin_number][0] = color_list[custom_color]
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_h) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                    if custom_text+1 == len(color_list): custom_text = 0
-                    else: custom_text += 1
-                    player_skins[custom_skin_number][1] = color_list[custom_text]
-                    if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
-                    else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_n) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                    if custom_font+1 == len(font_list): custom_font = 0
-                    else: custom_font += 1
-                    player_skins[custom_skin_number][3] = font_list[custom_font]
-                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_t) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                    if custom_color-1 < 0: custom_color = len(color_list)-1
-                    else: custom_color -= 1
-                    player_skins[custom_skin_number][0] = color_list[custom_color]
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_g) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                    if custom_text-1 < 0: custom_text = len(color_list)-1
-                    else: custom_text -= 1
-                    player_skins[custom_skin_number][1] = color_list[custom_text]
-                    if custom_text < (len(color_list)//2): player_skins[custom_skin_number][2] = color_list[custom_text + (len(color_list)//2)]
-                    else: player_skins[custom_skin_number][2] = color_list[custom_text - (len(color_list)//2)]
-                if (event.type == pygame.KEYDOWN and (event.key == pygame.K_b) and (p1_skin_color == custom_skin_number or p2_skin_color == custom_skin_number)):
-                    if custom_font-1 < 0: custom_font = len(font_list)-1
-                    else: custom_font -= 1
-                    player_skins[custom_skin_number][3] = font_list[custom_font]
-                    skin_font = pygame.font.SysFont(player_skins[p1_skin_color][3], int(70*SCALED_TEXT))
-                    skin_2font = pygame.font.SysFont(player_skins[p2_skin_color][3], int(70*SCALED_TEXT))
                 if (event.type == pygame.KEYDOWN and (event.key == pygame.K_s or event.key == pygame.K_DOWN or event.key == pygame.K_k)):
                     if title_keyboard_select == 0: title_keyboard_select = 1
                     elif title_keyboard_select != 5: title_keyboard_select += 1
