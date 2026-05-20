@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 import pyperclip
+import json
 
 pygame.init()
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -222,9 +223,18 @@ font_list = ['none', "comicsansms", "couriernew", 'gabriola', 'impact', 'microso
 killed_fonts_sad = ["courier", "agencyfb", "onyx", "curlz", "Haettenschweiler", "papyrus", "erasitc", "modernno20", "Colonna", "leelawadee", "playbill", "chiller", "brushscript", "perpetua", "mistral", "hightowertext", "juiceitc", "bernardcondensed"]
 
 # --- Player Skins ---
+try:
+    with open("skin_file.json", "r") as cust:
+        data = json.load(cust)
+except:
+    data = {"custom1": [0, 0, 0, 0], "custom2": [0, 0, 0, 0], "custom3": [0, 0, 0, 0], "custom4": [0, 0, 0, 0], "custom5": [0, 0, 0, 0]}
+    with open("skin_file.json", "w") as cust:
+        json.dump(data, cust)
 p1_skin_color = 0
 p2_skin_color = 0
-player_skins = [
+def reset_skins():
+    global player_skins
+    player_skins = [
                 [WHITE, RED, BLUE, "none"], #Default
                 [RED, ORANGE, YELLOW, "none"], #Default
                 [BLUE, CYAN, PURPLE, "none"], #Default
@@ -254,6 +264,14 @@ player_skins = [
                 [LAVA, GOLD, CRIMSON, "none"], #Blazing Burnout Skin
                 [GOLD, SILVER, BRONZE, "none"] #Podium Projectiles Skin
                 ]
+    for x in data:
+        check = 0
+        for y in data[x]:
+            if y == 0: check += 1
+        if check != 4:
+            player_skins.append([color_list[data[x][0]], color_list[data[x][1]], color_list[data[x][2]], font_list[data[x][3]]])
+player_skins = []
+reset_skins()
 
 # --- Spawner ---
 spawner_size = 50
@@ -5726,7 +5744,7 @@ def apply_settings():
     
 
 def SKIN_MAKER():
-    global player_skins
+    global player_skins, data
 
     skin_maker_block = 0
     skin_maker_text = 0
@@ -5872,7 +5890,24 @@ def SKIN_MAKER():
         save_label = biggish_font.render(("Save Skin"), True, WHITE)
         screen.blit(save_label, (1100*SCALED_WIDTH, 857*SCALED_HEIGHT))
         if save_black_background.collidepoint(mouse_pos) and mouse_click:
-            player_skins.append([color_list[skin_maker_block], color_list[skin_maker_text], color_list[skin_maker_alt], font_list[skin_maker_font]])
+            new = [skin_maker_block, skin_maker_text, skin_maker_alt, skin_maker_font]
+            changed = False
+            for x in data:
+                check = 0
+                for y in data[x]:
+                    if y == 0: check += 1
+                if check == 4 and not changed:
+                    data[x] = new
+                    changed = True
+            if not changed:
+                data["custom1"] = data["custom2"]
+                data["custom2"] = data["custom3"]
+                data["custom3"] = data["custom4"]
+                data["custom4"] = data["custom5"]
+                data["custom5"] = new
+            reset_skins()
+            with open("skin_file.json", "w") as f:
+                json.dump(data, f)
             pygame.time.delay(100)
 
         for event in pygame.event.get():
